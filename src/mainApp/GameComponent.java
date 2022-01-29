@@ -7,17 +7,19 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 public class GameComponent extends JComponent{
-	
+
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<String> lines = new ArrayList<String>();
-	private LevelReader reader = new LevelReader("Levels/Level-1");
+	private String fileName;
 	private int space = 30;
 	
-	public GameComponent() {
+	public GameComponent(String fileName) {
+		this.fileName = fileName;
 		createGameObjectList();
 	}
 	
 	public void createGameObjectList() {
+		LevelReader reader = new LevelReader(fileName);
 		reader.readFile();
 		lines = reader.getLines();
 		int x = 0;
@@ -66,5 +68,14 @@ public class GameComponent extends JComponent{
 		}		
 	}	
 
-
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+		recreate();
+	}
+	
+	public void recreate() {
+		objects.clear();
+		lines.clear();	
+		createGameObjectList();	
+	}
 }
