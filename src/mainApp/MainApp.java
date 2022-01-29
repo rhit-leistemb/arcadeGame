@@ -9,9 +9,13 @@ package mainApp;
  */
 public class MainApp {
 	
+	LevelReader reader = new LevelReader("Levels/Level-1");
 	
 	private void runApp() {
-		System.out.println("Write your cool arcade game here!");		
+		//System.out.println("Write your cool arcade game here!");
+		GameViewer viewer = new GameViewer();
+		viewer.createGame();
+		reader.readFile();
 	} // runApp
 
 	/**
