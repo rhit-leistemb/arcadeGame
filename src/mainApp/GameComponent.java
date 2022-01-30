@@ -7,8 +7,12 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
+/**
+ * 
+ */
 public class GameComponent extends JComponent{
-
+	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<String> lines = new ArrayList<String>();
 	private String fileName;

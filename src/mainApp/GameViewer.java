@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+/**
+ * 
+ */
 public class GameViewer {
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	public static final int FRAME_WIDTH = 670;
