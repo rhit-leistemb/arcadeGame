@@ -37,27 +37,29 @@ public class GameViewer {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
+				//consider changing to getKeyCode
 				char key = e.getKeyChar();
 				if(key == 'u') {
 					component.setFileName(fileNames.get(1));
-					component.repaint();
-				}else if(key == 'd') {
+//					component.repaint();
+				} else if(key == 'd') {
 					component.setFileName(fileNames.get(0));
-					component.repaint();
+//					component.repaint();
 				}
+				component.traverse(e);
+				component.repaint();
 				
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
+
 				
 			}
 			

@@ -2,6 +2,7 @@ package mainApp;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -12,6 +13,7 @@ public class GameComponent extends JComponent{
 	private ArrayList<String> lines = new ArrayList<String>();
 	private String fileName;
 	private int space = 30;
+	private Player hero;
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
@@ -47,9 +49,9 @@ public class GameComponent extends JComponent{
 					x+=space;
 					objects.add(o);
 				}else if(currentChar == 'H') {
-					Player o = new Player(x, y);
+					hero = new Player(x, y);
 					x+=space;
-					objects.add(o);
+					objects.add(hero);
 				}else {
 					x+=space;
 				}
@@ -57,6 +59,10 @@ public class GameComponent extends JComponent{
 			y+=space;
 			x= 0;
 		}
+	}
+	
+	public void traverse(KeyEvent press) {
+		hero.move(press);
 	}
 	
 	@Override
