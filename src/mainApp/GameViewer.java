@@ -17,8 +17,8 @@ import javax.swing.border.Border;
  */
 public class GameViewer {
 	private ArrayList<String> fileNames = new ArrayList<String>();
-	public static final int FRAME_WIDTH = 670;
-	public static final int FRAME_HEIGHT = 330;
+	public static final int FRAME_WIDTH = 450;
+	public static final int FRAME_HEIGHT = 430;
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	protected static Graphics g;
 	
@@ -30,7 +30,7 @@ public class GameViewer {
 		fileNames.add("Levels/Level-2");
 		
 		JFrame frame = new JFrame();
-		frame.setTitle("Arcade Game");
+		frame.setTitle("Arcade Game-Level 1");
 		frame.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -50,9 +50,11 @@ public class GameViewer {
 				char key = e.getKeyChar();
 				if(key == 'u') {
 					component.setFileName(fileNames.get(1));
+					frame.setTitle("Arcade Game-Level 2");
 //					component.repaint();
 				} else if(key == 'd') {
 					component.setFileName(fileNames.get(0));
+					frame.setTitle("Arcade Game-Level 1");
 //					component.repaint();
 				}
 				component.traverse(e);

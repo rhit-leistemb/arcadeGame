@@ -16,7 +16,6 @@ public class Player extends AnimateObject {
 	public void move(KeyEvent press) {
 		int code = press.getKeyCode();
 		if(code == KeyEvent.VK_UP) {
-			System.out.println("going upppp");
 			this.setY(this.getY() - speed);	
 		}
 //		if (code == KeyEvent.VK_DOWN) {

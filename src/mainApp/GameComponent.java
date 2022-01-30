@@ -16,7 +16,7 @@ public class GameComponent extends JComponent{
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<String> lines = new ArrayList<String>();
 	private String fileName;
-	private int space = 30;
+	private int space = 20;
 	private Player hero;
 	
 	public GameComponent(String fileName) {
