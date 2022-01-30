@@ -7,8 +7,8 @@ public class GameObject {
 	
 	public int x;
 	public int y;
-	public int width = 30;
-	public int height = 30;
+	public int width = 20;
+	public int height = 20;
 	public Color color = Color.black;
 	
 	public GameObject(int x, int y) {

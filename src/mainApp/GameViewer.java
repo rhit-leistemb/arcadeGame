@@ -33,7 +33,7 @@ public class GameViewer {
 		frame.setTitle("Arcade Game-Level 1");
 		frame.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frame.getContentPane().setBackground(Color.gray);
 		GameComponent component = new GameComponent(fileNames.get(0));
 		
 		frame.addKeyListener(new KeyListener() {
