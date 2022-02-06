@@ -81,6 +81,12 @@ public class LevelReader {
 		return objects;
 	}
 	
+	public void resetLevel() {
+		objects.clear();
+		lines.clear();
+		hero = null;
+	}
+	
 	public Player getHero() {
 		return hero;
 	}

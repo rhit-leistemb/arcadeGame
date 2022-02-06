@@ -14,7 +14,6 @@ public class GameComponent extends JComponent{
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
-	private ArrayList<String> lines = new ArrayList<String>();
 	private String fileName;
 	private Player hero;
 	
@@ -25,6 +24,7 @@ public class GameComponent extends JComponent{
 	
 	public void createGameObjectList() {
 		LevelReader reader = new LevelReader(fileName);
+		reader.resetLevel();
 		reader.readFile();
 		objects = reader.getObjects();
 		hero = reader.getHero();
@@ -89,7 +89,6 @@ public class GameComponent extends JComponent{
 	
 	public void recreate() {
 		objects.clear();
-		lines.clear();	
 		createGameObjectList();	
 	}
 }
