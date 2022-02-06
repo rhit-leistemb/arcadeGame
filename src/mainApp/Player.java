@@ -65,20 +65,23 @@ public class Player extends AnimateObject {
 		if(this.upStop == false) {
 			System.out.println("Move up");
 			this.setY(this.getY() - speed);
+			isMoving = true;
 		}
 		if (this.downStop == false) {
 			System.out.println("Move down");
 			this.setY(this.getY() + speed);
+			isMoving = true;
 		}
 		if(this.leftStop == false) {
 			System.out.println("Move left");
 			this.setX(this.getX() - speed);
+			//isMoving = true;
 		}
 		if(this.rightStop == false) {
 			System.out.println("Move right");
 			this.setX(this.getX() + speed);
+			//isMoving = true;
 		}
-		
 	}
 	
 	public void setUpStop(boolean condition) {
@@ -93,6 +96,8 @@ public class Player extends AnimateObject {
 	public void setRightStop(boolean condition) {
 		this.rightStop = condition;
 	}
+	
+
 
 }
 
