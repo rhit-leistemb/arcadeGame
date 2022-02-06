@@ -63,15 +63,19 @@ public class Player extends AnimateObject {
 		
 		//this one works
 		if(this.upStop == false) {
+			System.out.println("Move up");
 			this.setY(this.getY() - speed);	
 		}
 		if (this.downStop == false) {
+			System.out.println("Move down");
 			this.setY(this.getY() + speed);
 		}
 		if(this.leftStop == false) {
+			System.out.println("Move left");
 			this.setX(this.getX() - speed);
 		}
 		if(this.rightStop == false) {
+			System.out.println("Move right");
 			this.setX(this.getX() + speed);
 		}
 		

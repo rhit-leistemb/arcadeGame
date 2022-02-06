@@ -74,14 +74,24 @@ public class GameViewer {
 //					this.left = true;
 //				}
 //				component.traverse(e, this.up, this.right, this.left);
-				component.traverse(e);
+
+				if (code == KeyEvent.VK_UP) {
+					System.out.println("UP is being pressed");
+				}
+				if (code == KeyEvent.VK_RIGHT) {
+					System.out.println("RIGHT is being pressed");
+				}
+				if (code == KeyEvent.VK_LEFT) {
+					System.out.println("LEFT is being pressed");
+				}
+				component.traverse(code);
 				component.repaint();
 				
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-//				int code = e.getKeyCode();
+				int code = e.getKeyCode();
 //				if (code == KeyEvent.VK_UP) {
 //					this.up = false;
 //				}
@@ -91,7 +101,7 @@ public class GameViewer {
 //				if (code == KeyEvent.VK_LEFT) {
 //					this.left = false;
 //				}
-				component.hault(e);
+				component.hault(code);
 				component.repaint();
 			}
 			
