@@ -64,8 +64,8 @@ public class GameViewer {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
-				
+				component.hault(e);
+				component.repaint();
 			}
 			
 		});

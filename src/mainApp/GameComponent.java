@@ -66,8 +66,42 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void traverse(KeyEvent press) {
-		hero.move(press);
+		int code = press.getKeyCode();
+		if(code == KeyEvent.VK_UP) {
+			hero.setUpStop(false);
+			hero.move1();
+		}
+		if (code == KeyEvent.VK_DOWN) {
+			hero.setDownStop(false);
+			hero.move1();
+		}
+		if(code == KeyEvent.VK_LEFT) {
+			hero.setLeftStop(false);
+			hero.move1();
+		}
+		if(code == KeyEvent.VK_RIGHT ) {
+			hero.setRightStop(false);
+			hero.move1();
+		}
 	}
+	
+	public void hault(KeyEvent press) {
+		int code = press.getKeyCode();
+		if(code == KeyEvent.VK_UP) {
+			hero.setUpStop(true);	
+			System.out.println("stopped moving");
+		}
+		if (code == KeyEvent.VK_DOWN) {
+			hero.setDownStop(true);
+		}
+		if(code == KeyEvent.VK_LEFT) {
+			hero.setLeftStop(true);
+		}
+		if(code == KeyEvent.VK_RIGHT ) {
+			hero.setRightStop(true);
+		}
+	}
+	
 	
 	@Override
 	protected void paintComponent(Graphics g) {
