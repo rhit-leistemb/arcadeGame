@@ -16,7 +16,6 @@ public class GameComponent extends JComponent{
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<String> lines = new ArrayList<String>();
 	private String fileName;
-	private int space = 20;
 	private Player hero;
 	
 	public GameComponent(String fileName) {
@@ -27,42 +26,8 @@ public class GameComponent extends JComponent{
 	public void createGameObjectList() {
 		LevelReader reader = new LevelReader(fileName);
 		reader.readFile();
-		lines = reader.getLines();
-		int x = 0;
-		int y = 0;
-		for(int i = 0; i< lines.size(); i++){
-			String currentLine = lines.get(i);
-			for(int j = 0; j< currentLine.length(); j++) {
-				char currentChar = currentLine.charAt(j);
-				if(currentChar == '|') {
-					GameObject o = new GameObject(x, y);
-					x+=space;
-					objects.add(o);
-				}else if(currentChar == '-') {
-					GameObject o = new GameObject(x, y);
-					x+=space;
-					objects.add(o);
-				}else if(currentChar == '.') {
-					x+=space;
-				}else if(currentChar == 'B') {
-					BombCollectible o = new BombCollectible(x, y);
-					x+=space;
-					objects.add(o);
-				}else if(currentChar == 'A') {
-					Enemy o = new Enemy(x, y);
-					x+=space;
-					objects.add(o);
-				}else if(currentChar == 'H') {
-					hero = new Player(x, y);
-					x+=space;
-					objects.add(hero);
-				}else {
-					x+=space;
-				}
-			}
-			y+=space;
-			x= 0;
-		}
+		objects = reader.getObjects();
+		hero = reader.getHero();
 	}
 	
 	
@@ -94,7 +59,7 @@ public class GameComponent extends JComponent{
 		int code = press.getKeyCode();
 		if(code == KeyEvent.VK_UP) {
 			hero.setUpStop(true);	
-			System.out.println("stopped moving");
+			//System.out.println("stopped moving");
 		}
 		if (code == KeyEvent.VK_DOWN) {
 			hero.setDownStop(true);
