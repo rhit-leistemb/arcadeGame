@@ -18,10 +18,22 @@ public class Player extends AnimateObject {
 	}
 
 	//allows the player to control movement
-	public void move2() {
+//	public void move2(KeyEvent press, boolean up, boolean right, boolean left) {
+//		double angleHZ = 0;
+//		double angleV = 1;
 //		int code = press.getKeyCode();
-//		if(code == KeyEvent.VK_UP) {
-//			this.setY(this.getY() - speed);	
+//		
+//		if(up) {
+//			if (right) {
+//				angleV = Math.sin(  45 + (Math.PI/2)  );
+//				angleHZ = -1 * Math.cos(  45 + (Math.PI/2)  );
+//			}
+//			if (left) {
+//				angleV = Math.sin(  45 + (Math.PI/2)  );
+//				angleHZ = Math.cos(  45 + (Math.PI/2)  );
+//			}
+//			this.setY(this.getY() - (int)(speed * angleV));	
+//			this.setX(this.getX() + (int)(speed * angleHZ));
 //		}
 //		if (code == KeyEvent.VK_DOWN) {
 //			this.setY(this.getY() + speed);
@@ -31,7 +43,8 @@ public class Player extends AnimateObject {
 //		}
 //		if(code == KeyEvent.VK_RIGHT ) {
 //			this.setX(this.getX() + speed);
-	}	
+//		}
+//	}	
 
 	public void move1() {
 //		int code = press.getKeyCode();
@@ -46,7 +59,9 @@ public class Player extends AnimateObject {
 //		}
 //		if(code == KeyEvent.VK_RIGHT ) {
 //			this.setX(this.getX() + speed);
+//		}
 		
+		//this one works
 		if(this.upStop == false) {
 			this.setY(this.getY() - speed);	
 		}

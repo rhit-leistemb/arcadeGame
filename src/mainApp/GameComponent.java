@@ -65,7 +65,12 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
-	public void traverse(KeyEvent press) {
+	
+//	public void traverse(KeyEvent press, boolean up,boolean right, boolean left) {
+//		hero.move2(press, up, right, left);
+//	}
+	
+	public void traverse(KeyEvent press) {	
 		int code = press.getKeyCode();
 		if(code == KeyEvent.VK_UP) {
 			hero.setUpStop(false);

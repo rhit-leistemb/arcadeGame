@@ -22,6 +22,9 @@ public class GameViewer {
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	protected static Graphics g;
 	
+	
+//	public 
+	
 	public GameViewer() {
 	}
 
@@ -37,7 +40,10 @@ public class GameViewer {
 		GameComponent component = new GameComponent(fileNames.get(0));
 		
 		frame.addKeyListener(new KeyListener() {
-
+			public boolean up = false;
+			public boolean right = false;
+			private boolean left = false;
+			
 			@Override
 			public void keyTyped(KeyEvent e) {
 				
@@ -48,6 +54,7 @@ public class GameViewer {
 			public void keyPressed(KeyEvent e) {
 				//consider changing to getKeyCode
 				char key = e.getKeyChar();
+				int code = e.getKeyCode();
 				if(key == 'u') {
 					component.setFileName(fileNames.get(1));
 					frame.setTitle("Arcade Game-Level 2");
@@ -56,7 +63,17 @@ public class GameViewer {
 					component.setFileName(fileNames.get(0));
 					frame.setTitle("Arcade Game-Level 1");
 //					component.repaint();
-				}
+				} 
+//				if (code == KeyEvent.VK_UP) {
+//					this.up = true;
+//				}
+//				if (code == KeyEvent.VK_RIGHT) {
+//					this.right = true;
+//				}
+//				if (code == KeyEvent.VK_LEFT) {
+//					this.left = true;
+//				}
+//				component.traverse(e, this.up, this.right, this.left);
 				component.traverse(e);
 				component.repaint();
 				
@@ -64,6 +81,16 @@ public class GameViewer {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+//				int code = e.getKeyCode();
+//				if (code == KeyEvent.VK_UP) {
+//					this.up = false;
+//				}
+//				if (code == KeyEvent.VK_RIGHT) {
+//					this.right = false;
+//				}
+//				if (code == KeyEvent.VK_LEFT) {
+//					this.left = false;
+//				}
 				component.hault(e);
 				component.repaint();
 			}
