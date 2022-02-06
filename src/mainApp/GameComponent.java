@@ -89,6 +89,7 @@ public class GameComponent extends JComponent{
 	
 	public void recreate() {
 		objects.clear();
+		hero = null;
 		createGameObjectList();	
 	}
 }
