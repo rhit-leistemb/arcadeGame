@@ -64,7 +64,7 @@ public class Player extends AnimateObject {
 		//this one works
 		if(this.upStop == false) {
 			System.out.println("Move up");
-			this.setY(this.getY() - speed);	
+			this.setY(this.getY() - speed);
 		}
 		if (this.downStop == false) {
 			System.out.println("Move down");
@@ -93,6 +93,7 @@ public class Player extends AnimateObject {
 	public void setRightStop(boolean condition) {
 		this.rightStop = condition;
 	}
+
 }
 
 

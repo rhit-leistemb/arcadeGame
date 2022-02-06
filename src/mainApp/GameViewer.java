@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 
 /**
@@ -21,11 +24,12 @@ public class GameViewer {
 	public static final int FRAME_HEIGHT = 430;
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	protected static Graphics g;
+	private Player hero;
 	
 	
 //	public 
 	
-	public GameViewer() {
+public GameViewer() {
 	}
 
 	public void createGame() {
@@ -38,6 +42,7 @@ public class GameViewer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(Color.gray);
 		GameComponent component = new GameComponent(fileNames.get(0));
+		hero = component.getHero();
 		
 		frame.addKeyListener(new KeyListener() {
 			public boolean up = false;
@@ -107,10 +112,23 @@ public class GameViewer {
 			
 		});
 		
+		Timer timer = new Timer(20, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Timer ran");
+				 hero.gravity();
+				component.repaint();
+			}	
+		});
+		timer.start();
 		
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
 		frame.setVisible(true);	
 	}
+	
+	
+
 	
 }

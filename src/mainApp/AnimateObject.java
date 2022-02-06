@@ -6,4 +6,9 @@ public class AnimateObject extends GameObject{
 		super(x, y);
 	}
 
+	public void gravity() {
+		this.setY(this.getY()+3);
+
+	}
+
 }
