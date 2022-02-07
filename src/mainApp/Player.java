@@ -7,52 +7,50 @@ public class Player extends AnimateObject {
 
 	private Color playerColor = Color.GREEN;
 	private int speed = 3;
-	private boolean upStop = true;
-	private boolean downStop = true;
-	private boolean leftStop = true;
-	private boolean rightStop = true;
+	
+	private boolean goUp = false;
+	private boolean goDown = false;
+	private boolean goLeft = false;
+	private boolean goRight = false;
 	
 	public Player(int x, int y) {
 		super(x, y);
 		this.setColor(playerColor);
 	}
 
-	public void move1() {
+	
+
+	public void move() {
 		//this one works
-		if(this.upStop == false) {
-			System.out.println("Move up");
+		if(this.goUp == true) {
 			this.setY(this.getY() - speed);
 			isMoving = true;
 		}
-		if (this.downStop == false) {
-			System.out.println("Move down");
+		if (this.goDown == true) {
 			this.setY(this.getY() + speed);
 			isMoving = true;
 		}
-		if(this.leftStop == false) {
-			System.out.println("Move left");
+		if(this.goLeft == true) {
 			this.setX(this.getX() - speed);
 			//isMoving = true;
 		}
-		System.out.println("This is rightstop: " + this.rightStop);
-		if(this.rightStop == false) {
-			System.out.println("Move right");
+		if(this.goRight == true) {
 			this.setX(this.getX() + speed);
 			//isMoving = true;
 		}
 	}
 	
-	public void setUpStop(boolean condition) {
-		this.upStop = condition;
+	public void goUp(boolean condition) {
+		this.goUp = condition;
 	}
-	public void setDownStop(boolean condition) {
-		this.downStop = condition;
+	public void goDown(boolean condition) {
+		this.goDown = condition;
 	}
-	public void setLeftStop(boolean condition) {
-		this.leftStop = condition;
+	public void goLeft(boolean condition) {
+		this.goLeft = condition;
 	}
-	public void setRightStop(boolean condition) {
-		this.rightStop = condition;
+	public void goRight(boolean condition) {
+		this.goRight = condition;
 	}
 	
 

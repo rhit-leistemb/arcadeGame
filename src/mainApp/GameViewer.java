@@ -44,11 +44,7 @@ public GameViewer() {
 		GameComponent component = new GameComponent(fileNames.get(0));
 		hero = component.getHero();
 		
-		frame.addKeyListener(new KeyListener() {
-			public boolean up = false;
-			public boolean right = false;
-			private boolean left = false;
-			
+		frame.addKeyListener(new KeyListener() {			
 			@Override
 			public void keyTyped(KeyEvent e) {
 				
@@ -69,16 +65,7 @@ public GameViewer() {
 					frame.setTitle("Arcade Game-Level 1");
 //					component.repaint();
 				} 
-				if (code == KeyEvent.VK_UP) {
-					System.out.println("UP is being pressed");
-				}
-				if (code == KeyEvent.VK_RIGHT) {
-					System.out.println("RIGHT is being pressed");
-				}
-				if (code == KeyEvent.VK_LEFT) {
-					System.out.println("LEFT is being pressed");
-				}
-				component.traverse(code);
+				component.setDirection(code);
 				component.repaint();
 				
 			}
@@ -86,16 +73,7 @@ public GameViewer() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				int code = e.getKeyCode();
-				if (code == KeyEvent.VK_UP) {
-					System.out.println("UP is being released");
-				}
-				if (code == KeyEvent.VK_RIGHT) {
-					System.out.println("RIGHT is being released");
-				}
-				if (code == KeyEvent.VK_LEFT) {
-					System.out.println("LEFT is being released");
-				}
-				component.hault(code);
+				component.stopDirection(code);
 				component.repaint();
 			}
 			
@@ -106,7 +84,8 @@ public GameViewer() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				System.out.println("Timer ran");
-				 hero.gravity();
+				component.traverse(); 
+				hero.gravity();
 				component.repaint();
 			}	
 		});

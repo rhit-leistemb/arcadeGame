@@ -32,47 +32,42 @@ public class GameComponent extends JComponent{
 		objects = reader.getObjects();
 		hero = reader.getHero();
 	}
+
 	
-	public void traverse(int code) {	
-		if(code == KeyEvent.VK_UP) {
-			hero.setUpStop(false);
-		}
-		if (code == KeyEvent.VK_DOWN) {
-			hero.setDownStop(false);
-		}
-		if(code == KeyEvent.VK_LEFT) {
-			hero.setLeftStop(false);
-		}
-		if(code == KeyEvent.VK_RIGHT ) {
-			hero.setRightStop(false);
-		}
-		hero.move1();
+
+	public void traverse() {	
+		hero.move();
 	}
 	
-	public void hault(int code) {
+	public void setDirection(int code) {
 		if(code == KeyEvent.VK_UP) {
-			System.out.println("Stop moving up");
-			hero.setUpStop(true);	
-			hero.setIsMoving(false);
+			hero.goUp(true);
 		}
 		if (code == KeyEvent.VK_DOWN) {
-			System.out.println("Stop moving down");
-			hero.setDownStop(true);
-			hero.setIsMoving(false);
+			hero.goDown(true);
 		}
 		if(code == KeyEvent.VK_LEFT) {
-			System.out.println("Stop moving left");
-			hero.setLeftStop(true);
-			hero.setIsMoving(false);
+			hero.goLeft(true);
 		}
 		if(code == KeyEvent.VK_RIGHT ) {
-			System.out.println("Stop moving right");
-			hero.setRightStop(true);
-			hero.setIsMoving(false);
+			hero.goRight(true);
 		}
-		hero.move1();
 	}
 	
+	public void stopDirection(int code) {
+		if(code == KeyEvent.VK_UP) {
+			hero.goUp(false);
+		}
+		if (code == KeyEvent.VK_DOWN) {
+			hero.goDown(false);
+		}
+		if(code == KeyEvent.VK_LEFT) {
+			hero.goLeft(false);
+		}
+		if(code == KeyEvent.VK_RIGHT ) {
+			hero.goRight(false);
+		}
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
