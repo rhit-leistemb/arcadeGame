@@ -33,11 +33,6 @@ public class GameComponent extends JComponent{
 		hero = reader.getHero();
 	}
 	
-	
-//	public void traverse(KeyEvent press, boolean up,boolean right, boolean left) {
-//		hero.move2(press, up, right, left);
-//	}
-	
 	public void traverse(int code) {	
 		if(code == KeyEvent.VK_UP) {
 			hero.setUpStop(false);
@@ -59,25 +54,21 @@ public class GameComponent extends JComponent{
 			System.out.println("Stop moving up");
 			hero.setUpStop(true);	
 			hero.setIsMoving(false);
-			//hero.move1();
 		}
 		if (code == KeyEvent.VK_DOWN) {
 			System.out.println("Stop moving down");
 			hero.setDownStop(true);
 			hero.setIsMoving(false);
-			//hero.move1();
 		}
 		if(code == KeyEvent.VK_LEFT) {
 			System.out.println("Stop moving left");
 			hero.setLeftStop(true);
 			hero.setIsMoving(false);
-			//hero.move1();
 		}
 		if(code == KeyEvent.VK_RIGHT ) {
 			System.out.println("Stop moving right");
 			hero.setRightStop(true);
 			hero.setIsMoving(false);
-			//hero.move1();
 		}
 		hero.move1();
 	}
