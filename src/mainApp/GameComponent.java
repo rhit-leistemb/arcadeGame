@@ -43,9 +43,6 @@ public class GameComponent extends JComponent{
 		if(code == KeyEvent.VK_UP) {
 			hero.goUp(true);
 		}
-		if (code == KeyEvent.VK_DOWN) {
-			hero.goDown(true);
-		}
 		if(code == KeyEvent.VK_LEFT) {
 			hero.goLeft(true);
 		}
@@ -57,9 +54,6 @@ public class GameComponent extends JComponent{
 	public void stopDirection(int code) {
 		if(code == KeyEvent.VK_UP) {
 			hero.goUp(false);
-		}
-		if (code == KeyEvent.VK_DOWN) {
-			hero.goDown(false);
 		}
 		if(code == KeyEvent.VK_LEFT) {
 			hero.goLeft(false);
@@ -81,6 +75,10 @@ public class GameComponent extends JComponent{
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 		recreate();
+	}
+	
+	public void gravity() {
+		hero.gravity();
 	}
 	
 	public void recreate() {

@@ -9,7 +9,6 @@ public class Player extends AnimateObject {
 	private int speed = 3;
 	
 	private boolean goUp = false;
-	private boolean goDown = false;
 	private boolean goLeft = false;
 	private boolean goRight = false;
 	
@@ -25,10 +24,8 @@ public class Player extends AnimateObject {
 		if(this.goUp == true) {
 			this.setY(this.getY() - speed);
 			isMoving = true;
-		}
-		if (this.goDown == true) {
-			this.setY(this.getY() + speed);
-			isMoving = true;
+		}else if(this.goUp == false) {
+			isMoving = false;
 		}
 		if(this.goLeft == true) {
 			this.setX(this.getX() - speed);
@@ -42,9 +39,6 @@ public class Player extends AnimateObject {
 	
 	public void goUp(boolean condition) {
 		this.goUp = condition;
-	}
-	public void goDown(boolean condition) {
-		this.goDown = condition;
 	}
 	public void goLeft(boolean condition) {
 		this.goLeft = condition;

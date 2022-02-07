@@ -24,7 +24,6 @@ public class GameViewer {
 	public static final int FRAME_HEIGHT = 430;
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	protected static Graphics g;
-	private Player hero;
 	
 	
 //	public 
@@ -42,7 +41,6 @@ public GameViewer() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(Color.gray);
 		GameComponent component = new GameComponent(fileNames.get(0));
-		hero = component.getHero();
 		
 		frame.addKeyListener(new KeyListener() {			
 			@Override
@@ -59,11 +57,9 @@ public GameViewer() {
 				if(key == 'u') {
 					component.setFileName(fileNames.get(1));
 					frame.setTitle("Arcade Game-Level 2");
-//					component.repaint();
 				} else if(key == 'd') {
 					component.setFileName(fileNames.get(0));
 					frame.setTitle("Arcade Game-Level 1");
-//					component.repaint();
 				} 
 				component.setDirection(code);
 				component.repaint();
@@ -83,9 +79,8 @@ public GameViewer() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				System.out.println("Timer ran");
 				component.traverse(); 
-				hero.gravity();
+				component.gravity();
 				component.repaint();
 			}	
 		});
