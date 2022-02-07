@@ -17,6 +17,7 @@ public class GameComponent extends JComponent{
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+	private ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	private String fileName;
 	private Player hero;
 	
@@ -30,6 +31,7 @@ public class GameComponent extends JComponent{
 		reader.resetLevel();
 		reader.readFile();
 		objects = reader.getObjects();
+		animateObjects = reader.getAnimateObjects();
 		hero = reader.getHero();
 	}
 
@@ -78,11 +80,14 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void gravity() {
-		hero.gravity();
+		for(int i = 0; i< animateObjects.size(); i++) {
+			animateObjects.get(i).gravity();
+		}
 	}
 	
 	public void recreate() {
 		objects.clear();
+		animateObjects.clear();
 		hero = null;
 		createGameObjectList();	
 	}

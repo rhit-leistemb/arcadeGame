@@ -10,6 +10,7 @@ public class LevelReader {
 	String fileName;
 	ArrayList<String> lines = new ArrayList<String>();
 	ArrayList<GameObject> objects = new ArrayList<GameObject>();
+	ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	private final int space = 20;
 	private Player hero;
 		
@@ -60,13 +61,20 @@ public class LevelReader {
 					BombCollectible o = new BombCollectible(x, y);
 					x+=space;
 					objects.add(o);
-				}else if(currentChar == 'A') {
-					Enemy o = new Enemy(x, y);
+				}else if(currentChar == 'W') {
+					WalkingEnemy o = new WalkingEnemy(x, y);
 					x+=space;
+					animateObjects.add(o);
+					objects.add(o);
+				}else if(currentChar == 'F') {
+					FlyingEnemy o = new FlyingEnemy(x, y);
+					x+=space;
+					animateObjects.add(o);
 					objects.add(o);
 				}else if(currentChar == 'H') {
 					hero = new Player(x, y);
 					x+=space;
+					animateObjects.add(hero);
 					objects.add(hero);
 				}else {
 					x+=space;
@@ -81,8 +89,13 @@ public class LevelReader {
 		return objects;
 	}
 	
+	public ArrayList<AnimateObject> getAnimateObjects(){
+		return animateObjects;
+	}
+	
 	public void resetLevel() {
 		objects.clear();
+		animateObjects.clear();
 		lines.clear();
 		hero = null;
 	}
