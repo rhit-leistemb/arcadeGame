@@ -46,44 +46,85 @@ public class GameComponent extends JComponent{
 	}
 
 	public void checkCollision() {
-		Line2D.Double butt = hero.getButtLine();
+		Line2D.Double butt1 = hero.getButtLine();
+		Line2D.Double top1 = hero.getTopLine();
+		Line2D.Double right1 = hero.getRightLine();
+		Line2D.Double left1 = hero.getLeftLine();
 		for (int j = 0; j < bounds.size(); j++) {
-			Line2D.Double top = bounds.get(j).getTopLine();
-			if (butt.intersectsLine(top)) {
+			Line2D.Double top2 = bounds.get(j).getTopLine();
+			Line2D.Double butt2 = bounds.get(j).getButtLine();
+			Line2D.Double right2 = bounds.get(j).getRightLine();
+			Line2D.Double left2 = bounds.get(j).getLeftLine();
+			
+//			Rectangle2D.Double hitbox = bounds.get(j).getHitbox();
+//			if (butt1.intersects(hitbox)) {
+//				hero.setButtHit(true); 
+//				System.out.println("Butt hit");
+//			}
+//			if (top1.intersects(hitbox)) {
+//				hero.setTopHit(true); 
+//			}
+//			if (right1.intersects(hitbox)) {
+//				hero.setRSideHit(true); 
+//			}
+//			if (left1.intersects(hitbox)) {
+//				hero.setLSideHit(true); 
+//			}
+			if (butt1.intersectsLine(top2)) {
 				hero.setButtHit(true); 
 				System.out.println("Butt hit");
-			}	
-				
-				
-//				if (hb1.getCenterY() < hb2.getCenterY()) {
-//					hero.setButtHit(true); 
-//					System.out.println("Butt hit");
-//				}
-//				if (hb1.getCenterY() > hb2.getCenterY()) {
-//					hero.setTopHit(true); 
-//					System.out.println("Top hit");
-//				}
-//				if (hb1.getCenterX() < hb2.getCenterX()) {
-//					hero.setRSideHit(true); 
-//					System.out.println("Right hit");
-//				}
-//				if (hb1.getCenterX() > hb2.getCenterX()) {
-//					hero.setLSideHit(true); 
-//					System.out.println("Left hit");
-//				}
 			}
-			
+			if (top1.intersectsLine(butt2)) {
+				hero.setTopHit(true); 
+			}
+			if (right1.intersectsLine(left2)) {
+				hero.setRSideHit(true); 
+			}
+			if (left1.intersectsLine(right2)) {
+				hero.setLSideHit(true); 
+			}
 		}
-//	}
+	}
 	
 	public void checkFreedom() {
-		Line2D.Double butt = hero.getButtLine();
+		Line2D.Double butt1 = hero.getButtLine();
+		Line2D.Double top1 = hero.getTopLine();
+		Line2D.Double right1 = hero.getRightLine();
+		Line2D.Double left1 = hero.getLeftLine();
 		for (int j = 0; j < bounds.size(); j++) {
-			Line2D.Double top = bounds.get(j).getTopLine();
-			if (!butt.intersectsLine(top)) {
+			Line2D.Double top2 = bounds.get(j).getTopLine();
+			Line2D.Double butt2 = bounds.get(j).getButtLine();
+			Line2D.Double right2 = bounds.get(j).getRightLine();
+			Line2D.Double left2 = bounds.get(j).getLeftLine();
+			
+//			Rectangle2D.Double hitbox = bounds.get(j).getHitbox();
+//			if (!butt1.intersects(hitbox)) {
+//				hero.setButtHit(false); 
+//				System.out.println("Butt free");
+//			}
+//			if (!top1.intersects(hitbox)) {
+//				hero.setTopHit(false); 
+//			}
+//			if (!right1.intersects(hitbox)) {
+//				hero.setRSideHit(false); 
+//			}
+//			if (!left1.intersects(hitbox)) {
+//				hero.setLSideHit(false); 
+//			}
+//			
+			if (!butt1.intersectsLine(top2)) {
 				hero.setButtHit(false); 
 				System.out.println("Butt free");
-			}	
+			}
+			if (!top1.intersectsLine(butt2)) {
+				hero.setTopHit(false); 
+			}
+			if (!right1.intersectsLine(left2)) {
+				hero.setRSideHit(false); 
+			}
+			if (!left1.intersectsLine(right2)) {
+				hero.setLSideHit(false); 
+			}
 		}
 	}
 		
@@ -152,7 +193,7 @@ public class GameComponent extends JComponent{
 	
 	public void update() {
 		for(int i = 0; i< objects.size(); i++) {
-			objects.get(i).updateHitbox();
+			objects.get(i).updateHitLines();
 		}
 	}
 	

@@ -20,17 +20,17 @@ public class Player extends AnimateObject {
 	
 
 	public void move() {
-		if(this.goUp == true) {
+		if(this.goUp == true && super.getTopHit() == false) {
 			this.setY(this.getY() - speed);
 			isMoving = true;
 		} else if(this.goUp == false) {
 			isMoving = false;
 		}
-		if(this.goLeft == true) {
+		if(this.goLeft == true && super.getLSideHit() == false) {
 			this.setX(this.getX() - speed);
 			//isMoving = true;
 		}
-		if(this.goRight == true) {
+		if(this.goRight == true && super.getRSideHit() == false) {
 			this.setX(this.getX() + speed);
 			//isMoving = true;
 		}

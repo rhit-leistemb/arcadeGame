@@ -4,13 +4,14 @@ public class AnimateObject extends GameObject{
 	
 	boolean isMoving = false;
 //	boolean isColliding = false;
+
 	
 	public AnimateObject(int x, int y) {
 		super(x, y);
 	}
 
 	public void gravity() {
-		if(isMoving == false && this.getButtHit() == false) {
+		if(isMoving == false && super.getButtHit() == false) {
 			this.setY(this.getY()+3);
 		
 		
