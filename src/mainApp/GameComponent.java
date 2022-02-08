@@ -52,86 +52,72 @@ public class GameComponent extends JComponent{
 		Line2D.Double top1 = hero.getTopLine();
 		Line2D.Double right1 = hero.getRightLine();
 		Line2D.Double left1 = hero.getLeftLine();
-//		for (int j = 0; j < bounds.size(); j++) {
-		Line2D.Double top2 = bounds.get(30).getTopLine();
-		Line2D.Double butt2 = bounds.get(30).getButtLine();
-		Line2D.Double right2 = bounds.get(30).getRightLine();
-		Line2D.Double left2 = bounds.get(30).getLeftLine();
-			
-//			Rectangle2D.Double hitbox = bounds.get(j).getHitbox();
-//			if (butt1.intersects(hitbox)) {
-//				hero.setButtHit(true); 
-//				System.out.println("Butt hit");
-//			}
-//			if (top1.intersects(hitbox)) {
-//				hero.setTopHit(true); 
-//			}
-//			if (right1.intersects(hitbox)) {
-//				hero.setRSideHit(true); 
-//			}
-//			if (left1.intersects(hitbox)) {
-//				hero.setLSideHit(true); 
-//			}
-		if (butt1.intersectsLine(top2)) {
-			hero.setButtHit(true);
-			System.out.println("Butt hit");
+		
+		//multiplatform
+		for (int j = 0; j < bounds.size(); j++) {
+			Line2D.Double top2 = bounds.get(j).getTopLine();
+			Line2D.Double butt2 = bounds.get(j).getButtLine();
+			Line2D.Double right2 = bounds.get(j).getRightLine();
+			Line2D.Double left2 = bounds.get(j).getLeftLine();
+		
+		//single platform
+//		Line2D.Double top2 = bounds.get(30).getTopLine();
+//		Line2D.Double butt2 = bounds.get(30).getButtLine();
+//		Line2D.Double right2 = bounds.get(30).getRightLine();
+//		Line2D.Double left2 = bounds.get(30).getLeftLine();
+				
+			if (butt1.intersectsLine(top2)) {
+				hero.setButtHit(true);
+				System.out.println("Butt hit");
+			}
+			if (top1.intersectsLine(butt2)) {
+				hero.setTopHit(true); 
+				System.out.println("Top hit");
+			}
+			if (right1.intersectsLine(left2)) {
+				hero.setRSideHit(true); 
+				System.out.println("Right hit");
+			}
+			if (left1.intersectsLine(right2)) {
+				hero.setLSideHit(true); 
+				System.out.println("Left hit");
+			}
 		}
-		if (top1.intersectsLine(butt2)) {
-			hero.setTopHit(true); 
-			System.out.println("Top hit");
-		}
-		if (right1.intersectsLine(left2)) {
-			hero.setRSideHit(true); 
-			System.out.println("Right hit");
-		}
-		if (left1.intersectsLine(right2)) {
-			hero.setLSideHit(true); 
-			System.out.println("Left hit");
-		}
-		}
-//	}
+	}
 	
-	public void checkFreedom() {
+	public void checkFreedom() { 
 		Line2D.Double butt1 = hero.getButtLine();
 		Line2D.Double top1 = hero.getTopLine();
 		Line2D.Double right1 = hero.getRightLine();
 		Line2D.Double left1 = hero.getLeftLine();
-//		for (int j = 0; j < bounds.size(); j++) {
-		Line2D.Double top2 = bounds.get(30).getTopLine();
-		Line2D.Double butt2 = bounds.get(30).getButtLine();
-		Line2D.Double right2 = bounds.get(30).getRightLine();
-		Line2D.Double left2 = bounds.get(30).getLeftLine();
-			
-//			Rectangle2D.Double hitbox = bounds.get(j).getHitbox();
-//			if (!butt1.intersects(hitbox)) {
-//				hero.setButtHit(false); 
-//				System.out.println("Butt free");
-//			}
-//			if (!top1.intersects(hitbox)) {
-//				hero.setTopHit(false); 
-//			}
-//			if (!right1.intersects(hitbox)) {
-//				hero.setRSideHit(false); 
-//			}
-//			if (!left1.intersects(hitbox)) {
-//				hero.setLSideHit(false); 
-//			}
+		
+		for (int j = 0; j < bounds.size(); j++) {
+			Line2D.Double top2 = bounds.get(j).getTopLine();
+			Line2D.Double butt2 = bounds.get(j).getButtLine();
+			Line2D.Double right2 = bounds.get(j).getRightLine();
+			Line2D.Double left2 = bounds.get(j).getLeftLine();
+		
+//		Line2D.Double top2 = bounds.get(30).getTopLine();
+//		Line2D.Double butt2 = bounds.get(30).getButtLine();
+//		Line2D.Double right2 = bounds.get(30).getRightLine();
+//		Line2D.Double left2 = bounds.get(30).getLeftLine();
 //			
-		if (!butt1.intersectsLine(top2)) {
-			hero.setButtHit(false); 
-			System.out.println("Butt free");
+	
+			if (!butt1.intersectsLine(top2)) {
+				hero.setButtHit(false); 
+				System.out.println("Butt free");
+			}
+			if (!top1.intersectsLine(butt2)) {
+				hero.setTopHit(false); 
+			}
+			if (!right1.intersectsLine(left2)) {
+				hero.setRSideHit(false); 
+			}
+			if (!left1.intersectsLine(right2)) {
+				hero.setLSideHit(false); 
+			}
 		}
-		if (!top1.intersectsLine(butt2)) {
-			hero.setTopHit(false); 
-		}
-		if (!right1.intersectsLine(left2)) {
-			hero.setRSideHit(false); 
-		}
-		if (!left1.intersectsLine(right2)) {
-			hero.setLSideHit(false); 
-		}
-		}
-//	}
+	}
 		
 	
 		/*for (int i = 0; i < animateObjects.size(); i++) {
@@ -237,22 +223,34 @@ public class GameComponent extends JComponent{
 			o.drawOn(g2);
 		}
 		//
-		Line2D.Double top2 = bounds.get(30).getTopLine();
-		Line2D.Double butt2 = bounds.get(30).getButtLine();
-		Line2D.Double right2 = bounds.get(30).getRightLine();
-		Line2D.Double left2 = bounds.get(30).getLeftLine();
+		g2.setColor(Color.WHITE);
+		
+		//single platform
+//		Line2D.Double top2 = bounds.get(30).getTopLine();
+//		Line2D.Double butt2 = bounds.get(30).getButtLine();
+//		Line2D.Double right2 = bounds.get(30).getRightLine();
+//		Line2D.Double left2 = bounds.get(30).getLeftLine();
+		
+		
+		
+	//multiplatform	
+		for (int j = 0; j < bounds.size(); j++) {
+			Line2D.Double top2 = bounds.get(j).getTopLine();
+			Line2D.Double butt2 = bounds.get(j).getButtLine();
+			Line2D.Double right2 = bounds.get(j).getRightLine();
+			Line2D.Double left2 = bounds.get(j).getLeftLine();
+			
+			g2.draw(top2);
+			g2.draw(butt2);
+			g2.draw(right2);
+			g2.draw(left2);
+		}
+		
 		
 		Line2D.Double butt1 = hero.getButtLine();
 		Line2D.Double top1 = hero.getTopLine();
 		Line2D.Double right1 = hero.getRightLine();
 		Line2D.Double left1 = hero.getLeftLine();
-		
-		g2.setColor(Color.WHITE);
-		
-		g2.draw(top2);
-		g2.draw(butt2);
-		g2.draw(right2);
-		g2.draw(left2);
 		
 		g2.draw(butt1);
 		g2.draw(top1);
