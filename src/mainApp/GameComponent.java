@@ -76,18 +76,18 @@ public class GameComponent extends JComponent{
 			hero.setButtHit(true);
 			System.out.println("Butt hit");
 		}
-//		if (top1.intersectsLine(butt2)) {
-//			hero.setTopHit(true); 
-//			System.out.println("Top hit");
-//		}
-//		if (right1.intersectsLine(left2)) {
-//			hero.setRSideHit(true); 
-//			System.out.println("Right hit");
-//		}
-//		if (left1.intersectsLine(right2)) {
-//			hero.setLSideHit(true); 
-//			System.out.println("Left hit");
-//		}
+		if (top1.intersectsLine(butt2)) {
+			hero.setTopHit(true); 
+			System.out.println("Top hit");
+		}
+		if (right1.intersectsLine(left2)) {
+			hero.setRSideHit(true); 
+			System.out.println("Right hit");
+		}
+		if (left1.intersectsLine(right2)) {
+			hero.setLSideHit(true); 
+			System.out.println("Left hit");
+		}
 		}
 //	}
 	
@@ -121,15 +121,15 @@ public class GameComponent extends JComponent{
 			hero.setButtHit(false); 
 			System.out.println("Butt free");
 		}
-//		if (!top1.intersectsLine(butt2)) {
-//			hero.setTopHit(false); 
-//		}
-//		if (!right1.intersectsLine(left2)) {
-//			hero.setRSideHit(false); 
-//		}
-//		if (!left1.intersectsLine(right2)) {
-//			hero.setLSideHit(false); 
-//		}
+		if (!top1.intersectsLine(butt2)) {
+			hero.setTopHit(false); 
+		}
+		if (!right1.intersectsLine(left2)) {
+			hero.setRSideHit(false); 
+		}
+		if (!left1.intersectsLine(right2)) {
+			hero.setLSideHit(false); 
+		}
 		}
 //	}
 		
