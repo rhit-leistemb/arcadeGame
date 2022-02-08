@@ -2,6 +2,7 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 public class GameObject {
@@ -12,12 +13,28 @@ public class GameObject {
 	public int height = 20;
 	public Color color = Color.black;
 	
-	Rectangle2D.Double hitbox;
+//	Rectangle2D.Double hitbox;
+	
+	//
+	Line2D.Double buttLine;
+	Line2D.Double topLine;
+	Line2D.Double leftLine;
+	Line2D.Double rightLine;
+	
+	
+	private boolean buttHit = false;
+	private boolean rSideHit = false;
+	private boolean lSideHit = false;
+	private boolean topHit = false;
+	//
 	
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
-		hitbox = new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+//		hitbox = new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+//		buttLine = new Line2D.Double(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
+//		topLine = new Line2D.Double(this.x, this.y, this.x + this.width, this.y);
+		updateHitbox();
 	}
 	
 	public void drawOn(Graphics2D g) {
@@ -66,11 +83,55 @@ public class GameObject {
 		this.color = color;
 	}
 	
-	public Rectangle2D.Double getHitbox() {
-		return hitbox;
+//	public Rectangle2D.Double getHitbox() {
+//		return hitbox;
+//	}
+//	
+	public void updateHitbox() {
+		buttLine = new Line2D.Double(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
+		topLine = new Line2D.Double(this.x, this.y, this.x + this.width, this.y);
 	}
 	
-	public void updateHitbox() {
-		hitbox.setRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+	//
+	public Line2D.Double getButtLine(){
+		return this.buttLine;
 	}
+	
+	public Line2D.Double getTopLine(){
+		return this.topLine;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public boolean getButtHit() {
+		return this.buttHit;
+	}
+	public boolean getTopHit() {
+		return this.topHit;
+	}
+	public boolean getRSideHit() {
+		return this.rSideHit;
+	}
+	public boolean getLSideHit() {
+		return this.lSideHit;
+	}
+	
+	
+	public void setButtHit(boolean condition) {
+		this.buttHit = condition;
+	}
+	public void setTopHit(boolean condition) {
+		this.topHit = condition;
+	}
+	public void setLSideHit(boolean condition) {
+		this.lSideHit = condition;
+	}
+	public void setRSideHit(boolean condition) {
+		this.rSideHit = condition;
+	}
+	//
 }

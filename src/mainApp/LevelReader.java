@@ -11,6 +11,9 @@ public class LevelReader {
 	ArrayList<String> lines = new ArrayList<String>();
 	ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
+	//
+	ArrayList<GameObject> boundaries = new ArrayList<GameObject>();
+	//
 	private final int space = 20;
 	private Player hero;
 		
@@ -55,6 +58,9 @@ public class LevelReader {
 					BoundaryObject o = new BoundaryObject(x, y);
 					x+=space;
 					objects.add(o);
+					//
+					boundaries.add(o);
+					//
 				}else if(currentChar == '.') {
 					x+=space;
 				}else if(currentChar == 'B') {
@@ -93,6 +99,12 @@ public class LevelReader {
 		return animateObjects;
 	}
 	
+	//
+	public ArrayList<GameObject> getBoundaries() {
+		return boundaries;
+	}
+	//
+	
 	public void resetLevel() {
 		objects.clear();
 		animateObjects.clear();
@@ -115,5 +127,7 @@ public class LevelReader {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	
 	
 }

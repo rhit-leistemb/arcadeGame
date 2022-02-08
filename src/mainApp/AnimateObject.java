@@ -3,15 +3,19 @@ package mainApp;
 public class AnimateObject extends GameObject{
 	
 	boolean isMoving = false;
-	boolean isColliding = false;
+//	boolean isColliding = false;
 	
 	public AnimateObject(int x, int y) {
 		super(x, y);
 	}
 
 	public void gravity() {
-		if(isMoving == false&&isColliding == false) {
+		if(isMoving == false && this.getButtHit() == false) {
 			this.setY(this.getY()+3);
+		
+		
+//		if(isMoving == false&&isColliding == false) {
+//			this.setY(this.getY()+3);
 		}
 	}
 	
@@ -19,9 +23,9 @@ public class AnimateObject extends GameObject{
 		this.isMoving = isMoving;
 	}
 	
-	public void setIsColliding(boolean isColliding) {
-		this.isColliding = isColliding;
-		//System.out.println(isColliding);
-	}
+//	public void setIsColliding(boolean isColliding) {
+//		this.isColliding = isColliding;
+//		//System.out.println(isColliding);
+//	}
 
 }

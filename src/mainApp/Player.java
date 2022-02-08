@@ -20,11 +20,10 @@ public class Player extends AnimateObject {
 	
 
 	public void move() {
-		//this one works
 		if(this.goUp == true) {
 			this.setY(this.getY() - speed);
 			isMoving = true;
-		}else if(this.goUp == false) {
+		} else if(this.goUp == false) {
 			isMoving = false;
 		}
 		if(this.goLeft == true) {
