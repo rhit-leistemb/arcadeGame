@@ -57,7 +57,7 @@ public class GameComponent extends JComponent{
 				animateObjects.get(i).setIsColliding(false);
 			}
 		}*/
-		Rectangle2D.Double hb1 = hero.getHitbox();
+		/*Rectangle2D.Double hb1 = hero.getHitbox();
 		for (int j = 0; j < objects.size(); j++) {
 			Rectangle2D.Double hb2 = objects.get(j).getHitbox();
 			if (hb1.intersectsLine(hb2.getX(), hb2.getY(), hb2.getWidth(), hb2.getHeight())&& hero.getClass().getSimpleName() != objects.get(j).getClass().getSimpleName()) {
@@ -73,7 +73,26 @@ public class GameComponent extends JComponent{
 			hero.setIsColliding(true);
 		}else {
 			hero.setIsColliding(false);
-		}
+		}*/
+			int count = 1;
+			for(int j = 0; j< objects.size(); j++) {
+				if(objects.get(j).getClass().getSimpleName()!= "Player") {
+					//System.out.println(hero.getX()+hero.getWidth());
+					//System.out.println(objects.get(j).getX());
+					if(hero.getX()+hero.getWidth()>objects.get(j).getX()&&hero.getX()+hero.getWidth()<objects.get(j).getX()+objects.get(j).getWidth()&&hero.getY()+hero.getHeight()>objects.get(j).getY()&&hero.getY()+hero.getHeight()<objects.get(j).getY()+objects.get(j).getHeight()) {
+						count = 0;
+					}else {
+						count++;
+					}
+				}
+			}
+			if(count!=objects.size()-1) {
+				hero.setIsColliding(true);
+				count = 0;
+			}else {
+				count = 0;
+				hero.setIsColliding(false);
+			}
 	}
 	
 
