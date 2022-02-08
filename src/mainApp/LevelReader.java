@@ -12,7 +12,7 @@ public class LevelReader {
 	ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	//
-	ArrayList<BoundaryObject> boundaries = new ArrayList<BoundaryObject>();
+	ArrayList<GameObject> inanimateObjects = new ArrayList<GameObject>();
 	//
 	private final int space = 20;
 	private Player hero;
@@ -54,19 +54,19 @@ public class LevelReader {
 					BoundaryObject o = new BoundaryObject(x, y);
 					x+=space;
 					objects.add(o);
+					inanimateObjects.add(o);
 				}else if(currentChar == '-') {
 					BoundaryObject o = new BoundaryObject(x, y);
 					x+=space;
 					objects.add(o);
-					//
-					boundaries.add(o);
-					//
+					inanimateObjects.add(o);
 				}else if(currentChar == '.') {
 					x+=space;
 				}else if(currentChar == 'B') {
 					BombCollectible o = new BombCollectible(x, y);
 					x+=space;
 					objects.add(o);
+					inanimateObjects.add(o);
 				}else if(currentChar == 'W') {
 					WalkingEnemy o = new WalkingEnemy(x, y);
 					x+=space;
@@ -100,8 +100,8 @@ public class LevelReader {
 	}
 	
 	//
-	public ArrayList<BoundaryObject> getBoundaries() {
-		return boundaries;
+	public ArrayList<GameObject> getInanimate() {
+		return inanimateObjects;
 	}
 	//
 	
