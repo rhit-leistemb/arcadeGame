@@ -32,12 +32,10 @@ public class GameObject {
 		this.x = x;
 		this.y = y;
 		hitbox = new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-		buttLine = new Line2D.Double(this.getX(), this.getY() + this.getHeight() + 1, this.getX() + this.getWidth(), this.getY() + this.getHeight() + 1);
-		topLine = new Line2D.Double(this.getX(), this.getY() - 1, this.getX() + this.getWidth(), this.getY() - 1);
-		rightLine = new Line2D.Double(this.getX() + this.getWidth() + 3, this.getY(), this.getX() + this.getWidth() + 3, this.getY() + this.getHeight());
+		buttLine = new Line2D.Double(this.getX()-2, this.getY() + this.getHeight() + 1, this.getX() + this.getWidth()+2, this.getY() + this.getHeight() + 1);
+		topLine = new Line2D.Double(this.getX()-2, this.getY() - 1, this.getX() + this.getWidth(), this.getY() - 1);
+		rightLine = new Line2D.Double(this.getX() + this.getWidth() + 3, this.getY()-2, this.getX() + this.getWidth() + 3, this.getY() + this.getHeight()+2);
 		leftLine = new Line2D.Double(this.getX() - 2, this.getY(), this.getX() - 2, this.getY() + this.getHeight());
-	
-
 	}
 	
 	public void drawOn(Graphics2D g) {
