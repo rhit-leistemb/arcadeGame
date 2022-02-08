@@ -12,7 +12,7 @@ public class LevelReader {
 	ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	//
-	ArrayList<GameObject> boundaries = new ArrayList<GameObject>();
+	ArrayList<BoundaryObject> boundaries = new ArrayList<BoundaryObject>();
 	//
 	private final int space = 20;
 	private Player hero;
@@ -100,7 +100,7 @@ public class LevelReader {
 	}
 	
 	//
-	public ArrayList<GameObject> getBoundaries() {
+	public ArrayList<BoundaryObject> getBoundaries() {
 		return boundaries;
 	}
 	//

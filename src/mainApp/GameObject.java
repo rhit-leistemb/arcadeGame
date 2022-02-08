@@ -32,7 +32,10 @@ public class GameObject {
 		this.x = x;
 		this.y = y;
 		hitbox = new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-		updateHitLines();
+		buttLine = new Line2D.Double(this.getX(), this.getY() + this.getHeight(), this.getX() + this.getWidth(), this.getY() + this.getHeight());
+		topLine = new Line2D.Double(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY());
+		rightLine = new Line2D.Double(this.getX() + this.getWidth(), this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight());
+		leftLine = new Line2D.Double(this.getX() , this.getY(), this.getX(), this.getY() + this.getHeight());
 	}
 	
 	public void drawOn(Graphics2D g) {
@@ -86,10 +89,10 @@ public class GameObject {
 	}
 	
 	public void updateHitLines() {
-		buttLine = new Line2D.Double(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
-		topLine = new Line2D.Double(this.x, this.y, this.x + this.width, this.y);
-		rightLine = new Line2D.Double(this.x + this.width, this.y + 1, this.x + this.width, this.y + this.height - 1);
-		leftLine = new Line2D.Double(this.x , this.y + 1, this.x, this.y + this.height - 1);
+		buttLine.setLine(this.getX()-1, this.getY() + this.getHeight()+1, this.getX() + this.getWidth()+1, this.getY() + this.getHeight()+1);
+		topLine.setLine(this.getX()-1, this.getY()-1, this.getX() + this.getWidth()+1, this.getY()+1);
+		rightLine.setLine(this.getX() + this.getWidth()+1, this.getY()-1, this.getX() + this.getWidth()+1, this.getY() + this.getHeight()+1);
+		leftLine.setLine(this.getX()-1 , this.getY()-1, this.getX()-1, this.getY() + this.getHeight()+1);
 	}
 	
 	//

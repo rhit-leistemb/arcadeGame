@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class Player extends AnimateObject {
 
 	private Color playerColor = Color.GREEN;
-	private int speed = 3;
+	private int speed = 1;
 	
 	private boolean goUp = false;
 	private boolean goLeft = false;
@@ -20,17 +20,17 @@ public class Player extends AnimateObject {
 	
 
 	public void move() {
-		if(this.goUp == true && super.getTopHit() == false) {
+		if(this.goUp == true && this.getTopHit() == false) {
 			this.setY(this.getY() - speed);
 			isMoving = true;
 		} else if(this.goUp == false) {
 			isMoving = false;
 		}
-		if(this.goLeft == true && super.getLSideHit() == false) {
+		if(this.goLeft == true && this.getLSideHit() == false) {
 			this.setX(this.getX() - speed);
 			//isMoving = true;
 		}
-		if(this.goRight == true && super.getRSideHit() == false) {
+		if(this.goRight == true && this.getRSideHit() == false) {
 			this.setX(this.getX() + speed);
 			//isMoving = true;
 		}

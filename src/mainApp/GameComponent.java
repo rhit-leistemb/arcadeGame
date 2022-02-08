@@ -22,7 +22,7 @@ public class GameComponent extends JComponent{
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	//
-	private ArrayList<GameObject> bounds = new ArrayList<GameObject>();
+	private ArrayList<BoundaryObject> bounds = new ArrayList<BoundaryObject>();
 	//
 	private String fileName;
 	private Player hero;
@@ -47,6 +47,7 @@ public class GameComponent extends JComponent{
 
 	public void checkCollision() {
 		Line2D.Double butt1 = hero.getButtLine();
+		//butt1.setLine(hero.getButtLine().getX1(), hero.getButtLine().getY1(), hero.getButtLine().getX2(), hero.getButtLine().getY2());
 		Line2D.Double top1 = hero.getTopLine();
 		Line2D.Double right1 = hero.getRightLine();
 		Line2D.Double left1 = hero.getLeftLine();
@@ -72,7 +73,7 @@ public class GameComponent extends JComponent{
 //			}
 			if (butt1.intersectsLine(top2)) {
 				hero.setButtHit(true); 
-				System.out.println("Butt hit");
+				//System.out.println("Butt hit");
 			}
 			if (top1.intersectsLine(butt2)) {
 				hero.setTopHit(true); 

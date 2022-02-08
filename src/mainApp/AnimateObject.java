@@ -11,7 +11,7 @@ public class AnimateObject extends GameObject{
 	}
 
 	public void gravity() {
-		if(isMoving == false && super.getButtHit() == false) {
+		if(isMoving == false && this.getButtHit() == false) {
 			this.setY(this.getY()+3);
 		
 		
