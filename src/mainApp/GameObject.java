@@ -36,6 +36,7 @@ public class GameObject {
 		topLine = new Line2D.Double(this.getX(), this.getY() - 1, this.getX() + this.getWidth(), this.getY() - 1);
 		rightLine = new Line2D.Double(this.getX() + this.getWidth() + 3, this.getY(), this.getX() + this.getWidth() + 3, this.getY() + this.getHeight());
 		leftLine = new Line2D.Double(this.getX() - 2, this.getY(), this.getX() - 2, this.getY() + this.getHeight());
+	
 
 	}
 	
