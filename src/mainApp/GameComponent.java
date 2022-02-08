@@ -21,6 +21,7 @@ public class GameComponent extends JComponent{
 	private ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	private String fileName;
 	private Player hero;
+	private boolean isColliding = false;
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
@@ -37,21 +38,53 @@ public class GameComponent extends JComponent{
 	}
 
 	public void checkCollision() {
-		for (int i = 0; i < animateObjects.size(); i++) {
-			Rectangle2D.Double hb1 = animateObjects.get(i).hitbox;
+		/*for (int i = 0; i < animateObjects.size(); i++) {
+			Rectangle2D.Double hb1 = animateObjects.get(i).getHitbox();
 			for (int j = 0; j < objects.size(); j++) {
-				Rectangle2D.Double hb2 = objects.get(j).hitbox;
-				if (hb1.intersects(hb2)) {
-					animateObjects.get(i).setIsMoving(true);
+				Rectangle2D.Double hb2 = objects.get(j).getHitbox();
+				if (hb1.intersects(hb2)&& animateObjects.get(i).getClass().getSimpleName() != objects.get(j).getClass().getSimpleName()) {
+					isColliding = true;
+				}else {
+					isColliding = false;
 				}
+				System.out.println(animateObjects.get(i).getClass().getSimpleName());
+				System.out.println(objects.get(j).getClass().getSimpleName());
+				System.out.println(isColliding);
 			}
+			if(isColliding) {
+				animateObjects.get(i).setIsColliding(true);
+			}else {
+				animateObjects.get(i).setIsColliding(false);
+			}
+		}*/
+		Rectangle2D.Double hb1 = hero.getHitbox();
+		for (int j = 0; j < objects.size(); j++) {
+			Rectangle2D.Double hb2 = objects.get(j).getHitbox();
+			if (hb1.intersectsLine(hb2.getX(), hb2.getY(), hb2.getWidth(), hb2.getHeight())&& hero.getClass().getSimpleName() != objects.get(j).getClass().getSimpleName()) {
+				isColliding = true;
+				System.out.println(hero.getClass().getSimpleName());
+				System.out.println(objects.get(j).getClass().getSimpleName());
+			}else {
+				isColliding = false;
+			}
+			//System.out.println(isColliding);
 		}
-	
+		if(isColliding) {
+			hero.setIsColliding(true);
+		}else {
+			hero.setIsColliding(false);
+		}
 	}
 	
 
 	public void traverse() {	
 		hero.move();
+	}
+	
+	public void update() {
+		for(int i = 0; i< objects.size(); i++) {
+			objects.get(i).updateHitbox();
+		}
 	}
 	
 	public void setDirection(int code) {

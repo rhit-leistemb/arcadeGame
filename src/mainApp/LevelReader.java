@@ -48,11 +48,11 @@ public class LevelReader {
 			for(int j = 0; j< currentLine.length(); j++) {
 				char currentChar = currentLine.charAt(j);
 				if(currentChar == '|') {
-					GameObject o = new GameObject(x, y);
+					BoundaryObject o = new BoundaryObject(x, y);
 					x+=space;
 					objects.add(o);
 				}else if(currentChar == '-') {
-					GameObject o = new GameObject(x, y);
+					BoundaryObject o = new BoundaryObject(x, y);
 					x+=space;
 					objects.add(o);
 				}else if(currentChar == '.') {

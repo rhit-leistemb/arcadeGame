@@ -12,11 +12,12 @@ public class GameObject {
 	public int height = 20;
 	public Color color = Color.black;
 	
-	Rectangle2D.Double hitbox = new Rectangle2D.Double(this.x, this.y, this.width, this.height);
+	Rectangle2D.Double hitbox;
 	
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
+		hitbox = new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 	
 	public void drawOn(Graphics2D g) {
@@ -63,5 +64,13 @@ public class GameObject {
 	
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	public Rectangle2D.Double getHitbox() {
+		return hitbox;
+	}
+	
+	public void updateHitbox() {
+		hitbox.setRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 }
