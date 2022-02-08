@@ -2,6 +2,7 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 public class GameObject {
 	
@@ -10,6 +11,8 @@ public class GameObject {
 	public int width = 20;
 	public int height = 20;
 	public Color color = Color.black;
+	
+	Rectangle2D.Double hitbox = new Rectangle2D.Double(this.x, this.y, this.width, this.height);
 	
 	public GameObject(int x, int y) {
 		this.x = x;

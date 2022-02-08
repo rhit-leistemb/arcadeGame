@@ -79,6 +79,7 @@ public GameViewer() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				component.checkCollision();
 				component.traverse(); 
 				component.gravity();
 				component.repaint();

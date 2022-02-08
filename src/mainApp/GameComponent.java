@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -35,6 +36,21 @@ public class GameComponent extends JComponent{
 		hero = reader.getHero();
 	}
 
+	public AnimateObject[] checkCollision() {
+		for (int i = 0; i < animateObjects.size(); i++) {
+			Rectangle2D.Double hb1 = animateObjects.get(i).hitbox;
+			for (int j = 0; j < objects.size(); j++) {
+				Rectangle2D.Double hb2 = objects.get(j).hitbox;
+				if (hb1.intersects(hb2)) {
+					animateObjects.get(i).setIsMoving(true);
+				}
+			}
+		}
+		
+		
+		return null;
+	
+	}
 	
 
 	public void traverse() {	
