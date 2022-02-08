@@ -12,7 +12,7 @@ public class AnimateObject extends GameObject{
 
 	public void gravity() {
 		if(isMoving == false && this.getButtHit() == false) {
-			System.out.println("Applying gravity");
+			//System.out.println("Applying gravity");
 			this.setY(this.getY()+ 2);
 		
 		
@@ -31,6 +31,18 @@ public class AnimateObject extends GameObject{
 
 	public void setIsMoving(boolean isMoving) {
 		this.isMoving = isMoving;
+	}
+	
+	public void move() {
+		return;
+	}
+	
+	public void moveRight() {
+		return;
+	}
+	
+	public void moveLeft() {
+		return;
 	}
 	
 //	public void setIsColliding(boolean isColliding) {

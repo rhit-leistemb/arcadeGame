@@ -24,6 +24,7 @@ public class GameViewer {
 	public static final int FRAME_HEIGHT = 430;
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	protected static Graphics g;
+	private int num = 1;
 	
 	
 //	public 
@@ -86,8 +87,37 @@ public GameViewer() {
 				component.repaint();
 			}	
 		});
+		
 		timer.start();
 		
+		Timer t2 = new Timer(100, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(num <= 50) {	
+					component.moveEnemyRight();
+				}
+				if(num >= 50)
+					component.moveEnemyLeft();
+				}
+			
+		});
+		t2.start();
+		
+		Timer t3 = new Timer(50, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(num >= 100) {
+					num = 0;
+				}else {
+					num++;
+				}
+			}
+			
+		});
+		
+		t3.start();
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
 		frame.setVisible(true);	

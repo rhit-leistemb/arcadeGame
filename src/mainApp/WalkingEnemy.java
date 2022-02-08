@@ -11,14 +11,16 @@ public class WalkingEnemy extends Enemy{
 		this.setColor(walkingEnemyColor);
 	}
 	
-	public void walk() {
-		this.setX(this.getX()+20);
-		try {
-			this.wait(20);
-		} catch (InterruptedException e) {
-			System.out.println("WalkingEnemy wait does not work");
-		}
-		this.setX(this.getX()-20);
+	public void move(){
+		this.setX(this.getX()+2);
+	}
+	
+	public void moveRight() {
+		this.setX(this.getX()+2);
+	}
+	
+	public void moveLeft() {
+		this.setX(this.getX()-2);
 	}
 
 }

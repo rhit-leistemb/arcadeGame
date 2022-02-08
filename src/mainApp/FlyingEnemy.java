@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.Color;
+import java.util.Random;
 
 public class FlyingEnemy extends Enemy{
 	
@@ -11,14 +12,22 @@ public class FlyingEnemy extends Enemy{
 		this.setColor(flyingEnemyColor);
 	}
 	
-	public void fly() {
-		this.setY(this.getY()-50);
-		try {
-			this.wait(20);
-		} catch (InterruptedException e) {
-			System.out.println("FlyingEnemy wait does not work");
+	public void move() {
+		Random random = new Random();
+		int rand = random.nextInt(4);
+		if(rand == 0) {
+			this.setY(this.getY()-4);
+		}else if(rand == 1) {
+			this.setY(this.getY()+4);
+		}else if(rand == 2) {
+			this.setX(this.getX()-4);
+		}else if(rand == 3) {
+			this.setX(this.getX()+4);
 		}
-		this.setY(this.getY()+50);
 	}
-
+	
+	
+	public void gravity() {
+		return;
+	}
 }

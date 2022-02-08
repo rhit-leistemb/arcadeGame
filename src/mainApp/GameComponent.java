@@ -67,19 +67,19 @@ public class GameComponent extends JComponent{
 					
 				if (butt1.intersectsLine(top2)) {
 					animateObjects.get(i).setButtHit(true);
-					System.out.println("Butt hit");
+					//System.out.println("Butt hit");
 				}
 				if (top1.intersectsLine(butt2)) {
 					animateObjects.get(i).setTopHit(true); 
-					System.out.println("Top hit");
+					//System.out.println("Top hit");
 				}
 				if (right1.intersectsLine(left2)) {
 					animateObjects.get(i).setRSideHit(true); 
-					System.out.println("Right hit");
+					//System.out.println("Right hit");
 				}
 				if (left1.intersectsLine(right2)) {
 					animateObjects.get(i).setLSideHit(true); 
-					System.out.println("Left hit");
+					//System.out.println("Left hit");
 				}
 			}
 		}
@@ -182,6 +182,27 @@ public class GameComponent extends JComponent{
 
 	public void traverse() {	
 		hero.move();
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
+				animateObjects.get(i).move();
+			}
+		}
+	}
+	
+	public void moveEnemyRight() {
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
+				animateObjects.get(i).moveRight();
+			}
+		}
+	}
+	
+	public void moveEnemyLeft() {
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
+				animateObjects.get(i).moveLeft();
+			}
+		}
 	}
 	
 	public void update() {
@@ -224,7 +245,7 @@ public class GameComponent extends JComponent{
 			o.drawOn(g2);
 		}
 		//
-		g2.setColor(Color.WHITE);
+		//g2.setColor(Color.WHITE);
 		
 	//draw hitboxes
 		for (int j = 0; j < objects.size(); j++) {
@@ -233,10 +254,10 @@ public class GameComponent extends JComponent{
 			Line2D.Double right2 = objects.get(j).getRightLine();
 			Line2D.Double left2 = objects.get(j).getLeftLine();
 			
-			g2.draw(top2);
-			g2.draw(butt2);
-			g2.draw(right2);
-			g2.draw(left2);
+			//g2.draw(top2);
+			//g2.draw(butt2);
+			//g2.draw(right2);
+			//g2.draw(left2);
 		}
 	}	
 
