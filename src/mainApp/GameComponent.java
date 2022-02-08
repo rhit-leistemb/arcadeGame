@@ -36,7 +36,7 @@ public class GameComponent extends JComponent{
 		hero = reader.getHero();
 	}
 
-	public AnimateObject[] checkCollision() {
+	public void checkCollision() {
 		for (int i = 0; i < animateObjects.size(); i++) {
 			Rectangle2D.Double hb1 = animateObjects.get(i).hitbox;
 			for (int j = 0; j < objects.size(); j++) {
@@ -46,9 +46,6 @@ public class GameComponent extends JComponent{
 				}
 			}
 		}
-		
-		
-		return null;
 	
 	}
 	
