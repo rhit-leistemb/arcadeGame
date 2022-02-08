@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class Player extends AnimateObject {
 
 	private Color playerColor = Color.GREEN;
-	private int speed = 1;
+	private int speed = 3;
 	
 	private boolean goUp = false;
 	private boolean goLeft = false;

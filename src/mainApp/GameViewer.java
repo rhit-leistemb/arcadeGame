@@ -79,12 +79,15 @@ public GameViewer() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				component.checkCollision();
 				component.update();
 				component.checkCollision();
-				component.traverse(); 
+				component.traverse();
+				component.checkCollision();
 				component.gravity();
+				component.checkCollision();
 				component.repaint();
+				component.checkCollision();
 			}	
 		});
 		timer.start();
