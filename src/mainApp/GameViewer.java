@@ -27,8 +27,6 @@ public class GameViewer {
 	private int num = 1;
 	
 	
-//	public 
-	
 public GameViewer() {
 	}
 
@@ -45,9 +43,8 @@ public GameViewer() {
 		
 		frame.addKeyListener(new KeyListener() {			
 			@Override
-			public void keyTyped(KeyEvent e) {
-				
-				
+			public void keyTyped(KeyEvent e) {	
+			
 			}
 
 			@Override
@@ -72,8 +69,8 @@ public GameViewer() {
 				int code = e.getKeyCode();
 				component.stopDirection(code);
 				component.repaint();
-			}
 			
+			}	
 		});
 		
 		Timer timer = new Timer(20, new ActionListener() {
@@ -87,7 +84,6 @@ public GameViewer() {
 				component.repaint();
 			}	
 		});
-		
 		timer.start();
 		
 		Timer t2 = new Timer(100, new ActionListener() {
@@ -113,11 +109,10 @@ public GameViewer() {
 				}else {
 					num++;
 				}
-			}
-			
+			}	
 		});
-		
 		t3.start();
+		
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
 		frame.setVisible(true);	

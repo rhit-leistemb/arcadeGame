@@ -13,35 +13,24 @@ public class GameObject {
 	public int height = 20;
 	public Color color = Color.black;
 	
-	Rectangle2D.Double hitbox;
-	
-	//
 	Line2D.Double buttLine;
 	Line2D.Double topLine;
 	Line2D.Double leftLine;
 	Line2D.Double rightLine;
 	
-	
 	private boolean buttHit = false;
 	private boolean rSideHit = false;
 	private boolean lSideHit = false;
 	private boolean topHit = false;
-	//
+	
 	
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
-//		hitbox = new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-//		buttLine = new Line2D.Double(this.getX()-2, this.getY() + this.getHeight() + 1, this.getX() + this.getWidth()+2, this.getY() + this.getHeight() + 1);
-//		topLine = new Line2D.Double(this.getX()-2, this.getY() - 1, this.getX() + this.getWidth() + 2, this.getY() - 1);
-//		rightLine = new Line2D.Double(this.getX() + this.getWidth() + 3, this.getY(), this.getX() + this.getWidth() + 3, this.getY() + this.getHeight() + 1);
-//		leftLine = new Line2D.Double(this.getX() - 2, this.getY(), this.getX() - 2, this.getY() + this.getHeight() + 1);
 		buttLine = new Line2D.Double(this.getX(), this.getY() + this.getHeight(), this.getX() + this.getWidth(), this.getY() + this.getHeight() );
 		topLine = new Line2D.Double(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY());
 		rightLine = new Line2D.Double(this.getX() + this.getWidth() , this.getY() + 1, this.getX() + this.getWidth(), this.getY() + this.getHeight() - 1);
 		leftLine = new Line2D.Double(this.getX(), this.getY() + 1, this.getX(), this.getY() + this.getHeight() - 1);
-		
-	
 	}
 	
 	public void drawOn(Graphics2D g) {
@@ -90,12 +79,6 @@ public class GameObject {
 		this.color = color;
 	}
 	
-	public Rectangle2D.Double getHitbox() {
-		return hitbox;
-	}
-
-	
-	//
 	public Line2D.Double getButtLine(){
 		return this.buttLine;
 	}
@@ -137,5 +120,4 @@ public class GameObject {
 	public void setRSideHit(boolean condition) {
 		this.rSideHit = condition;
 	}
-	//
 }

@@ -28,11 +28,9 @@ public class Player extends AnimateObject {
 		}
 		if(this.goLeft == true && this.getLSideHit() == false) {
 			this.setX(this.getX() - speed);
-			//isMoving = true;
 		}
 		if(this.goRight == true && this.getRSideHit() == false) {
 			this.setX(this.getX() + speed);
-			//isMoving = true;
 		}
 	}
 	
