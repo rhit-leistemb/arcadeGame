@@ -114,6 +114,16 @@ public class GameComponent extends JComponent{
 	
 	public void lose() {
 		System.out.println("Game Over");
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("Player")) {
+				animateObjects.remove(i);
+			}
+		}
+		for(int j = 0; j< objects.size(); j++) {
+			if(objects.get(j).getClass().getSimpleName().equals("Player")) {
+				objects.remove(j);
+			}
+		}
 		this.completed = true;
 	}
 	
