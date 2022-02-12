@@ -106,6 +106,8 @@ public class GameComponent extends JComponent{
 	public void moveEnemyRight() {
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
+				animateObjects.get(i).goRight(true);
+				animateObjects.get(i).goLeft(false);
 				animateObjects.get(i).moveRight();
 			}
 		}
@@ -114,6 +116,8 @@ public class GameComponent extends JComponent{
 	public void moveEnemyLeft() {
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
+				animateObjects.get(i).goRight(false);
+				animateObjects.get(i).goLeft(true);
 				animateObjects.get(i).moveLeft();
 			}
 		}

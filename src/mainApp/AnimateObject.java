@@ -4,6 +4,9 @@ public class AnimateObject extends GameObject{
 	
 	boolean isMoving = false;
 
+	private boolean goUp = false;
+	private boolean goLeft = false;
+	private boolean goRight = false;
 	
 	public AnimateObject(int x, int y) {
 		super(x, y);
@@ -37,6 +40,13 @@ public class AnimateObject extends GameObject{
 	
 	public void moveLeft() {
 		return;
+	}
+	
+	public void goLeft(boolean condition) {
+		this.goLeft = condition;
+	}
+	public void goRight(boolean condition) {
+		this.goRight = condition;
 	}
 
 }
