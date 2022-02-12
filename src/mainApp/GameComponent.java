@@ -25,6 +25,7 @@ public class GameComponent extends JComponent{
 	private String fileName;
 	private Player hero;
 	private int num = 0;
+	private int numTwo = 0;
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
@@ -106,8 +107,8 @@ public class GameComponent extends JComponent{
 	public void moveEnemyRight() {
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
-				animateObjects.get(i).goRight(true);
-				animateObjects.get(i).goLeft(false);
+				animateObjects.get(i).moveRight();
+			}else if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
 				animateObjects.get(i).moveRight();
 			}
 		}
@@ -116,9 +117,25 @@ public class GameComponent extends JComponent{
 	public void moveEnemyLeft() {
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
-				animateObjects.get(i).goRight(false);
-				animateObjects.get(i).goLeft(true);
 				animateObjects.get(i).moveLeft();
+			}else if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
+				animateObjects.get(i).moveLeft();
+			}
+		}
+	}
+	
+	public void enemyFlyUp() {
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
+				animateObjects.get(i).flyUp();
+			}
+		}
+	}
+	
+	public void enemyFlyDown() {
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
+				animateObjects.get(i).flyDown();
 			}
 		}
 	}
@@ -127,7 +144,7 @@ public class GameComponent extends JComponent{
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
 		}
-		checkFreedom();
+		this.checkFreedom();
 	}
 	
 	public void moveEnemy() {
@@ -138,19 +155,22 @@ public class GameComponent extends JComponent{
 			this.moveEnemyLeft();
 			num++;
 		}else {
-			for(int i = 0; i< animateObjects.size(); i++) {
-				if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
-					animateObjects.get(i).move();
-				}
+			if(numTwo < 50) {
+				this.enemyFlyDown();
+				numTwo++;
+			}else if(numTwo < 100) {
+				this.enemyFlyUp();
+				numTwo++;
+			}else {
+				numTwo=0;
+				num = 0;
 			}
-			num = 0;
 		}
-
 	}
 	
 	public void setDirection(int code) {
 		if(code == KeyEvent.VK_UP) {
-			hero.goUp(true);
+			hero.setGoUp(true);
 		}
 		if(code == KeyEvent.VK_LEFT) {
 			hero.goLeft(true);
@@ -163,7 +183,7 @@ public class GameComponent extends JComponent{
 	
 	public void stopDirection(int code) {
 		if(code == KeyEvent.VK_UP) {
-			hero.goUp(false);
+			hero.setGoUp(false);
 		}
 		if(code == KeyEvent.VK_LEFT) {
 			hero.goLeft(false);
@@ -183,18 +203,18 @@ public class GameComponent extends JComponent{
 		}
 			
 	//draws hitboxes
-		g2.setColor(Color.WHITE);
-		for (int j = 0; j < objects.size(); j++) {
-			Line2D.Double top2 = objects.get(j).getTopLine();
-			Line2D.Double butt2 = objects.get(j).getButtLine();
-			Line2D.Double right2 = objects.get(j).getRightLine();
-			Line2D.Double left2 = objects.get(j).getLeftLine();
-			
-			g2.draw(top2);
-			g2.draw(butt2);
-			g2.draw(right2);
-			g2.draw(left2);
-		}
+//		g2.setColor(Color.WHITE);
+//		for (int j = 0; j < objects.size(); j++) {
+//			Line2D.Double top2 = objects.get(j).getTopLine();
+//			Line2D.Double butt2 = objects.get(j).getButtLine();
+//			Line2D.Double right2 = objects.get(j).getRightLine();
+//			Line2D.Double left2 = objects.get(j).getLeftLine();
+//			
+//			g2.draw(top2);
+//			g2.draw(butt2);
+//			g2.draw(right2);
+//			g2.draw(left2);
+//		}
 	}	
 
 	public void setFileName(String fileName) {

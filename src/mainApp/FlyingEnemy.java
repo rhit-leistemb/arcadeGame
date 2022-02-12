@@ -12,20 +12,28 @@ public class FlyingEnemy extends Enemy{
 		this.setColor(flyingEnemyColor);
 	}
 	
-	public void move() {
-		Random random = new Random();
-		int rand = random.nextInt(4);
-		if(rand == 0) {
-			this.setY(this.getY()-4);
-		}else if(rand == 1) {
-			this.setY(this.getY()+4);
-		}else if(rand == 2) {
-			this.setX(this.getX()-4);
-		}else if(rand == 3) {
-			this.setX(this.getX()+4);
+	public void flyUp() {
+		if(this.getTopHit() == false) {
+			this.setY(this.getY()-2);
+		}
+	}
+	public void flyDown() {
+		if(this.getButtHit() == false) {
+			this.setY(this.getY()+2);
 		}
 	}
 	
+	public void moveRight() {
+		if(this.getRSideHit() == false) {
+			this.setX(this.getX()+2);
+		}
+	}
+	
+	public void moveLeft() {
+		if(this.getLSideHit() == false) {
+			this.setX(this.getX()-2);
+		}
+	}
 	
 	public void gravity() {
 		return;
