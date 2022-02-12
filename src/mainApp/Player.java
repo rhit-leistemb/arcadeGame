@@ -8,6 +8,7 @@ public class Player extends AnimateObject {
 	private Color playerColor = Color.GREEN;
 	private int speed = 2;
 	private int score = 0;
+	private int lives = 3;
 	
 	public Player(int x, int y) {
 		super(x, y);
@@ -27,6 +28,14 @@ public class Player extends AnimateObject {
 		if(this.isGoRight() == true && this.getRSideHit() == false) {
 			this.setX(this.getX() + speed);
 		}
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 	
 //	public void updateVal(GameObject other) {

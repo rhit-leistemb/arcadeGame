@@ -27,6 +27,9 @@ public class GameComponent extends JComponent{
 	private Player hero;
 	private int num = 0;
 	private int numTwo = 0;
+	private boolean playerGotHit = false;
+	private int delayHit = 0;
+	private int lives;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean completed = false;
@@ -44,7 +47,7 @@ public class GameComponent extends JComponent{
 		objects = reader.getObjects();
 		animateObjects = reader.getAnimateObjects();
 		hero = reader.getHero();	
-		
+		lives = hero.getLives();
 		winScore = reader.getBombNum();
 	}
 
@@ -89,6 +92,15 @@ public class GameComponent extends JComponent{
 				System.out.println("# of bombs: " + winScore);
 				System.out.println("Score: " + score);
 				checkWin();
+			}else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")||generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+				if(playerGotHit == false) {
+					playerGotHit = true;
+					lives--;
+					System.out.println("Lives: " + lives);
+					if(lives == 0) {
+						lose();
+					}
+				}
 			}
 		}
 	}
@@ -98,6 +110,11 @@ public class GameComponent extends JComponent{
 			System.out.println("HERO HAS WONNNN!!!!!!!");
 			this.completed = true;
 		}
+	}
+	
+	public void lose() {
+		System.out.println("Game Over");
+		this.completed = true;
 	}
 	
 	public void checkFreedom() { 
@@ -174,6 +191,13 @@ public class GameComponent extends JComponent{
 			animateObjects.get(i).updateHitLines();
 		}
 		this.checkFreedom();
+		if(playerGotHit) {
+			delayHit++;
+			if(delayHit >100) {
+				playerGotHit = false;
+				delayHit = 0;
+			}
+		}
 	}
 	
 	public void moveEnemy() {
