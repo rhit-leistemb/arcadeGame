@@ -24,6 +24,7 @@ public class GameComponent extends JComponent{
 	private ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
 	private String fileName;
 	private Player hero;
+	private int num = 0;
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
@@ -100,11 +101,6 @@ public class GameComponent extends JComponent{
 
 	public void traverse() {	
 		hero.move();
-		for(int i = 0; i< animateObjects.size(); i++) {
-			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
-				animateObjects.get(i).move();
-			}
-		}
 	}
 	
 	public void moveEnemyRight() {
@@ -127,6 +123,25 @@ public class GameComponent extends JComponent{
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
 		}
+		checkFreedom();
+	}
+	
+	public void moveEnemy() {
+		if(num < 50) {
+			this.moveEnemyRight();
+			num++;
+		}else if(num < 100) {
+			this.moveEnemyLeft();
+			num++;
+		}else {
+			for(int i = 0; i< animateObjects.size(); i++) {
+				if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
+					animateObjects.get(i).move();
+				}
+			}
+			num = 0;
+		}
+
 	}
 	
 	public void setDirection(int code) {
@@ -139,7 +154,7 @@ public class GameComponent extends JComponent{
 		if(code == KeyEvent.VK_RIGHT ) {
 			hero.goRight(true);
 		}
-		checkFreedom();
+		//checkFreedom();
 	}
 	
 	public void stopDirection(int code) {
@@ -152,7 +167,7 @@ public class GameComponent extends JComponent{
 		if(code == KeyEvent.VK_RIGHT ) {
 			hero.goRight(false);
 		}
-		checkFreedom();
+		//checkFreedom();
 	}
 	
 	@Override
@@ -163,19 +178,19 @@ public class GameComponent extends JComponent{
 			o.drawOn(g2);
 		}
 			
-//	//draws hitboxes
-//		g2.setColor(Color.WHITE);
-//		for (int j = 0; j < objects.size(); j++) {
-//			Line2D.Double top2 = objects.get(j).getTopLine();
-//			Line2D.Double butt2 = objects.get(j).getButtLine();
-//			Line2D.Double right2 = objects.get(j).getRightLine();
-//			Line2D.Double left2 = objects.get(j).getLeftLine();
-//			
-//			g2.draw(top2);
-//			g2.draw(butt2);
-//			g2.draw(right2);
-//			g2.draw(left2);
-//		}
+	//draws hitboxes
+		g2.setColor(Color.WHITE);
+		for (int j = 0; j < objects.size(); j++) {
+			Line2D.Double top2 = objects.get(j).getTopLine();
+			Line2D.Double butt2 = objects.get(j).getButtLine();
+			Line2D.Double right2 = objects.get(j).getRightLine();
+			Line2D.Double left2 = objects.get(j).getLeftLine();
+			
+			g2.draw(top2);
+			g2.draw(butt2);
+			g2.draw(right2);
+			g2.draw(left2);
+		}
 	}	
 
 	public void setFileName(String fileName) {
