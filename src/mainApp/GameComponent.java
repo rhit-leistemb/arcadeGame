@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
+
 /**
  * 
  */
@@ -26,6 +27,9 @@ public class GameComponent extends JComponent{
 	private Player hero;
 	private int num = 0;
 	private int numTwo = 0;
+	private int score = 0;
+	private int winScore = 0;
+	private boolean completed = false;
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
@@ -40,6 +44,8 @@ public class GameComponent extends JComponent{
 		objects = reader.getObjects();
 		animateObjects = reader.getAnimateObjects();
 		hero = reader.getHero();	
+		
+		winScore = reader.getBombNum();
 	}
 
 	public void checkCollision() {
@@ -57,17 +63,40 @@ public class GameComponent extends JComponent{
 						
 				if (butt1.intersectsLine(top2)) {
 					animateObjects.get(i).setButtHit(true);
+					react(animateObjects.get(i), objects.get(j), j);					
 				}
 				if (top1.intersectsLine(butt2)) {
 					animateObjects.get(i).setTopHit(true); 
-				}
+					react(animateObjects.get(i), objects.get(j), j);				}
 				if (right1.intersectsLine(left2)) {
 					animateObjects.get(i).setRSideHit(true); 
+					react(animateObjects.get(i), objects.get(j), j);				
 				}
 				if (left1.intersectsLine(right2)) {
 					animateObjects.get(i).setLSideHit(true); 
-				}
+					react(animateObjects.get(i), objects.get(j), j);				}
 			}
+		}
+	}
+	
+	
+	public void react(AnimateObject movingObj, GameObject generalObj, int index) {
+		if (movingObj.getClass().getSimpleName().equals("Player")) {
+			if (generalObj.getClass().getSimpleName().equals("BombCollectible")) {
+				System.out.println("Bomb collected");
+				objects.remove(index);
+				score++;
+				System.out.println("# of bombs: " + winScore);
+				System.out.println("Score: " + score);
+				checkWin();
+			}
+		}
+	}
+	
+	public void checkWin() {
+		if (score == winScore) {
+			System.out.println("HERO HAS WONNNN!!!!!!!");
+			this.completed = true;
 		}
 	}
 	
@@ -234,4 +263,10 @@ public class GameComponent extends JComponent{
 		hero = null;
 		createGameObjectList();	
 	}
+	
+	
+	public boolean getCompleted() {
+		return this.completed;
+	}
+	
 }

@@ -7,13 +7,12 @@ public class Player extends AnimateObject {
 
 	private Color playerColor = Color.GREEN;
 	private int speed = 2;
+	private int score = 0;
 	
 	public Player(int x, int y) {
 		super(x, y);
 		this.setColor(playerColor);
 	}
-
-	
 
 	public void move() {
 		if(this.isGoUp() == true && this.getTopHit() == false) {
@@ -29,6 +28,12 @@ public class Player extends AnimateObject {
 			this.setX(this.getX() + speed);
 		}
 	}
+	
+//	public void updateVal(GameObject other) {
+//		if(other.getClass().getSimpleName().equals("BombCollectible")) {
+//			score++;
+//		}
+//	}
 
 }
 

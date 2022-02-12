@@ -79,6 +79,7 @@ public GameViewer() {
 			public void actionPerformed(ActionEvent e) {
 				component.update();
 				component.checkCollision();
+//				hasWon(component.getCompleted());
 				component.traverse();
 				component.moveEnemy();
 				component.gravity();
@@ -86,6 +87,14 @@ public GameViewer() {
 			}	
 		});
 		timer.start();
+		
+//		public void hasWon(boolean won) {
+//			if(won) {
+//				
+//			} else {
+//				return;
+//			}
+//		}
 		
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
