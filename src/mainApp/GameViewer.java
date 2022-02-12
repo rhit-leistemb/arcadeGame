@@ -3,6 +3,7 @@ package mainApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
@@ -21,7 +24,7 @@ import javax.swing.border.Border;
 public class GameViewer {
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	public static final int FRAME_WIDTH = 450;
-	public static final int FRAME_HEIGHT = 430;
+	public static final int FRAME_HEIGHT = 450;
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	protected static Graphics g;
 	private int num = 1;
@@ -39,6 +42,17 @@ public GameViewer() {
 		frame.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(Color.gray);
+		
+		JPanel informationPanel = new JPanel();
+		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
+		JLabel score = new JLabel("Score: 0", JLabel.LEFT);
+		score.setFont(new Font("Verdana", Font.PLAIN, 18));
+		JLabel lives = new JLabel("Lives: 0", JLabel.RIGHT);
+		lives.setFont(new Font("Verdana", Font.PLAIN, 18));
+		informationPanel.add(score);
+		informationPanel.add(lives);
+		informationPanel.setBackground(Color.LIGHT_GRAY);
+		
 		GameComponent component = new GameComponent(fileNames.get(0));
 		
 		frame.addKeyListener(new KeyListener() {			
@@ -84,6 +98,7 @@ public GameViewer() {
 				component.moveEnemy();
 				component.gravity();
 				component.repaint();
+				frame.repaint();
 			}	
 		});
 		timer.start();
@@ -95,7 +110,7 @@ public GameViewer() {
 //				return;
 //			}
 //		}
-		
+		frame.add(informationPanel, BorderLayout.SOUTH);
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
 		frame.setVisible(true);	
