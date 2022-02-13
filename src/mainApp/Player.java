@@ -38,11 +38,6 @@ public class Player extends AnimateObject {
 		this.lives = lives;
 	}
 	
-//	public void updateVal(GameObject other) {
-//		if(other.getClass().getSimpleName().equals("BombCollectible")) {
-//			score++;
-//		}
-//	}
 
 }
 
