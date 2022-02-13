@@ -29,7 +29,7 @@ public class GameComponent extends JComponent{
 	private int numTwo = 0;
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
-	private int lives;
+	private int lives = 3;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean completed = false;
@@ -70,33 +70,33 @@ public class GameComponent extends JComponent{
 				}
 				if (top1.intersectsLine(butt2)) {
 					animateObjects.get(i).setTopHit(true); 
-					react(animateObjects.get(i), objects.get(j), j);				}
+					react(animateObjects.get(i), objects.get(j), j);				
+				}
 				if (right1.intersectsLine(left2)) {
 					animateObjects.get(i).setRSideHit(true); 
 					react(animateObjects.get(i), objects.get(j), j);				
 				}
 				if (left1.intersectsLine(right2)) {
 					animateObjects.get(i).setLSideHit(true); 
-					react(animateObjects.get(i), objects.get(j), j);				}
+					react(animateObjects.get(i), objects.get(j), j);				
+				}
 			}
 		}
 	}
 	
 	
 	public void react(AnimateObject movingObj, GameObject generalObj, int index) {
-		if (movingObj.getClass().getSimpleName().equals("Player")) {
-			if (generalObj.getClass().getSimpleName().equals("BombCollectible")) {
+		if(movingObj.getClass().getSimpleName().equals("Player")) {
+			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
 				System.out.println("Bomb collected");
 				objects.remove(index);
 				score++;
-				System.out.println("# of bombs: " + winScore);
-				System.out.println("Score: " + score);
 				checkWin();
-			}else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")||generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")||generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
 				if(playerGotHit == false) {
 					playerGotHit = true;
 					lives--;
-					System.out.println("Lives: " + lives);
+//					System.out.println("Lives: " + lives);
 					if(lives == 0) {
 						lose();
 					}
@@ -301,6 +301,12 @@ public class GameComponent extends JComponent{
 	
 	public boolean getCompleted() {
 		return this.completed;
+	}
+	public int getLives() {
+		return this.lives;
+	}
+	public int getScore() {
+		return this.score;
 	}
 	
 }

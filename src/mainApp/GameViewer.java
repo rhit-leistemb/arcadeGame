@@ -29,6 +29,10 @@ public class GameViewer {
 	protected static Graphics g;
 	private int num = 1;
 	
+	private int scoreNum = 0;
+	private int livesNum = 3;
+	JLabel score;
+	JLabel lives;
 	
 public GameViewer() {
 	}
@@ -45,10 +49,12 @@ public GameViewer() {
 		
 		JPanel informationPanel = new JPanel();
 		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
-		JLabel score = new JLabel("Score: 0", JLabel.LEFT);
+		score = new JLabel("Score: " + scoreNum, JLabel.LEFT);
 		score.setFont(new Font("Verdana", Font.PLAIN, 18));
-		JLabel lives = new JLabel("Lives: 0", JLabel.RIGHT);
+		
+		lives = new JLabel("Lives: " + livesNum, JLabel.RIGHT);
 		lives.setFont(new Font("Verdana", Font.PLAIN, 18));
+		
 		informationPanel.add(score);
 		informationPanel.add(lives);
 		informationPanel.setBackground(Color.LIGHT_GRAY);
@@ -97,6 +103,7 @@ public GameViewer() {
 				component.traverse();
 				component.moveEnemy();
 				component.gravity();
+				updateCount(component);
 				component.repaint();
 				frame.repaint();
 			}	
@@ -104,19 +111,27 @@ public GameViewer() {
 		timer.start();
 		
 //		public void hasWon(boolean won) {
-//			if(won) {
-//				
-//			} else {
-//				return;
-//			}
+//		if(won) {
+//			
+//		} else {
+//			return;
 //		}
+	//}
 		frame.add(informationPanel, BorderLayout.SOUTH);
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
 		frame.setVisible(true);	
 	}
 	
+	public void updateCount(GameComponent component) {
+		this.livesNum = component.getLives();
+		this.scoreNum = component.getScore();
+		
+		this.score.setText("Score: " + scoreNum);
+		this.lives.setText("Lives: " + livesNum);
+	}
 	
+
 
 	
 }
