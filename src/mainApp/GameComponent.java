@@ -33,11 +33,14 @@ public class GameComponent extends JComponent{
 	private int numTwo = 0;
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
+	
 	private int lives = 3;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean won = false;
 	private boolean lost = false;
+	
+	private String currentLevel;
 	
 	private File winImgFile = new File("Sprites/EndScreen.PNG");
 	private Image winImg;
@@ -64,6 +67,7 @@ public class GameComponent extends JComponent{
 		hero = reader.getHero();	
 		lives = hero.getLives();
 		winScore = reader.getBombNum();
+		currentLevel = reader.getLevel();
 	}
 
 	public void checkCollision() {
@@ -278,12 +282,17 @@ public class GameComponent extends JComponent{
 			o.drawOn(g2);
 		}
 		
-		if(won || lost) {
-			int xPos = (450/2) - this.winImg.getWidth(null)/2 - 5;
-			int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
-			g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);
-		}
-			
+		if(won) {
+			g2.setPaint(Color.BLACK);
+			g2.fillRect(0, 0, 450, 450);
+			if(currentLevel.equals("Levels/Level-1")) {
+				int xPos = (450/2) - this.winImg.getWidth(null)/2 - 5;
+				int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
+				g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);	
+			} else {
+				
+			}
+		}	
 ////	draws hitboxes
 //		g2.setColor(Color.WHITE);
 //		for (int j = 0; j < objects.size(); j++) {

@@ -123,6 +123,10 @@ public class LevelReader {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+	public String getLevel() {
+		return this.fileName;
+	}
 	
 	
 	

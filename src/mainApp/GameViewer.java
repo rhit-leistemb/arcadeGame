@@ -105,15 +105,9 @@ public class GameViewer {
 				char key = e.getKeyChar();
 				int code = e.getKeyCode();
 				if(key == 'u') {
-					component.setFileName(fileNames.get(1));
-					frame.setTitle("Arcade Game-Level 2");
-					won = false;
-					paused = false;
+					changeLevel(component, "Arcade Game-Level 2", 1);
 				} else if(key == 'd') {
-					component.setFileName(fileNames.get(0));
-					frame.setTitle("Arcade Game-Level 1");
-					won = false;
-					paused = false;
+					changeLevel(component, "Arcade Game-Level 1", 0);
 				} 
 				if(key == 'p' && won == false) {
 					paused = !paused;
@@ -170,12 +164,20 @@ public class GameViewer {
 			this.paused = true;
 			this.won = true;
 			frame.setTitle("Wow bro look at u");
+			//JLabel for text?
 		} else {
 			return;
 		}
+	}	
+	public void changeLevel(GameComponent component, String title, int level) {
+		component.setFileName(fileNames.get(level));
+		frame.setTitle(title);
+		this.won = false;
+		this.paused = false;
+	}
 }
 	
 
 
 	
-}
+
