@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -35,7 +36,7 @@ public class GameComponent extends JComponent{
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
 	
-	private int lives = 1;
+	private int lives = 200;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean won = false;
@@ -60,6 +61,7 @@ public class GameComponent extends JComponent{
 		this.fileName = fileName;
 		createGameObjectList();
 		
+		//loads in images
 		try {
 			this.winImg = ImageIO.read(winImgFile);
 		} catch (IOException e) {
@@ -105,6 +107,7 @@ public class GameComponent extends JComponent{
 		currentLevel = reader.getLevel();
 	}
 
+	//checks if animatedObject is colliding with something
 	public void checkCollision() {
 		for (int i = 0; i < animateObjects.size(); i++) {
 			Line2D.Double butt1 = animateObjects.get(i).getButtLine();
@@ -138,7 +141,35 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
-	
+	//checks is animatedObject is no long colliding against something
+	public void checkFreedom() { 
+		for (int i = 0; i < animateObjects.size(); i++) {
+			Line2D.Double butt1 = animateObjects.get(i).getButtLine();
+			Line2D.Double top1 = animateObjects.get(i).getTopLine();
+			Line2D.Double right1 = animateObjects.get(i).getRightLine();
+			Line2D.Double left1 = animateObjects.get(i).getLeftLine();
+		
+			for (int j = 0; j < objects.size(); j++) {
+				Line2D.Double top2 = objects.get(j).getTopLine();
+				Line2D.Double butt2 = objects.get(j).getButtLine();
+				Line2D.Double right2 = objects.get(j).getRightLine();
+				Line2D.Double left2 = objects.get(j).getLeftLine();	
+		
+				if (!butt1.intersectsLine(top2)) {
+					animateObjects.get(i).setButtHit(false); 
+				}
+				if (!top1.intersectsLine(butt2)) {
+					animateObjects.get(i).setTopHit(false); 
+				}
+				if (!right1.intersectsLine(left2)) {
+					animateObjects.get(i).setRSideHit(false); 
+				}
+				if (!left1.intersectsLine(right2)) {
+					animateObjects.get(i).setLSideHit(false); 
+				}
+			}
+		}
+	}
 	public void react(AnimateObject movingObj, GameObject generalObj, int index) {
 		if(movingObj.getClass().getSimpleName().equals("Player")) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
@@ -179,41 +210,14 @@ public class GameComponent extends JComponent{
 		this.lost = true;
 	}
 	
-	public void checkFreedom() { 
-		for (int i = 0; i < animateObjects.size(); i++) {
-			Line2D.Double butt1 = animateObjects.get(i).getButtLine();
-			Line2D.Double top1 = animateObjects.get(i).getTopLine();
-			Line2D.Double right1 = animateObjects.get(i).getRightLine();
-			Line2D.Double left1 = animateObjects.get(i).getLeftLine();
-		
-			for (int j = 0; j < objects.size(); j++) {
-				Line2D.Double top2 = objects.get(j).getTopLine();
-				Line2D.Double butt2 = objects.get(j).getButtLine();
-				Line2D.Double right2 = objects.get(j).getRightLine();
-				Line2D.Double left2 = objects.get(j).getLeftLine();	
-		
-				if (!butt1.intersectsLine(top2)) {
-					animateObjects.get(i).setButtHit(false); 
-				}
-				if (!top1.intersectsLine(butt2)) {
-					animateObjects.get(i).setTopHit(false); 
-				}
-				if (!right1.intersectsLine(left2)) {
-					animateObjects.get(i).setRSideHit(false); 
-				}
-				if (!left1.intersectsLine(right2)) {
-					animateObjects.get(i).setLSideHit(false); 
-				}
-			}
-		}
-	}
-
-	public void traverse() {	
-		checkFreedom();
-		hero.move(this);
+	//tells player to start moving
+	public void traverse() {
+		checkCollision();
+		hero.move();
 	}
 	
 	public void moveEnemyRight() {
+		checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
 				animateObjects.get(i).moveRight();
@@ -224,6 +228,7 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void moveEnemyLeft() {
+		checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
 				animateObjects.get(i).moveLeft();
@@ -283,7 +288,7 @@ public class GameComponent extends JComponent{
 			}
 		}
 	}
-	
+	//sets constant velocity in a direction
 	public void setDirection(int code) {
 		if(code == KeyEvent.VK_UP) {
 			hero.setGoUp(true);
@@ -294,9 +299,10 @@ public class GameComponent extends JComponent{
 		if(code == KeyEvent.VK_RIGHT ) {
 			hero.goRight(true);
 		}
+		
 		//checkFreedom();
 	}
-	
+	//stops constant velocity in a direction
 	public void stopDirection(int code) {
 		if(code == KeyEvent.VK_UP) {
 			hero.setGoUp(false);
@@ -317,7 +323,7 @@ public class GameComponent extends JComponent{
 		for (GameObject o: this.objects) {
 			o.drawOn(g2);
 		}
-		
+		//draws appropriate screens for win
 		if(won) {
 			g2.setPaint(Color.BLACK);
 			g2.fillRect(0, 0, 450, 450);
@@ -334,17 +340,18 @@ public class GameComponent extends JComponent{
 				int yPos3 = 450 - 150;
 				g2.drawImage(this.congratsImg, xPos3, yPos3, this.trophyImg.getWidth(null), this.congratsImg.getHeight(null), null);
 				
-//				g2.setPaint(Color.RED);
-//				g2.drawString("Congratulations! You won!", 100, 350);
+				g2.setPaint(Color.YELLOW);
+				g2.drawString("Press 'R' to restart", 320, 13);
 			} else {
 				int xPos = (450/2) - this.nextImg.getWidth(null)/2 - 5;
 				int yPos = (450/2) - this.nextImg.getHeight(null)/2 - 70;
 				g2.drawImage(this.nextImg, xPos, yPos, this.nextImg.getWidth(null), this.nextImg.getHeight(null), null);
 				g2.setPaint(Color.YELLOW);
-				g2.drawString("Congratulations! Press the U key for the next level.", 100, 350);
+				g2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+				g2.drawString("Congratulations! Press 'U' for the next level.", 100, 350);
 			}
 		}
-		
+		//draws appropriate screens for loss
 		if(lost) {
 			g2.setPaint(new Color(0, 0, 0, 150));
 			g2.fillRect(0, 0, 450, 450);
@@ -371,12 +378,6 @@ public class GameComponent extends JComponent{
 //			g2.draw(left2);
 //		}
 	}	
-	
-	protected void paintEnd(Graphics g) {
-		Graphics2D g2 = (Graphics2D)g;
-		
-		
-	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
@@ -400,7 +401,7 @@ public class GameComponent extends JComponent{
 		createGameObjectList();	
 	}
 	
-	
+//getters and setters	
 	public boolean getWon() {
 		if(won == true) {
 			return true;

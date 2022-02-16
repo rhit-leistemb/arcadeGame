@@ -30,8 +30,7 @@ public class Player extends AnimateObject {
 	private final String playerWalkingRight4 = "PlayerSprites/PlayerWalkingRight4NoBG.png";
 	
 	private int speed = 2;
-	private int score = 0;
-	private int lives = 1;
+	private int lives = 200;
 	private File playerImageFile = new File(playerStanding);
 	private Image playerImage;
 	
@@ -41,8 +40,7 @@ public class Player extends AnimateObject {
 		this.updateImage();
 	}
 
-	public void move(GameComponent comp) {
-		comp.checkCollision();
+	public void move() {
 		if(this.isGoUp() == true && this.getTopHit() == false) {
 			this.setPlayerImageFile(playerFlyingUp);
 			this.setY(this.getY() - speed);

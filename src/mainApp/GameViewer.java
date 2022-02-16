@@ -40,6 +40,7 @@ public class GameViewer {
 	
 	private boolean paused = false;
 	private boolean won = false;
+	private boolean lost = false;
 	
 	private int scoreNum = 0;
 	private int livesNum = 3;
@@ -110,8 +111,11 @@ public class GameViewer {
 				} else if(key == 'd') {
 					changeLevel(component, "Arcade Game-Level 1", 0);
 				} 
-				if(key == 'p' && won == false) {
+				if(key == 'p' && won == false && lost == false) {
 					paused = !paused;
+				}
+				if(key == 'r' && lost == true) {
+					changeLevel(component, "Arcade Game-Level 1", 0);
 				}
 				component.setDirection(code);
 				component.repaint();
@@ -179,6 +183,7 @@ public class GameViewer {
 	public void hasLost(boolean ended){
 		if(ended) {
 			this.paused = true;
+			this.lost = true;
 			frame.setTitle(":(");
 //			informationPanel.setVisible(false);
 			//informationPanel.removeAll();
