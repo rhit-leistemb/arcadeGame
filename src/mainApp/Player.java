@@ -15,7 +15,7 @@ public class Player extends AnimateObject {
 	//private Color playerColor = Color.GREEN;
 	private int speed = 2;
 	private int score = 0;
-	private int lives = 467;
+	private int lives = 3;
 	private File playerImageFile = new File("Sprites/BombJackPlayerSprite.png");
 	private Image playerImage;
 	

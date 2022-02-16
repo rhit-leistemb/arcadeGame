@@ -34,7 +34,7 @@ public class GameComponent extends JComponent{
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
 	
-	private int lives = 467;
+	private int lives = 3;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean won = false;
@@ -294,7 +294,7 @@ public class GameComponent extends JComponent{
 				g2.drawString("Congratulations! You won!", 100, 350);
 			} else {
 				g2.setPaint(Color.RED);
-				g2.drawString("Congratulations! Press the U key for the next level", 100, 350);
+				g2.drawString("Congratulations! Press the U key for the next level.", 100, 350);
 			}
 		}
 		

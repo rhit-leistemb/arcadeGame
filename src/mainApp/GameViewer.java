@@ -165,11 +165,12 @@ public class GameViewer {
 		if(ended) {
 			this.paused = true;
 			this.won = true;
-			frame.setTitle("Wow bro look at u");
 //			informationPanel.removeAll();
+			informationPanel.setVisible(false);
 //			JLabel msg = new JLabel("Congratulations! Press the U key for the next level");
 //			msg.setFont(new Font("Verdana", Font.ITALIC, 13));
-//			informationPanel.add(msg);
+			//informationPanel.add(msg);
+			//informationPanel.setVisible(true);
 //			frame.add(informationPanel);
 		} else {
 			return;
@@ -179,11 +180,13 @@ public class GameViewer {
 		if(ended) {
 			this.paused = true;
 			frame.setTitle(":(");
-//			informationPanel.removeAll();
+//			informationPanel.setVisible(false);
+			//informationPanel.removeAll();
 //			JLabel msg = new JLabel("Better luck next time...");
 //			msg.setFont(new Font("Verdana", Font.ITALIC, 18));
 //			informationPanel.add(msg);
-//			informationPanel.repaint();
+			//informationPanel.revalidate();
+			//informationPanel.repaint();
 		} else {
 			return;
 		}
@@ -191,6 +194,7 @@ public class GameViewer {
 	public void changeLevel(GameComponent component, String title, int level) {
 		component.setFileName(fileNames.get(level));
 		frame.setTitle(title);
+		informationPanel.setVisible(true);
 		this.won = false;
 		this.paused = false;
 	}
