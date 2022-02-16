@@ -14,6 +14,7 @@ public class MainApp {
 		//System.out.println("Write your cool arcade game here!");
 		GameViewer viewer = new GameViewer();
 		viewer.createGame();
+		System.out.println("Test");
 	} // runApp
 
 	/**
