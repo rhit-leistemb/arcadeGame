@@ -48,13 +48,14 @@ public class LevelReader {
 		for(int i = 0; i< lines.size(); i++){
 			String currentLine = lines.get(i);
 			for(int j = 0; j< currentLine.length(); j++) {
+				int frameWidth = space * currentLine.length() - space;
 				char currentChar = currentLine.charAt(j);
 				if(currentChar == '|') {
-					BoundaryObject o = new BoundaryObject(x, y);
+					BoundaryObject o = new BoundaryObject(x, y, frameWidth);
 					x+=space;
 					objects.add(o);
 				}else if(currentChar == '-') {
-					BoundaryObject o = new BoundaryObject(x, y);
+					BoundaryObject o = new BoundaryObject(x, y, frameWidth);
 					x+=space;
 					objects.add(o);
 				}else if(currentChar == '.') {

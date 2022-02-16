@@ -265,7 +265,7 @@ public class GameComponent extends JComponent{
 			o.drawOn(g2);
 		}
 			
-	//draws hitboxes
+////	draws hitboxes
 //		g2.setColor(Color.WHITE);
 //		for (int j = 0; j < objects.size(); j++) {
 //			Line2D.Double top2 = objects.get(j).getTopLine();
