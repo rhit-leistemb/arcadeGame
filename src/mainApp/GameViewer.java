@@ -47,6 +47,7 @@ public class GameViewer {
 	JLabel lives;
 	
 	JFrame frame;
+	JPanel informationPanel;
 	
 	public GameViewer() {
 //		try {
@@ -66,7 +67,7 @@ public class GameViewer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(Color.gray);
 		
-		JPanel informationPanel = new JPanel();
+		informationPanel = new JPanel();
 		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
 		score = new JLabel("Score: " + scoreNum, JLabel.LEFT);
 		score.setFont(new Font("Verdana", Font.PLAIN, 18));
@@ -133,7 +134,8 @@ public class GameViewer {
 				if(!paused) {
 					component.update();
 					component.checkCollision();
-					hasWon(component.getCompleted());
+					hasWon(component.getWon());
+					hasLost(component.getLost());
 					component.traverse();
 					component.moveEnemy();
 					component.gravity();
@@ -164,7 +166,24 @@ public class GameViewer {
 			this.paused = true;
 			this.won = true;
 			frame.setTitle("Wow bro look at u");
-			//JLabel for text?
+//			informationPanel.removeAll();
+//			JLabel msg = new JLabel("Congratulations! Press the U key for the next level");
+//			msg.setFont(new Font("Verdana", Font.ITALIC, 13));
+//			informationPanel.add(msg);
+//			frame.add(informationPanel);
+		} else {
+			return;
+		}
+	}	
+	public void hasLost(boolean ended){
+		if(ended) {
+			this.paused = true;
+			frame.setTitle(":(");
+//			informationPanel.removeAll();
+//			JLabel msg = new JLabel("Better luck next time...");
+//			msg.setFont(new Font("Verdana", Font.ITALIC, 18));
+//			informationPanel.add(msg);
+//			informationPanel.repaint();
 		} else {
 			return;
 		}

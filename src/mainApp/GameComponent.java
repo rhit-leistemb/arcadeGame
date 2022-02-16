@@ -34,7 +34,7 @@ public class GameComponent extends JComponent{
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
 	
-	private int lives = 3;
+	private int lives = 467;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean won = false;
@@ -174,7 +174,8 @@ public class GameComponent extends JComponent{
 	}
 
 	public void traverse() {	
-		hero.move();
+		checkFreedom();
+		hero.move(this);
 	}
 	
 	public void moveEnemyRight() {
@@ -285,14 +286,23 @@ public class GameComponent extends JComponent{
 		if(won) {
 			g2.setPaint(Color.BLACK);
 			g2.fillRect(0, 0, 450, 450);
-			if(currentLevel.equals("Levels/Level-1")) {
+			if(currentLevel.equals("Levels/Level-2")) {
 				int xPos = (450/2) - this.winImg.getWidth(null)/2 - 5;
 				int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
-				g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);	
+				g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);
+				g2.setPaint(Color.RED);
+				g2.drawString("Congratulations! You won!", 100, 350);
 			} else {
-				
+				g2.setPaint(Color.RED);
+				g2.drawString("Congratulations! Press the U key for the next level", 100, 350);
 			}
-		}	
+		}
+		
+		if(lost) {
+			g2.setPaint(Color.YELLOW);
+			g2.drawString("Better luck next time...", 275, 13);
+		}
+	
 ////	draws hitboxes
 //		g2.setColor(Color.WHITE);
 //		for (int j = 0; j < objects.size(); j++) {
@@ -337,8 +347,14 @@ public class GameComponent extends JComponent{
 	}
 	
 	
-	public boolean getCompleted() {
-		if(won == true || lost == true) {
+	public boolean getWon() {
+		if(won == true) {
+			return true;
+		}
+		return false;
+	}
+	public boolean getLost() {
+		if(lost == true) {
 			return true;
 		}
 		return false;

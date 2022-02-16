@@ -15,7 +15,7 @@ public class Player extends AnimateObject {
 	//private Color playerColor = Color.GREEN;
 	private int speed = 2;
 	private int score = 0;
-	private int lives = 3;
+	private int lives = 467;
 	private File playerImageFile = new File("Sprites/BombJackPlayerSprite.png");
 	private Image playerImage;
 	
@@ -30,7 +30,8 @@ public class Player extends AnimateObject {
 		}
 	}
 
-	public void move() {
+	public void move(GameComponent comp) {
+		comp.checkCollision();
 		if(this.isGoUp() == true && this.getTopHit() == false) {
 			this.setY(this.getY() - speed);
 			isMoving = true;
