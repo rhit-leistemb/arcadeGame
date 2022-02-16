@@ -5,13 +5,20 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,22 +33,34 @@ public class GameViewer {
 	public static final int FRAME_WIDTH = 450;
 	public static final int FRAME_HEIGHT = 450;
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
+	
 	protected static Graphics g;
-	private int num = 1;
+//	private File winImgFile = new File("Sprites/EndScreen.PNG");
+//	private Image winImg;
+	
+	private boolean paused = false;
+	private boolean won = false;
 	
 	private int scoreNum = 0;
 	private int livesNum = 3;
 	JLabel score;
 	JLabel lives;
 	
-public GameViewer() {
+	JFrame frame;
+	
+	public GameViewer() {
+//		try {
+//			this.winImg = ImageIO.read(winImgFile);
+//		} catch (IOException e) {
+//			System.out.println("Cannot find win screen image file.");
+//		}
 	}
 
 	public void createGame() {
 		fileNames.add("Levels/Level-1");
 		fileNames.add("Levels/Level-2");
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setTitle("Arcade Game-Level 1");
 		frame.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +80,20 @@ public GameViewer() {
 		
 		GameComponent component = new GameComponent(fileNames.get(0));
 		
+//		JPanel startPanel = new JPanel();
+//		JButton pauseButt = new JButton("P");
+//		informationPanel.add(pauseButt);
+//		pauseButt.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				System.out.println("Rn game is paused: " + paused);
+//			}
+//			
+//			
+//		});
+		
 		frame.addKeyListener(new KeyListener() {			
 			@Override
 			public void keyTyped(KeyEvent e) {	
@@ -69,16 +102,22 @@ public GameViewer() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				//consider changing to getKeyCode
 				char key = e.getKeyChar();
 				int code = e.getKeyCode();
 				if(key == 'u') {
 					component.setFileName(fileNames.get(1));
 					frame.setTitle("Arcade Game-Level 2");
+					won = false;
+					paused = false;
 				} else if(key == 'd') {
 					component.setFileName(fileNames.get(0));
 					frame.setTitle("Arcade Game-Level 1");
+					won = false;
+					paused = false;
 				} 
+				if(key == 'p' && won == false) {
+					paused = !paused;
+				}
 				component.setDirection(code);
 				component.repaint();
 				
@@ -97,26 +136,21 @@ public GameViewer() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				component.update();
-				component.checkCollision();
-//				hasWon(component.getCompleted());
-				component.traverse();
-				component.moveEnemy();
-				component.gravity();
-				updateCount(component);
-				component.repaint();
-				frame.repaint();
+				if(!paused) {
+					component.update();
+					component.checkCollision();
+					hasWon(component.getCompleted());
+					component.traverse();
+					component.moveEnemy();
+					component.gravity();
+					updateCount(component);
+					component.repaint();
+					frame.repaint();
+				}
 			}	
 		});
 		timer.start();
 		
-//		public void hasWon(boolean won) {
-//		if(won) {
-//			
-//		} else {
-//			return;
-//		}
-	//}
 		frame.add(informationPanel, BorderLayout.SOUTH);
 		frame.add(component, BorderLayout.CENTER);
 		frame.pack();
@@ -130,6 +164,16 @@ public GameViewer() {
 		this.score.setText("Score: " + scoreNum);
 		this.lives.setText("Lives: " + livesNum);
 	}
+	
+	public void hasWon(boolean ended){
+		if(ended) {
+			this.paused = true;
+			this.won = true;
+			frame.setTitle("Wow bro look at u");
+		} else {
+			return;
+		}
+}
 	
 
 

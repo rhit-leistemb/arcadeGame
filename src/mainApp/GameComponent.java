@@ -3,14 +3,18 @@ package mainApp;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.Line2D.Double;
+import java.io.File;
+import java.io.IOException;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
@@ -32,11 +36,22 @@ public class GameComponent extends JComponent{
 	private int lives = 3;
 	private int score = 0;
 	private int winScore = 0;
-	private boolean completed = false;
+	private boolean won = false;
+	private boolean lost = false;
+	
+	private File winImgFile = new File("Sprites/EndScreen.PNG");
+	private Image winImg;
+	
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
 		createGameObjectList();
+		
+		try {
+			this.winImg = ImageIO.read(winImgFile);
+		} catch (IOException e) {
+			System.out.println("Cannot find win screen image file.");
+		}
 	}
 	
 	public void createGameObjectList() {
@@ -88,7 +103,6 @@ public class GameComponent extends JComponent{
 	public void react(AnimateObject movingObj, GameObject generalObj, int index) {
 		if(movingObj.getClass().getSimpleName().equals("Player")) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
-				System.out.println("Bomb collected");
 				objects.remove(index);
 				score++;
 				checkWin();
@@ -96,7 +110,6 @@ public class GameComponent extends JComponent{
 				if(playerGotHit == false) {
 					playerGotHit = true;
 					lives--;
-//					System.out.println("Lives: " + lives);
 					if(lives == 0) {
 						lose();
 					}
@@ -108,7 +121,7 @@ public class GameComponent extends JComponent{
 	public void checkWin() {
 		if (score == winScore) {
 			System.out.println("HERO HAS WONNNN!!!!!!!");
-			this.completed = true;
+			this.won = true;
 		}
 	}
 	
@@ -124,7 +137,7 @@ public class GameComponent extends JComponent{
 				objects.remove(j);
 			}
 		}
-		this.completed = true;
+		this.lost = true;
 	}
 	
 	public void checkFreedom() { 
@@ -264,6 +277,12 @@ public class GameComponent extends JComponent{
 		for (GameObject o: this.objects) {
 			o.drawOn(g2);
 		}
+		
+		if(won || lost) {
+			int xPos = (450/2) - this.winImg.getWidth(null)/2 - 5;
+			int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
+			g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);
+		}
 			
 ////	draws hitboxes
 //		g2.setColor(Color.WHITE);
@@ -279,6 +298,12 @@ public class GameComponent extends JComponent{
 //			g2.draw(left2);
 //		}
 	}	
+	
+	protected void paintEnd(Graphics g) {
+		Graphics2D g2 = (Graphics2D)g;
+		
+		
+	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
@@ -295,12 +320,19 @@ public class GameComponent extends JComponent{
 		objects.clear();
 		animateObjects.clear();
 		hero = null;
+		won = false;
+		lost = false;
+		score = 0;
+		lives = 3;
 		createGameObjectList();	
 	}
 	
 	
 	public boolean getCompleted() {
-		return this.completed;
+		if(won == true || lost == true) {
+			return true;
+		}
+		return false;
 	}
 	public int getLives() {
 		return this.lives;
