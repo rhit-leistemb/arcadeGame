@@ -43,7 +43,6 @@ public class Player extends AnimateObject {
 
 	public void move(GameComponent comp) {
 		comp.checkCollision();
-		
 		if(this.isGoUp() == true && this.getTopHit() == false) {
 			this.setPlayerImageFile(playerFlyingUp);
 			this.setY(this.getY() - speed);
