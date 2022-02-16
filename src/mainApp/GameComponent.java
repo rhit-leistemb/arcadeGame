@@ -45,12 +45,14 @@ public class GameComponent extends JComponent{
 	
 	private File winImgFile = new File("Sprites/EndScreen.PNG");
 	private Image winImg;
-	private File trophyImgFile = new File("Sprites/YouWin.PNG");
+	private File trophyImgFile = new File("Sprites/Win.PNG");
 	private Image trophyImg;
 	private File nextImgFile = new File("Sprites/NextLevel.PNG");
 	private Image nextImg;
 	private File loseImgFile = new File("Sprites/GameOver.PNG");
 	private Image loseImg;
+	private File congratsImgFile = new File("Sprites/Congrats.PNG");
+	private Image congratsImg;
 	
 	
 	
@@ -64,18 +66,27 @@ public class GameComponent extends JComponent{
 			System.out.println("Cannot find win screen image file.");
 		}
 		try {
-			this.trophyImg = ImageIO.read(trophyImgFile);
+			BufferedImage bufferedImg = ImageIO.read(trophyImgFile);
+			this.trophyImg = bufferedImg.getScaledInstance(110, 50, Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			System.out.println("Cannot find trophy image file.");
 		}
 		try {
-			this.nextImg = ImageIO.read(nextImgFile);
+			BufferedImage bufferedImg = ImageIO.read(congratsImgFile);
+			this.congratsImg = bufferedImg.getScaledInstance(2000, 30, Image.SCALE_DEFAULT);
+//			this.congratsImg = ImageIO.read(congratsImgFile);
+		} catch (IOException e) {
+			System.out.println("Cannot find trophy image file.");
+		}
+		try {
+			BufferedImage bufferedImg = ImageIO.read(nextImgFile);
+			this.nextImg = bufferedImg.getScaledInstance(280, 240, Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			System.out.println("Cannot find Next Level image file.");
 		}
 		try {
 			BufferedImage bufferedImg = ImageIO.read(loseImgFile);
-			loseImg = bufferedImg.getScaledInstance(270, 200, Image.SCALE_DEFAULT);
+			this.loseImg = bufferedImg.getScaledInstance(270, 200, Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			System.out.println("Cannot find Game Over image file.");
 		}
@@ -315,17 +326,21 @@ public class GameComponent extends JComponent{
 				int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
 				g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);
 				
-				int xPos2 = (450/2) - this.trophyImg.getWidth(null)/2 - 5;
-				int yPos2 = (450/2) - this.trophyImg.getHeight(null)/2 - 70;
+				int xPos2 = (450 - this.trophyImg.getWidth(null) - 15);
+				int yPos2 = 120;
 				g2.drawImage(this.trophyImg, xPos2, yPos2, this.trophyImg.getWidth(null), this.trophyImg.getHeight(null), null);
+			
+				int xPos3 = 450/2 - 70;
+				int yPos3 = 450 - 150;
+				g2.drawImage(this.congratsImg, xPos3, yPos3, this.trophyImg.getWidth(null), this.congratsImg.getHeight(null), null);
 				
-				g2.setPaint(Color.RED);
-				g2.drawString("Congratulations! You won!", 100, 350);
+//				g2.setPaint(Color.RED);
+//				g2.drawString("Congratulations! You won!", 100, 350);
 			} else {
-				int xPos = (450/2) - this.trophyImg.getWidth(null)/2 - 5;
-				int yPos = (450/2) - this.trophyImg.getHeight(null)/2 - 70;
-				g2.drawImage(this.trophyImg, xPos, yPos, this.trophyImg.getWidth(null), this.trophyImg.getHeight(null), null);
-				g2.setPaint(Color.RED);
+				int xPos = (450/2) - this.nextImg.getWidth(null)/2 - 5;
+				int yPos = (450/2) - this.nextImg.getHeight(null)/2 - 70;
+				g2.drawImage(this.nextImg, xPos, yPos, this.nextImg.getWidth(null), this.nextImg.getHeight(null), null);
+				g2.setPaint(Color.YELLOW);
 				g2.drawString("Congratulations! Press the U key for the next level.", 100, 350);
 			}
 		}
