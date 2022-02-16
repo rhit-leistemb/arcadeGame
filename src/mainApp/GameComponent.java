@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.Line2D.Double;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.geom.Rectangle2D;
@@ -34,7 +35,7 @@ public class GameComponent extends JComponent{
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
 	
-	private int lives = 3;
+	private int lives = 1;
 	private int score = 0;
 	private int winScore = 0;
 	private boolean won = false;
@@ -44,6 +45,13 @@ public class GameComponent extends JComponent{
 	
 	private File winImgFile = new File("Sprites/EndScreen.PNG");
 	private Image winImg;
+	private File trophyImgFile = new File("Sprites/YouWin.PNG");
+	private Image trophyImg;
+	private File nextImgFile = new File("Sprites/NextLevel.PNG");
+	private Image nextImg;
+	private File loseImgFile = new File("Sprites/GameOver.PNG");
+	private Image loseImg;
+	
 	
 	
 	public GameComponent(String fileName) {
@@ -54,6 +62,22 @@ public class GameComponent extends JComponent{
 			this.winImg = ImageIO.read(winImgFile);
 		} catch (IOException e) {
 			System.out.println("Cannot find win screen image file.");
+		}
+		try {
+			this.trophyImg = ImageIO.read(trophyImgFile);
+		} catch (IOException e) {
+			System.out.println("Cannot find trophy image file.");
+		}
+		try {
+			this.nextImg = ImageIO.read(nextImgFile);
+		} catch (IOException e) {
+			System.out.println("Cannot find Next Level image file.");
+		}
+		try {
+			BufferedImage bufferedImg = ImageIO.read(loseImgFile);
+			loseImg = bufferedImg.getScaledInstance(270, 200, Image.SCALE_DEFAULT);
+		} catch (IOException e) {
+			System.out.println("Cannot find Game Over image file.");
 		}
 	}
 	
@@ -290,17 +314,32 @@ public class GameComponent extends JComponent{
 				int xPos = (450/2) - this.winImg.getWidth(null)/2 - 5;
 				int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
 				g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);
+				
+				int xPos2 = (450/2) - this.trophyImg.getWidth(null)/2 - 5;
+				int yPos2 = (450/2) - this.trophyImg.getHeight(null)/2 - 70;
+				g2.drawImage(this.trophyImg, xPos2, yPos2, this.trophyImg.getWidth(null), this.trophyImg.getHeight(null), null);
+				
 				g2.setPaint(Color.RED);
 				g2.drawString("Congratulations! You won!", 100, 350);
 			} else {
+				int xPos = (450/2) - this.trophyImg.getWidth(null)/2 - 5;
+				int yPos = (450/2) - this.trophyImg.getHeight(null)/2 - 70;
+				g2.drawImage(this.trophyImg, xPos, yPos, this.trophyImg.getWidth(null), this.trophyImg.getHeight(null), null);
 				g2.setPaint(Color.RED);
 				g2.drawString("Congratulations! Press the U key for the next level.", 100, 350);
 			}
 		}
 		
 		if(lost) {
+			g2.setPaint(new Color(0, 0, 0, 150));
+			g2.fillRect(0, 0, 450, 450);
+			
 			g2.setPaint(Color.YELLOW);
 			g2.drawString("Better luck next time...", 275, 13);
+			
+			int xPos2 = (450/2) - this.loseImg.getWidth(null)/2 - 5;
+			int yPos2 = (450/2) - this.loseImg.getHeight(null)/2 - 70;
+			g2.drawImage(this.loseImg, xPos2, yPos2, this.loseImg.getWidth(null), this.loseImg.getHeight(null), null);
 		}
 	
 ////	draws hitboxes
