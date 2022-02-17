@@ -70,12 +70,20 @@ public class FlyingEnemy extends Enemy{
 		if(this.getTopHit() == false) {
 			this.setEnemyImageFile(enemyStanding);
 			this.setY(this.getY()-2);
+		}else if(this.getLSideHit()==false){
+			this.moveLeft();
+		}else {
+			this.moveRight();
 		}
 	}
 	public void flyDown() {
 		if(this.getButtHit() == false) {
 			this.setEnemyImageFile(enemyDown);
 			this.setY(this.getY()+2);
+		}else if(this.getLSideHit()==false){
+			this.moveLeft();
+		}else {
+			this.moveRight();
 		}
 	}
 	
@@ -83,6 +91,10 @@ public class FlyingEnemy extends Enemy{
 		if(this.getRSideHit() == false) {
 			this.setEnemyImageFile(enemyRight);
 			this.setX(this.getX()+2);
+		}else if(this.getTopHit()==false){
+			this.flyUp();
+		}else {
+			this.flyDown();
 		}
 	}
 	
@@ -90,6 +102,10 @@ public class FlyingEnemy extends Enemy{
 		if(this.getLSideHit() == false) {
 			this.setEnemyImageFile(enemyLeft);
 			this.setX(this.getX()-2);
+		}else if(this.getTopHit()==false){
+			this.flyUp();
+		}else {
+			this.flyDown();
 		}
 	}
 	
