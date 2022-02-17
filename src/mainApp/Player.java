@@ -28,17 +28,21 @@ public class Player extends AnimateObject {
 	private final String playerWalkingRight2 = "PlayerSprites/PlayerWalkingRight2NoBG.png";
 	private final String playerWalkingRight3 = "PlayerSprites/PlayerWalkingRight3NoBG.png";
 	private final String playerWalkingRight4 = "PlayerSprites/PlayerWalkingRight4NoBG.png";
+	private final String playerPowerUpEffect = "Sprites/PowerUpCollectiblePlayerEffectNoBG.png";
 	
 	private int stamina = 100;
 	private int speed = 2;
 	private int lives = 1;
 	private File playerImageFile = new File(playerStanding);
 	private Image playerImage;
+	private Image effectImage;
+	private boolean isPoweredUp = false;
 	private ArrayList<BulletObject> bullets = new ArrayList<BulletObject>();
 	
 	public Player(int x, int y) {
 		super(x, y);
 		this.updateImage();
+		this.updateEffectImage();
 	}
 
 	public void move() {
@@ -117,8 +121,21 @@ public class Player extends AnimateObject {
 		}
 	}
 	
+	public void updateEffectImage() {
+		playerImageFile = new File(playerPowerUpEffect);
+		try {
+			BufferedImage bufferedImg = ImageIO.read(playerImageFile);
+			effectImage = bufferedImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT);
+		} catch (IOException e) {
+			System.out.println("Cannot find player image file.");
+		}
+	}
+	
 	public void drawOn(Graphics2D g) {
 		g.drawImage(playerImage, getX(), getY(), getWidth(), getHeight(), null);
+		if(isPoweredUp) {
+			g.drawImage(effectImage, getX(), getY(), getWidth(), getHeight(), null);
+		}
 	}
 
 	public int getLives() {
@@ -141,6 +158,14 @@ public class Player extends AnimateObject {
 		}else{
 			this.stamina = stamina;
 		}
+	}
+
+	public boolean getPoweredUp() {
+		return isPoweredUp;
+	}
+
+	public void setPoweredUp(boolean isPoweredUp) {
+		this.isPoweredUp = isPoweredUp;
 	}
 	
 

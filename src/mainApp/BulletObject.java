@@ -23,11 +23,11 @@ public class BulletObject extends AnimateObject{
 		if(this.isGoUp()) {
 			g.rotate(Math.PI/2);
 		}else if(this.isGoDown()) {
-			g.rotate(Math.PI/2);
+			g.rotate(-Math.PI/2);
 		}else if(this.isGoRight()) {
 			g.rotate(0);
 		}else if(this.isGoLeft()) {
-			g.rotate(0);
+			g.rotate(0); 
 		}
 	}
 	

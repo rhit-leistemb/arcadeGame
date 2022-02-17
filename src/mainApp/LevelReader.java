@@ -80,6 +80,10 @@ public class LevelReader {
 					x+=space;
 					animateObjects.add(hero);
 					objects.add(hero);
+				}else if(currentChar == 'P') {
+					PowerUpCollectible o = new PowerUpCollectible(x, y);
+					x+=space;
+					objects.add(o);
 				}else {
 					x+=space;
 				}

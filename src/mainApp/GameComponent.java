@@ -35,8 +35,10 @@ public class GameComponent extends JComponent{
 	private Player hero;
 	private int num = 0;
 	private int numTwo = 0;
+	private int delayPowerUp = 0;  
 	private int delayStamina = 0;
 	private boolean playerGotHit = false;
+	private boolean isPoweredUp = false;
 	private int delayHit = 0;
 	
 	private int lives;
@@ -148,19 +150,19 @@ public class GameComponent extends JComponent{
 						
 				if (butt1.intersectsLine(top2)) {
 					animateObjects.get(i).setButtHit(true);
-					react(animateObjects.get(i), objects.get(j), i, j, true);					
+					react(animateObjects.get(i), objects.get(j), i, j);					
 				}
 				if (top1.intersectsLine(butt2)) {
 					animateObjects.get(i).setTopHit(true); 
-					react(animateObjects.get(i), objects.get(j), i, j, false);				
+					react(animateObjects.get(i), objects.get(j), i, j);				
 				}
 				if (right1.intersectsLine(left2)) {
 					animateObjects.get(i).setRSideHit(true); 
-					react(animateObjects.get(i), objects.get(j), i, j, false);				
+					react(animateObjects.get(i), objects.get(j), i, j);				
 				}
 				if (left1.intersectsLine(right2)) {
 					animateObjects.get(i).setLSideHit(true); 
-					react(animateObjects.get(i), objects.get(j), i, j, false);				
+					react(animateObjects.get(i), objects.get(j), i, j);				
 				}
 			}
 		}
@@ -195,8 +197,8 @@ public class GameComponent extends JComponent{
 			}
 		}
 	}
-	public void react(AnimateObject movingObj, GameObject generalObj, int aniIndex, int objIndex, boolean attack) {
-		if(movingObj.getClass().getSimpleName().equals("Player")  && attack == false) {
+	public void react(AnimateObject movingObj, GameObject generalObj, int aniIndex, int objIndex) {
+		if(movingObj.getClass().getSimpleName().equals("Player")&&hero.getPoweredUp() == false) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
 				objects.remove(objIndex);
 				bombs++;
@@ -209,9 +211,13 @@ public class GameComponent extends JComponent{
 						lose();
 					}
 				}
+			} else if(generalObj.getClass().getSimpleName().equals("PowerUpCollectible")) {
+				objects.remove(objIndex);
+				hero.setPoweredUp(true);
+				this.isPoweredUp = true;
 			}
 		}
-		if(movingObj.getClass().getSimpleName().equals("Player")  && attack == true) {
+		if(movingObj.getClass().getSimpleName().equals("Player")  && hero.getPoweredUp()) {
 			if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
 				objects.remove(objIndex);	
 			}
@@ -262,23 +268,8 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
-	public void enemyFlyUp() {
-		for(int i = 0; i< animateObjects.size(); i++) {
-			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
-				animateObjects.get(i).flyUp();
-			}
-		}
-	}
-	
-	public void enemyFlyDown() {
-		for(int i = 0; i< animateObjects.size(); i++) {
-			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
-				animateObjects.get(i).flyDown();
-			}
-		}
-	}
-	
 	public void update() {
+
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
 		}
@@ -294,6 +285,17 @@ public class GameComponent extends JComponent{
 		if(delayStamina >= 10) {
 			hero.updateStamina();
 			delayStamina = 0;
+		}
+		hero.setPoweredUp(isPoweredUp);
+		if(hero.getPoweredUp()) {
+			this.delayPowerUp++;
+			//System.out.println(delayPowerUp);
+			if(delayPowerUp >= 250) {
+				System.out.println("Reset powered up");
+				this.isPoweredUp = false; 
+				hero.setPoweredUp(isPoweredUp);
+				delayPowerUp = 0;
+			}
 		}
 	}
 	
