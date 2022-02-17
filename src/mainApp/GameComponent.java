@@ -200,25 +200,32 @@ public class GameComponent extends JComponent{
 				objects.remove(objIndex);
 				bombs++;
 				checkWin();
-			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")&&hero.getPoweredUp() == false) {
-				if(playerGotHit == false) {
-					playerGotHit = true;
-					lives--;
-					if(lives == 0) {
-						lose();
-					}
-				}
 			} else if(generalObj.getClass().getSimpleName().equals("PowerUpCollectible")) {
 				objects.remove(objIndex);
 				hero.setPoweredUp(true);
 				this.isPoweredUp = true;
 			}
-		}
-		if(movingObj.getClass().getSimpleName().equals("Player")  && hero.getPoweredUp()) {
-			if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
-				objects.remove(objIndex);	
+			if(hero.getPoweredUp()) {
+				if(movingObj.getClass().getSimpleName().equals("Player")) {
+					if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
+						objects.remove(objIndex);	
+					}
+				}
+			}else {
+				if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+					if(playerGotHit == false) {
+						playerGotHit = true;
+						lives--;
+						if(lives == 0) {
+							lose();
+						}
+					}
+				}
 			}
 		}
+
+
+		
 	}
 	
 	public void checkWin() {
@@ -266,7 +273,6 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void update() {
-
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
 		}
@@ -320,6 +326,7 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void enemyFly() {
+		this.checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
 				animateObjects.get(i).move();
@@ -504,6 +511,7 @@ public class GameComponent extends JComponent{
 		hero.setPoweredUp(isPoweredUp);
 		delayPowerUp = 0;
 		delayStamina = 0;
+		delayHit = 0;
 		hero = null;
 		won = false;
 		lost = false;
