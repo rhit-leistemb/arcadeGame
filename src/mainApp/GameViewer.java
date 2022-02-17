@@ -44,8 +44,10 @@ public class GameViewer {
 	
 	private int scoreNum = 0;
 	private int livesNum = 3;
+	private int staminaNum = 100;
 	JLabel score;
 	JLabel lives;
+	JLabel stamina;
 	
 	JFrame frame;
 	JPanel informationPanel;
@@ -75,10 +77,17 @@ public class GameViewer {
 		lives = new JLabel("Lives: " + livesNum, JLabel.RIGHT);
 		lives.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
+		stamina = new JLabel("Stamina: "+staminaNum, JLabel.RIGHT);
+		stamina.setFont(new Font("MS Gothic", Font.PLAIN, 20));
+		
 		informationPanel.add(score);
 		informationPanel.add(lives);
+		informationPanel.add(stamina);
+		
 		Color informationPanelColor = new Color(204, 204, 0);
 		informationPanel.setBackground(informationPanelColor);
+		
+
 		
 		GameComponent component = new GameComponent(fileNames.get(0));
 		
@@ -163,10 +172,15 @@ public class GameViewer {
 	public void updateCount(GameComponent component) {
 		this.livesNum = component.getLives();
 		this.scoreNum = component.getScore();
+		this.staminaNum =  component.getStamina();
 		
-		this.score.setText("Score: " + scoreNum);
-		this.lives.setText("Lives: " + livesNum);
+		
+		this.score.setText("Score: " + scoreNum+"     ");
+		this.lives.setText("Lives: " + livesNum+"     ");
+		this.stamina.setText("Stamina: "+ staminaNum);
 	}
+	
+	
 	
 	public void hasWon(boolean ended){
 		if(ended) {

@@ -95,11 +95,9 @@ public class Player extends AnimateObject {
 		if(this.isGoUp()) {
 			stamina-=10;
 			this.setStamina(stamina);
-			System.out.println(stamina);
 		}else {
 			stamina+=2;
 			this.setStamina(stamina);
-			System.out.println(stamina);
 		}
 	}
 	

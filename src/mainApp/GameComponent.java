@@ -475,6 +475,10 @@ public class GameComponent extends JComponent{
 	public int getScore() {
 		return this.score;
 	}
+	
+	public int getStamina() {
+		return hero.getStamina();
+	}
 
 	public void setPause() {
 		this.paused = !this.paused;
