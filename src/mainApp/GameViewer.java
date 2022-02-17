@@ -96,17 +96,16 @@ public class GameViewer {
 			
 		});
 		
-		tempTimer = new Timer(20, new ActionListener() {
+		tempTimer = new Timer(1000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				checkReady();
-				//component.update();
-				//component.checkCollision();
-				//component.traverse();
-				//component.moveEnemy();
-				//component.gravity();
-				component.repaint();
+//				component.update();
+//				component.checkCollision();
+//				component.moveEnemy();
+//				component.gravity();
+//				component.repaint();
 			}	
 		});
 		tempTimer.start();
@@ -119,8 +118,11 @@ public class GameViewer {
 	public void checkReady() {
 		if(ready) {
 			tempTimer.stop();
+			tempTimer.removeActionListener(null);
+			tempTimer = null;
 			frame1.removeAll();
 			frame1.setVisible(false);
+			frame1.dispose();
 			createGame();
 		}
 	}
