@@ -13,8 +13,8 @@ public class MainApp {
 	private void runApp() {
 		//System.out.println("Write your cool arcade game here!");
 		GameViewer viewer = new GameViewer();
-		viewer.createStart();
-		
+//		viewer.createStart();
+		viewer.createGame();
 //		boolean start = false;
 //		while(!start) {
 //			start = viewer.checkReady();

@@ -39,7 +39,7 @@ public class GameViewer {
 //	private File winImgFile = new File("Sprites/EndScreen.PNG");
 //	private Image winImg;
 	
-	private boolean ready = false;
+	private boolean ready = true;
 	private boolean paused = false;
 	private boolean won = false;
 	private boolean lost = false;
