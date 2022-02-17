@@ -37,7 +37,6 @@ public class Player extends AnimateObject {
 	private Image playerImage;
 	private Image effectImage;
 	private boolean isPoweredUp = false;
-	private ArrayList<BulletObject> bullets = new ArrayList<BulletObject>();
 	
 	public Player(int x, int y) {
 		super(x, y);
