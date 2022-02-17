@@ -56,11 +56,22 @@ public class GameComponent extends JComponent{
 	private File congratsImgFile = new File("Sprites/Congrats.PNG");
 	private Image congratsImg;
 	
+	private File backgroundImageFile = new File("Sprites/BackgroundLevel1.png");
+	private Image backgroundImage;
 	
 	
 	
 	public GameComponent(String fileName) {
 		this.fileName = fileName;
+		
+		try {
+			Image bufferedBackgroundImg = ImageIO.read(backgroundImageFile);
+			backgroundImage = bufferedBackgroundImg.getScaledInstance(450, 450, Image.SCALE_DEFAULT);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+			System.out.println("Cannot find background image file");
+		}
 		createGameObjectList();
 		
 		//loads in images
@@ -321,6 +332,8 @@ public class GameComponent extends JComponent{
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
+		
+		g2.drawImage(backgroundImage, 0, 0, null);
 
 		for (GameObject o: this.objects) {
 			o.drawOn(g2);
