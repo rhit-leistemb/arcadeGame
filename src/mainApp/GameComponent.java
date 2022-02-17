@@ -195,12 +195,12 @@ public class GameComponent extends JComponent{
 		}
 	}
 	public void react(AnimateObject movingObj, GameObject generalObj, int aniIndex, int objIndex) {
-		if(movingObj.getClass().getSimpleName().equals("Player")&&hero.getPoweredUp() == false) {
+		if(movingObj.getClass().getSimpleName().equals("Player")) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
 				objects.remove(objIndex);
 				bombs++;
 				checkWin();
-			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")&&hero.getPoweredUp() == false) {
 				if(playerGotHit == false) {
 					playerGotHit = true;
 					lives--;
@@ -500,6 +500,10 @@ public class GameComponent extends JComponent{
 		objects.clear();
 		animateObjects.clear();
 		scoreList.clear();
+		isPoweredUp =false;
+		hero.setPoweredUp(isPoweredUp);
+		delayPowerUp = 0;
+		delayStamina = 0;
 		hero = null;
 		won = false;
 		lost = false;
