@@ -38,6 +38,7 @@ public class GameViewer {
 //	private File winImgFile = new File("Sprites/EndScreen.PNG");
 //	private Image winImg;
 	
+	private boolean ready = false;
 	private boolean paused = false;
 	private boolean won = false;
 	private boolean lost = false;
@@ -50,7 +51,9 @@ public class GameViewer {
 	JLabel stamina;
 	
 	JFrame frame;
+	JFrame frame1;
 	JPanel informationPanel;
+	Timer tempTimer;
 	
 	public GameViewer() {
 //		try {
@@ -61,14 +64,65 @@ public class GameViewer {
 	}
 	
 	public void createStart() {
-		fileNames.add("Levels/Level-0");
+		frame1 = new JFrame();
+		frame1.setTitle("Welcome!");
+		frame1.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		GameComponent component = new GameComponent("Levels/Level-0", ready);
+		
+		frame1.addKeyListener(new KeyListener() {
 
-		frame = new JFrame();
-		frame.setTitle("Welcome!");
-		frame.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int code = e.getKeyCode();
+				if(code == KeyEvent.VK_ENTER) {
+					ready = true;
+				}
+				component.repaint();
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}		
+			
+		});
+		
+		tempTimer = new Timer(20, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				checkReady();
+				component.update();
+				component.checkCollision();
+				component.moveEnemy();
+				component.gravity();
+				component.repaint();
+			}	
+		});
+		tempTimer.start();
+	
+		frame1.add(component, BorderLayout.CENTER);
+		frame1.pack();
+		frame1.setVisible(true);
 	}
 	
+	public void checkReady() {
+		if(ready) {
+			tempTimer.stop();
+			frame1.removeAll();
+			frame1.setVisible(false);
+			createGame();
+		}
+	}
 	
 	public void createGame() {
 		fileNames.add("Levels/Level-1");
@@ -99,7 +153,7 @@ public class GameViewer {
 		
 
 		
-		GameComponent component = new GameComponent(fileNames.get(0));
+		GameComponent component = new GameComponent(fileNames.get(0), ready);
 		
 //		JPanel startPanel = new JPanel();
 //		JButton pauseButt = new JButton("P");
@@ -134,8 +188,13 @@ public class GameViewer {
 					paused = !paused;
 					component.setPause();
 				}
-				if(key == 'r' && lost == true || won == true) {
-					changeLevel(component, "Arcade Game-Level 1", 0);
+				if(key == 'r') {
+					if(lost == true || won == true) {
+						changeLevel(component, "Arcade Game-Level 1", 0);
+					} else {
+						//change logic so changeLevel iterates, then pick right level
+						changeLevel(component, "Arcade Game-Level 1", 0);
+					}
 				}
 				component.setDirection(code);
 				component.repaint();

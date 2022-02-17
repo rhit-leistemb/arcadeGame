@@ -13,7 +13,7 @@ public class MainApp {
 	private void runApp() {
 		//System.out.println("Write your cool arcade game here!");
 		GameViewer viewer = new GameViewer();
-		viewer.createGame();
+		viewer.createStart();
 	} // runApp
 
 	/**

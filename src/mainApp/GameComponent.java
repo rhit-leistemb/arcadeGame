@@ -29,7 +29,9 @@ public class GameComponent extends JComponent{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<AnimateObject> animateObjects = new ArrayList<AnimateObject>();
+	private ArrayList<Integer> scoreList = new ArrayList<Integer>();
 	private String fileName;
+	private Boolean ready;
 	private Player hero;
 	private int num = 0;
 	private int numTwo = 0;
@@ -37,7 +39,7 @@ public class GameComponent extends JComponent{
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
 	
-	private int lives = 200;
+	private int lives;
 	private int bombs = 0;
 	private int winScore = 0;
 	private boolean won = false;
@@ -46,6 +48,8 @@ public class GameComponent extends JComponent{
 	
 	private String currentLevel;
 	
+	private File titleImgFile = new File("Sprites/Title.PNG");
+	private Image titleImg;
 	private File winImgFile = new File("Sprites/EndScreen.PNG");
 	private Image winImg;
 	private File trophyImgFile = new File("Sprites/Win.PNG");
@@ -62,8 +66,9 @@ public class GameComponent extends JComponent{
 	
 	
 	
-	public GameComponent(String fileName) {
+	public GameComponent(String fileName, Boolean ready) {
 		this.fileName = fileName;
+		this.ready = ready;
 		
 		try {
 			Image bufferedBackgroundImg = ImageIO.read(backgroundImageFile);
@@ -76,6 +81,12 @@ public class GameComponent extends JComponent{
 		createGameObjectList();
 		
 		//loads in images
+		try {
+			BufferedImage bufferedImg = ImageIO.read(titleImgFile);
+			this.titleImg = bufferedImg.getScaledInstance(300, 125, Image.SCALE_DEFAULT);
+		} catch (IOException e) {
+			System.out.println("Cannot find title screen image file.");
+		}
 		try {
 			this.winImg = ImageIO.read(winImgFile);
 		} catch (IOException e) {
@@ -353,6 +364,15 @@ public class GameComponent extends JComponent{
 		}
 		//draws appropriate screens for win
 		g2.setFont(new Font("MS Gothic", Font.PLAIN, 11));
+		if(!ready) {
+			int xPos = (450/2) - this.titleImg.getWidth(null)/2;
+			int yPos = (450/2) - this.titleImg.getHeight(null)/2 - 70;
+			g2.drawImage(this.titleImg, xPos, yPos, this.titleImg.getWidth(null), this.titleImg.getHeight(null), null);
+			
+			g2.setFont(new Font("MS Gothic", Font.BOLD, 17));
+			g2.setPaint(Color.RED);
+			g2.drawString("Press 'Enter' to Start", 120, 395);
+		}
 		if(won) {
 			g2.setPaint(Color.BLACK);
 			g2.fillRect(0, 0, 450, 450);
@@ -371,6 +391,16 @@ public class GameComponent extends JComponent{
 				
 				g2.setPaint(Color.YELLOW);
 				g2.drawString("Press 'R' to restart", 320, 13);
+				
+				g2.setFont(new Font("MS Gothic", Font.BOLD, 30));
+				int points1 = bombs * 10;
+				int points2 = lives * 20;
+				int pointsTot = points1 + points2;
+				
+				for(int i = 0; i < scoreList.size(); i++) {
+					pointsTot+=scoreList.get(i);
+				}
+				g2.drawString("Total Score: " + pointsTot, 100, 380);
 			} else {
 				int xPos = (450/2) - this.nextImg.getWidth(null)/2 - 5;
 				int yPos = (450/2) - this.nextImg.getHeight(null)/2 - 70;
@@ -397,6 +427,7 @@ public class GameComponent extends JComponent{
 				g2.drawString("Items", 163, 105);
 				g2.drawString("Points", 240, 105);
 				int pointsTot = points1 + points2;
+				scoreList.add(pointsTot);
 				g2.drawString("Total Score: " + pointsTot, 157, 220);
 			}
 		}
@@ -473,6 +504,7 @@ public class GameComponent extends JComponent{
 	public void recreate() {
 		objects.clear();
 		animateObjects.clear();
+		scoreList.clear();
 		hero = null;
 		won = false;
 		lost = false;
