@@ -212,7 +212,7 @@ public class GameComponent extends JComponent{
 			}
 		}
 		if(movingObj.getClass().getSimpleName().equals("Player")  && attack == true) {
-			if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+			if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
 				objects.remove(objIndex);	
 			}
 		}
