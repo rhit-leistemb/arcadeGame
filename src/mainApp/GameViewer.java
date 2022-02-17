@@ -77,7 +77,8 @@ public class GameViewer {
 		
 		informationPanel.add(score);
 		informationPanel.add(lives);
-		informationPanel.setBackground(Color.LIGHT_GRAY);
+		Color informationPanelColor = new Color(204, 204, 0);
+		informationPanel.setBackground(informationPanelColor);
 		
 		GameComponent component = new GameComponent(fileNames.get(0));
 		
