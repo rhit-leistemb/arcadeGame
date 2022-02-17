@@ -113,6 +113,7 @@ public class GameViewer {
 				} 
 				if(key == 'p' && won == false && lost == false) {
 					paused = !paused;
+					component.setPause();
 				}
 				if(key == 'r' && lost == true) {
 					changeLevel(component, "Arcade Game-Level 1", 0);
@@ -146,6 +147,8 @@ public class GameViewer {
 					updateCount(component);
 					component.repaint();
 					frame.repaint();
+				} else {
+					component.repaint();
 				}
 			}	
 		});

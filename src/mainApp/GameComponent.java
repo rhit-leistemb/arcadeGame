@@ -41,6 +41,7 @@ public class GameComponent extends JComponent{
 	private int winScore = 0;
 	private boolean won = false;
 	private boolean lost = false;
+	private boolean paused = false;
 	
 	private String currentLevel;
 	
@@ -54,6 +55,7 @@ public class GameComponent extends JComponent{
 	private Image loseImg;
 	private File congratsImgFile = new File("Sprites/Congrats.PNG");
 	private Image congratsImg;
+	
 	
 	
 	
@@ -324,6 +326,7 @@ public class GameComponent extends JComponent{
 			o.drawOn(g2);
 		}
 		//draws appropriate screens for win
+		g2.setFont(new Font("MS Gothic", Font.PLAIN, 11));
 		if(won) {
 			g2.setPaint(Color.BLACK);
 			g2.fillRect(0, 0, 450, 450);
@@ -346,9 +349,10 @@ public class GameComponent extends JComponent{
 				int xPos = (450/2) - this.nextImg.getWidth(null)/2 - 5;
 				int yPos = (450/2) - this.nextImg.getHeight(null)/2 - 70;
 				g2.drawImage(this.nextImg, xPos, yPos, this.nextImg.getWidth(null), this.nextImg.getHeight(null), null);
+				
 				g2.setPaint(Color.YELLOW);
-				g2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
-				g2.drawString("Congratulations! Press 'U' for the next level.", 100, 350);
+				g2.setFont(new Font("MS Gothic", Font.PLAIN, 15));
+				g2.drawString("Congratulations! Press 'U' for the next level.", 33, 350);
 			}
 		}
 		//draws appropriate screens for loss
@@ -357,11 +361,43 @@ public class GameComponent extends JComponent{
 			g2.fillRect(0, 0, 450, 450);
 			
 			g2.setPaint(Color.YELLOW);
-			g2.drawString("Better luck next time...", 275, 13);
+			g2.drawString("Better lpuck next time...", 275, 13);
 			
 			int xPos2 = (450/2) - this.loseImg.getWidth(null)/2 - 5;
 			int yPos2 = (450/2) - this.loseImg.getHeight(null)/2 - 70;
 			g2.drawImage(this.loseImg, xPos2, yPos2, this.loseImg.getWidth(null), this.loseImg.getHeight(null), null);
+		}
+		
+		if(paused) {
+			int xPos = (450/2) - this.nextImg.getWidth(null)/2 - 5;
+			int yPos = (450/2) - this.nextImg.getHeight(null)/2 - 70;
+			g2.drawImage(this.nextImg, xPos, yPos, this.nextImg.getWidth(null), this.nextImg.getHeight(null), null);
+
+			g2.setPaint(new Color(0, 0, 0, 170));
+//			g2.fillRect(75, 55  450*4/6, 450*4/6 - 20);
+			g2.fillRect(0, 0, 450, 450);
+			
+			g2.setPaint(Color.YELLOW);
+			g2.setFont(new Font("MS Gothic", Font.BOLD, 15));
+			g2.drawString("Key", 130, 100);
+			g2.setFont(new Font("MS Gothic", Font.PLAIN, 15));
+			g2.drawString("P", 135, 135);
+			g2.drawString("U", 135, 155);
+			g2.drawString("D", 135, 175);
+			g2.drawString("R", 135, 195);
+
+
+			
+			g2.setFont(new Font("MS Gothic", Font.BOLD, 15));
+			g2.drawString("Action", 200, 100);
+			g2.setFont(new Font("MS Gothic", Font.PLAIN, 15));
+			g2.drawString("Pauses the game", 200, 135);
+			g2.drawString("Next Level", 200, 155);
+			g2.drawString("Previous Level", 200, 175);
+			g2.drawString("Restarts Game", 200, 195);
+
+
+			
 		}
 	
 ////	draws hitboxes
@@ -419,6 +455,10 @@ public class GameComponent extends JComponent{
 	}
 	public int getScore() {
 		return this.score;
+	}
+
+	public void setPause() {
+		this.paused = !this.paused;
 	}
 	
 }
