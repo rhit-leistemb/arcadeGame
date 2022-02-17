@@ -168,8 +168,8 @@ public class GameComponent extends JComponent{
 	
 	//checks is animatedObject is no long colliding against something
 	public void checkFreedom() { 
-		checkCollision();
 		for (int i = 0; i < animateObjects.size(); i++) {
+			checkCollision();
 			Line2D.Double butt1 = animateObjects.get(i).getButtLine();
 			Line2D.Double top1 = animateObjects.get(i).getTopLine();
 			Line2D.Double right1 = animateObjects.get(i).getRightLine();
@@ -251,7 +251,6 @@ public class GameComponent extends JComponent{
 	public void traverse() {
 		checkCollision();
 		hero.move();
-		checkCollision();
 	}
 	
 	public void moveEnemyRight() {
@@ -267,7 +266,9 @@ public class GameComponent extends JComponent{
 		checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
+				this.checkCollision();
 				animateObjects.get(i).moveLeft();
+				this.checkCollision();
 			}
 		}
 	}
@@ -311,12 +312,15 @@ public class GameComponent extends JComponent{
 				if(num < 50) {
 					this.checkCollision();
 					this.moveEnemyRight();
+					this.checkCollision();
 					num++;
 				}else if(num < 100) {
 					this.checkCollision();
 					this.moveEnemyLeft();
+					this.checkCollision();
 					num++;
 				}else {
+					this.checkCollision();
 					numThree++;
 					if(numThree >= 100) {
 						num = 0;
@@ -348,12 +352,15 @@ public class GameComponent extends JComponent{
 	public void setDirection(int code) {
 		this.checkCollision();
 		if(code == KeyEvent.VK_UP) {
+			this.checkCollision();
 			hero.setGoUp(true);
 		}
 		if(code == KeyEvent.VK_LEFT) {
+			this.checkCollision();
 			hero.goLeft(true);
 		}
 		if(code == KeyEvent.VK_RIGHT ) {
+			this.checkCollision();
 			hero.goRight(true);
 		}
 	}
@@ -361,12 +368,15 @@ public class GameComponent extends JComponent{
 	public void stopDirection(int code) {
 		this.checkCollision();
 		if(code == KeyEvent.VK_UP) {
+			this.checkCollision();
 			hero.setGoUp(false);
 		}
 		if(code == KeyEvent.VK_LEFT) {
+			this.checkCollision();
 			hero.goLeft(false);
 		}
 		if(code == KeyEvent.VK_RIGHT ) {
+			this.checkCollision();
 			hero.goRight(false);
 		}
 	}
