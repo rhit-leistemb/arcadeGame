@@ -140,11 +140,17 @@ public class GameComponent extends JComponent{
 			Line2D.Double right1 = animateObjects.get(i).getRightLine();
 			Line2D.Double left1 = animateObjects.get(i).getLeftLine();
 			
+			Line2D.Double r2 = animateObjects.get(i).getR2();
+			Line2D.Double l2 = animateObjects.get(i).getL2();
+			
 			for (int j = 0; j < objects.size(); j++) {
 				Line2D.Double top2 = objects.get(j).getTopLine();
 				Line2D.Double butt2 = objects.get(j).getButtLine();
 				Line2D.Double right2 = objects.get(j).getRightLine();
 				Line2D.Double left2 = objects.get(j).getLeftLine();
+				
+				Line2D.Double r22 = objects.get(i).getR2();
+				Line2D.Double l22 = objects.get(i).getL2();
 						
 				if (butt1.intersectsLine(top2)) {
 					animateObjects.get(i).setButtHit(true);
@@ -154,11 +160,11 @@ public class GameComponent extends JComponent{
 					animateObjects.get(i).setTopHit(true); 
 					react(animateObjects.get(i), objects.get(j), i, j);				
 				}
-				if (right1.intersectsLine(left2)) {
+				if (right1.intersectsLine(left2) || r2.intersectsLine(left2)) {
 					animateObjects.get(i).setRSideHit(true); 
 					react(animateObjects.get(i), objects.get(j), i, j);				
 				}
-				if (left1.intersectsLine(right2)) {
+				if (left1.intersectsLine(right2) || l2.intersectsLine(right2)) {
 					animateObjects.get(i).setLSideHit(true); 
 					react(animateObjects.get(i), objects.get(j), i, j);				
 				}

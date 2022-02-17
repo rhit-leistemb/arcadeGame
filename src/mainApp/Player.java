@@ -32,7 +32,7 @@ public class Player extends AnimateObject {
 	
 	private int stamina = 100;
 	private int speed = 2;
-	private int lives = 1;
+	private int lives = 300;
 	private File playerImageFile = new File(playerStanding);
 	private Image playerImage;
 	private Image effectImage;
