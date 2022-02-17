@@ -290,7 +290,7 @@ public class GameComponent extends JComponent{
 		if(hero.getPoweredUp()) {
 			this.delayPowerUp++;
 			//System.out.println(delayPowerUp);
-			if(delayPowerUp >= 250) {
+			if(delayPowerUp >= 200) {
 				System.out.println("Reset powered up");
 				this.isPoweredUp = false; 
 				hero.setPoweredUp(isPoweredUp);
