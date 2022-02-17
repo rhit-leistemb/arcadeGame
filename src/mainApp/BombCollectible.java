@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 public class BombCollectible extends GameObject{
 	
 	//private Color bombColor = Color.RED;
-	private File bombImageFile = new File("Sprites/BombCollectibleSprite.png");
+	private File bombImageFile = new File("Sprites/BombCollectibleNoBG.png");
 	private Image bombImage;
 
 	public BombCollectible(int x, int y) {
@@ -27,7 +27,7 @@ public class BombCollectible extends GameObject{
 	}
 	
 	public void drawOn(Graphics2D g) {
-		g.drawImage(bombImage, getX(), getY(), getWidth(), getHeight(), null);
+		g.drawImage(bombImage, getX(), getY(), getWidth()-getWidth()/10, getHeight(), null);
 	}
 
 }
