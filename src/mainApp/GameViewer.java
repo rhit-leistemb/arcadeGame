@@ -53,7 +53,7 @@ public class GameViewer {
 	JFrame frame;
 	JFrame frame1;
 	JPanel informationPanel;
-	Timer tempTimer;
+	Timer timer;
 	
 	public GameViewer() {
 //		try {
@@ -63,7 +63,7 @@ public class GameViewer {
 //		}
 	}
 	
-	public void createStart() {
+	public boolean createStart() {
 		frame1 = new JFrame();
 		frame1.setTitle("Welcome!");
 		frame1.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
@@ -96,7 +96,7 @@ public class GameViewer {
 			
 		});
 		
-		tempTimer = new Timer(1000, new ActionListener() {
+		timer = new Timer(100, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -108,23 +108,27 @@ public class GameViewer {
 //				component.repaint();
 			}	
 		});
-		tempTimer.start();
+		timer.start();
 	
 		frame1.add(component, BorderLayout.CENTER);
 		frame1.pack();
 		frame1.setVisible(true);
+		
+		return ready;
 	}
 	
-	public void checkReady() {
+	public boolean checkReady() {
 		if(ready) {
-			tempTimer.stop();
-			tempTimer.removeActionListener(null);
-			tempTimer = null;
+			System.out.println("closed");
+			timer.stop();
+//			timer.removeActionListener(null);
+//			timer = null;
 			frame1.removeAll();
 			frame1.setVisible(false);
 			frame1.dispose();
 			createGame();
 		}
+		return ready;
 	}
 	
 	public void createGame() {
@@ -182,9 +186,9 @@ public class GameViewer {
 			public void keyPressed(KeyEvent e) {
 				char key = e.getKeyChar();
 				int code = e.getKeyCode();
-				if(key == 'u') {
+				if(key == 'u' && lost == false) {
 					changeLevel(component, "Arcade Game-Level 2", 1);
-				} else if(key == 'd') {
+				} else if(key == 'd' && lost == false) {
 					changeLevel(component, "Arcade Game-Level 1", 0);
 				} 
 				if(key == 'p' && won == false && lost == false) {
@@ -217,7 +221,7 @@ public class GameViewer {
 			}	
 		});
 		
-		Timer timer = new Timer(20, new ActionListener() {
+		timer = new Timer(20, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -294,6 +298,10 @@ public class GameViewer {
 		informationPanel.setVisible(true);
 		this.won = false;
 		this.paused = false;
+	}
+	
+	public boolean getReady() {
+		return ready;
 	}
 }
 	

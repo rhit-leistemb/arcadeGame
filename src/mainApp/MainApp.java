@@ -14,6 +14,28 @@ public class MainApp {
 		//System.out.println("Write your cool arcade game here!");
 		GameViewer viewer = new GameViewer();
 		viewer.createStart();
+		
+//		boolean start = false;
+//		while(!start) {
+//			start = viewer.checkReady();
+//			System.out.println("still running");
+//			if(start) {
+//				break;
+//			}
+//		}
+//		viewer.
+//		System.out.println("Moving on");
+//		while(true) {
+//			if(start) {
+//				System.out.println("hittt");
+//				viewer = new GameViewer();
+//				viewer.createGame();
+//				break;
+//			} else {
+//				System.out.println("Enter not hit yet");
+//			}
+//		}
+			
 	} // runApp
 
 	/**
