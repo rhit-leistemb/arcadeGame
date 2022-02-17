@@ -47,9 +47,9 @@ public class FlyingEnemy extends Enemy{
 	
 	public void move() {
 		int diffX = this.getX()-playerX;
-		System.out.println("DiffX: "+diffX);
+		//System.out.println("DiffX: "+diffX);
 		int diffY = this.getY()-playerY;
-		System.out.println("DiffY: "+diffY);
+		//System.out.println("DiffY: "+diffY);
 		if(Math.abs(diffX)>Math.abs(diffY)) {
 			if(diffX<0) {
 				this.moveRight();
@@ -57,7 +57,7 @@ public class FlyingEnemy extends Enemy{
 				this.moveLeft();
 			}
 		}else{
-			System.out.println("Otheru");
+			//System.out.println("Other");
 			if(diffY<0) {
 				this.flyDown();
 			}else if(diffY>0){
