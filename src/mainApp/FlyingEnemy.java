@@ -71,20 +71,43 @@ public class FlyingEnemy extends Enemy{
 			this.setEnemyImageFile(enemyStanding);
 			this.setY(this.getY()-2);
 		}else if(this.getLSideHit()==false){
+			this.setEnemyImageFile(enemyLeft);
+			this.setX(this.getX()-2);
+		}else if(this.getRSideHit()==false) {
+			this.setEnemyImageFile(enemyRight);
+			this.setX(this.getX()+2);
+		}else if(this.getTopHit()==false){
+			this.setEnemyImageFile(enemyStanding);
+			this.setY(this.getY()-2);
+		}
+			/*else if(this.getLSideHit()==false){
+		}
 			this.moveLeft();
 		}else {
 			this.moveRight();
-		}
+		}*/
 	}
 	public void flyDown() {
 		if(this.getButtHit() == false) {
 			this.setEnemyImageFile(enemyDown);
 			this.setY(this.getY()+2);
 		}else if(this.getLSideHit()==false){
+			this.setEnemyImageFile(enemyLeft);
+			this.setX(this.getX()-2);
+		}else if(this.getRSideHit()==false) {
+			this.setEnemyImageFile(enemyRight);
+			this.setX(this.getX()+2);
+		}else if(this.getTopHit()==false){
+			this.setEnemyImageFile(enemyStanding);
+			this.setY(this.getY()-2);
+		}
+		
+		/*else if(this.getLSideHit()==false){
+		}
 			this.moveLeft();
 		}else {
 			this.moveRight();
-		}
+		}*/
 	}
 	
 	public void moveRight() {
@@ -92,10 +115,19 @@ public class FlyingEnemy extends Enemy{
 			this.setEnemyImageFile(enemyRight);
 			this.setX(this.getX()+2);
 		}else if(this.getTopHit()==false){
+			this.setEnemyImageFile(enemyStanding);
+			this.setY(this.getY()-2);
+		}else if(this.getButtHit()==false) {
+			this.setEnemyImageFile(enemyDown);
+			this.setY(this.getY()+2);
+		}else if(this.getLSideHit()==false){
+			this.setEnemyImageFile(enemyLeft);
+			this.setX(this.getX()-2);
+		}/*else if(this.getTopHit()==false){
 			this.flyUp();
 		}else {
 			this.flyDown();
-		}
+		}*/
 	}
 	
 	public void moveLeft() {
@@ -103,10 +135,19 @@ public class FlyingEnemy extends Enemy{
 			this.setEnemyImageFile(enemyLeft);
 			this.setX(this.getX()-2);
 		}else if(this.getTopHit()==false){
+			this.setEnemyImageFile(enemyStanding);
+			this.setY(this.getY()-2);
+		}else if(this.getButtHit()==false) {
+			this.setEnemyImageFile(enemyDown);
+			this.setY(this.getY()+2);
+		}else if(this.getRSideHit()==false) {
+			this.setEnemyImageFile(enemyRight);
+			this.setX(this.getX()+2);
+		}/*else if(this.getTopHit()==false){
 			this.flyUp();
 		}else {
 			this.flyDown();
-		}
+		}*/
 	}
 	
 	public void gravity() {

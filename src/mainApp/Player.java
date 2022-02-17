@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -33,6 +34,7 @@ public class Player extends AnimateObject {
 	private int lives = 1;
 	private File playerImageFile = new File(playerStanding);
 	private Image playerImage;
+	private ArrayList<BulletObject> bullets = new ArrayList<BulletObject>();
 	
 	public Player(int x, int y) {
 		super(x, y);

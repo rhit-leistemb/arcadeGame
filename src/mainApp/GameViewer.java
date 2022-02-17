@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -53,6 +54,8 @@ public class GameViewer {
 	JFrame frame;
 	JFrame frame1;
 	JPanel informationPanel;
+	JPanel staminaPanel;
+	JPanel staminaBar;
 	Timer timer;
 	
 	public GameViewer() {
@@ -96,16 +99,16 @@ public class GameViewer {
 			
 		});
 		
-		timer = new Timer(100, new ActionListener() {
+		timer = new Timer(500, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				checkReady();
-//				component.update();
-//				component.checkCollision();
-//				component.moveEnemy();
-//				component.gravity();
-//				component.repaint();
+				component.update();
+				component.checkCollision();
+				component.moveEnemy();
+				component.gravity();
+				component.repaint();
 			}	
 		});
 		timer.start();
@@ -141,6 +144,22 @@ public class GameViewer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		informationPanel = new JPanel();
+		staminaPanel = new JPanel();
+		
+		staminaPanel.setPreferredSize(new Dimension(110, 20));
+		staminaPanel.setBackground(Color.black);
+		staminaPanel.setOpaque(false);
+		Border blackLine = BorderFactory.createLineBorder(Color.black);
+		staminaPanel.setBorder(blackLine);
+		
+		
+		
+		staminaBar = new JPanel();
+		staminaBar.setPreferredSize(new Dimension(100, 10));
+		staminaBar.setLocation(0, 0);
+		staminaBar.setBackground(Color.green);
+		
+		staminaPanel.add(staminaBar);
 		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
 		bombs = new JLabel("Bombs: " + bombNum, JLabel.LEFT);
 		bombs.setFont(new Font("MS Gothic", Font.PLAIN, 20));
@@ -149,12 +168,14 @@ public class GameViewer {
 		lives.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
 		stamina = new JLabel("Stamina: "+staminaNum, JLabel.RIGHT);
-		stamina.setFont(new Font("MS Gothic", Font.PLAIN, 20));
+		stamina.setFont(new Font("MS Gothic", Font.PLAIN, 10));
 		
 		informationPanel.add(bombs);
 		informationPanel.add(lives);
-		informationPanel.add(stamina);
-		
+		//informationPanel.add(stamina);
+
+		informationPanel.add(staminaPanel);
+		//informationPanel.add(stamina);
 		Color informationPanelColor = new Color(204, 204, 0);
 		informationPanel.setBackground(informationPanelColor);
 		
@@ -254,7 +275,16 @@ public class GameViewer {
 		
 		this.bombs.setText("Bomb: " + bombNum +"     ");
 		this.lives.setText("Lives: " + livesNum+"     ");
-		this.stamina.setText("Stamina: "+ staminaNum);
+		if(staminaNum >50) {
+			staminaBar.setBackground(Color.green);
+		}else if(staminaNum >25){
+			staminaBar.setBackground(Color.yellow);
+		}else {
+			staminaBar.setBackground(Color.red);
+		}
+		staminaBar.setSize(new Dimension(staminaNum, 10));
+		staminaBar.setLocation(5, staminaPanel.getHeight()/2-5);
+		//this.stamina.setText("Stamina:"+ staminaNum);
 	}
 	
 	
