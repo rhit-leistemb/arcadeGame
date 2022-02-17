@@ -101,10 +101,11 @@ public class GameViewer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				checkReady();
-				component.update();
-				component.checkCollision();
-				component.moveEnemy();
-				component.gravity();
+				//component.update();
+				//component.checkCollision();
+				//component.traverse();
+				//component.moveEnemy();
+				//component.gravity();
 				component.repaint();
 			}	
 		});
@@ -191,9 +192,13 @@ public class GameViewer {
 				if(key == 'r') {
 					if(lost == true || won == true) {
 						changeLevel(component, "Arcade Game-Level 1", 0);
+						lost = false;
+						won = false;
 					} else {
 						//change logic so changeLevel iterates, then pick right level
 						changeLevel(component, "Arcade Game-Level 1", 0);
+						lost = false;
+						won = false;
 					}
 				}
 				component.setDirection(code);
