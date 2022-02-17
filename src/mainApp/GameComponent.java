@@ -38,7 +38,7 @@ public class GameComponent extends JComponent{
 	private int delayHit = 0;
 	
 	private int lives = 200;
-	private int score = 0;
+	private int bombs = 0;
 	private int winScore = 0;
 	private boolean won = false;
 	private boolean lost = false;
@@ -188,7 +188,7 @@ public class GameComponent extends JComponent{
 		if(movingObj.getClass().getSimpleName().equals("Player")) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
 				objects.remove(index);
-				score++;
+				bombs++;
 				checkWin();
 			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")||generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
 				if(playerGotHit == false) {
@@ -203,14 +203,12 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void checkWin() {
-		if (score == winScore) {
-			System.out.println("HERO HAS WONNNN!!!!!!!");
+		if (bombs == winScore) {
 			this.won = true;
 		}
 	}
 	
 	public void lose() {
-		System.out.println("Game Over");
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("Player")) {
 				animateObjects.remove(i);
@@ -381,6 +379,25 @@ public class GameComponent extends JComponent{
 				g2.setPaint(Color.YELLOW);
 				g2.setFont(new Font("MS Gothic", Font.PLAIN, 15));
 				g2.drawString("Congratulations! Press 'U' for the next level.", 33, 350);
+				
+			
+				g2.drawString("Bombs:" + bombs, 160, 135);
+				g2.drawString("Lives: " + lives, 160, 155);
+//				g2.drawString("Time", 138, 175);
+//				g2.drawString("Stamina", 138, 195);
+		
+				int points1 = bombs * 10;
+				g2.drawString(" " + points1, 250, 135);
+				int points2 = lives * 20;
+				g2.drawString(" " + points2, 250, 155);
+//				g2.drawString("", 200, 175);
+//				g2.drawString("", 200, 195);
+				
+				g2.setFont(new Font("MS Gothic", Font.BOLD, 15));
+				g2.drawString("Items", 163, 105);
+				g2.drawString("Points", 240, 105);
+				int pointsTot = points1 + points2;
+				g2.drawString("Total Score: " + pointsTot, 157, 220);
 			}
 		}
 		//draws appropriate screens for loss
@@ -402,7 +419,6 @@ public class GameComponent extends JComponent{
 			g2.drawImage(this.nextImg, xPos, yPos, this.nextImg.getWidth(null), this.nextImg.getHeight(null), null);
 
 			g2.setPaint(new Color(0, 0, 0, 170));
-//			g2.fillRect(75, 55  450*4/6, 450*4/6 - 20);
 			g2.fillRect(0, 0, 450, 450);
 			
 			g2.setPaint(Color.YELLOW);
@@ -460,7 +476,7 @@ public class GameComponent extends JComponent{
 		hero = null;
 		won = false;
 		lost = false;
-		score = 0;
+		bombs = 0;
 		lives = 3;
 		createGameObjectList();	
 	}
@@ -482,7 +498,7 @@ public class GameComponent extends JComponent{
 		return this.lives;
 	}
 	public int getScore() {
-		return this.score;
+		return this.bombs;
 	}
 	
 	public int getStamina() {

@@ -42,10 +42,10 @@ public class GameViewer {
 	private boolean won = false;
 	private boolean lost = false;
 	
-	private int scoreNum = 0;
+	private int bombNum = 0;
 	private int livesNum = 3;
 	private int staminaNum = 100;
-	JLabel score;
+	JLabel bombs;
 	JLabel lives;
 	JLabel stamina;
 	
@@ -59,7 +59,17 @@ public class GameViewer {
 //			System.out.println("Cannot find win screen image file.");
 //		}
 	}
+	
+	public void createStart() {
+		fileNames.add("Levels/Level-0");
 
+		frame = new JFrame();
+		frame.setTitle("Welcome!");
+		frame.setPreferredSize( new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	
 	public void createGame() {
 		fileNames.add("Levels/Level-1");
 		fileNames.add("Levels/Level-2");
@@ -71,8 +81,8 @@ public class GameViewer {
 		
 		informationPanel = new JPanel();
 		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
-		score = new JLabel("Score: " + scoreNum, JLabel.LEFT);
-		score.setFont(new Font("MS Gothic", Font.PLAIN, 20));
+		bombs = new JLabel("Bombs: " + bombNum, JLabel.LEFT);
+		bombs.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
 		lives = new JLabel("Lives: " + livesNum, JLabel.RIGHT);
 		lives.setFont(new Font("MS Gothic", Font.PLAIN, 20));
@@ -80,7 +90,7 @@ public class GameViewer {
 		stamina = new JLabel("Stamina: "+staminaNum, JLabel.RIGHT);
 		stamina.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
-		informationPanel.add(score);
+		informationPanel.add(bombs);
 		informationPanel.add(lives);
 		informationPanel.add(stamina);
 		
@@ -124,7 +134,7 @@ public class GameViewer {
 					paused = !paused;
 					component.setPause();
 				}
-				if(key == 'r' && lost == true) {
+				if(key == 'r' && lost == true || won == true) {
 					changeLevel(component, "Arcade Game-Level 1", 0);
 				}
 				component.setDirection(code);
@@ -155,9 +165,6 @@ public class GameViewer {
 					component.gravity();
 					updateCount(component);
 					component.repaint();
-					frame.repaint();
-				} else {
-					component.repaint();
 				}
 			}	
 		});
@@ -171,11 +178,11 @@ public class GameViewer {
 	
 	public void updateCount(GameComponent component) {
 		this.livesNum = component.getLives();
-		this.scoreNum = component.getScore();
+		this.bombNum = component.getScore();
 		this.staminaNum =  component.getStamina();
 		
 		
-		this.score.setText("Score: " + scoreNum+"     ");
+		this.bombs.setText("Bomb: " + bombNum +"     ");
 		this.lives.setText("Lives: " + livesNum+"     ");
 		this.stamina.setText("Stamina: "+ staminaNum);
 	}
@@ -186,6 +193,7 @@ public class GameViewer {
 		if(ended) {
 			this.paused = true;
 			this.won = true;
+			this.lost = false;
 //			informationPanel.removeAll();
 			informationPanel.setVisible(false);
 //			JLabel msg = new JLabel("Congratulations! Press the U key for the next level");
@@ -201,6 +209,7 @@ public class GameViewer {
 		if(ended) {
 			this.paused = true;
 			this.lost = true;
+			this.won = false;
 			frame.setTitle(":(");
 //			informationPanel.setVisible(false);
 			//informationPanel.removeAll();
