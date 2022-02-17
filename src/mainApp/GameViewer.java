@@ -247,12 +247,15 @@ public class GameViewer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!paused) {
+					component.checkCollision();
 					component.update();
 					component.checkCollision();
 					hasWon(component.getWon());
 					hasLost(component.getLost());
 					component.traverse();
+					component.checkCollision();
 					component.moveEnemy();
+					component.checkCollision();
 					component.gravity();
 					updateCount(component);
 					component.repaint();

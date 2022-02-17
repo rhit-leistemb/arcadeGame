@@ -35,6 +35,7 @@ public class GameComponent extends JComponent{
 	private Player hero;
 	private int num = 0;
 	private int numTwo = 0;
+	private int numThree = 0;
 	private int delayPowerUp = 0;  
 	private int delayStamina = 0;
 	private boolean playerGotHit = false;
@@ -167,6 +168,7 @@ public class GameComponent extends JComponent{
 	
 	//checks is animatedObject is no long colliding against something
 	public void checkFreedom() { 
+		checkCollision();
 		for (int i = 0; i < animateObjects.size(); i++) {
 			Line2D.Double butt1 = animateObjects.get(i).getButtLine();
 			Line2D.Double top1 = animateObjects.get(i).getTopLine();
@@ -202,14 +204,11 @@ public class GameComponent extends JComponent{
 				checkWin();
 			} else if(generalObj.getClass().getSimpleName().equals("PowerUpCollectible")) {
 				objects.remove(objIndex);
-				hero.setPoweredUp(true);
 				this.isPoweredUp = true;
 			}
 			if(hero.getPoweredUp()) {
-				if(movingObj.getClass().getSimpleName().equals("Player")) {
-					if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
-						objects.remove(objIndex);	
-					}
+				if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
+					objects.remove(objIndex);	
 				}
 			}else {
 				if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
@@ -252,6 +251,7 @@ public class GameComponent extends JComponent{
 	public void traverse() {
 		checkCollision();
 		hero.move();
+		checkCollision();
 	}
 	
 	public void moveEnemyRight() {
@@ -273,10 +273,12 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void update() {
+
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
+			this.checkCollision();
+			this.checkFreedom();
 		}
-		this.checkFreedom();
 		if(playerGotHit) {
 			delayHit++;
 			if(delayHit >100) {
@@ -301,21 +303,29 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void moveEnemy() {
+		this.checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).setPlayerX(hero.getX());
 			animateObjects.get(i).setPlayerY(hero.getY());
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")){
 				if(num < 50) {
+					this.checkCollision();
 					this.moveEnemyRight();
 					num++;
 				}else if(num < 100) {
+					this.checkCollision();
 					this.moveEnemyLeft();
 					num++;
 				}else {
-					num = 0;
+					numThree++;
+					if(numThree >= 100) {
+						num = 0;
+						numThree = 0;
+					}
 				}
 			}else if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")){
 				if(numTwo < 10) {
+					this.checkCollision();
 					this.enemyFly();
 					numTwo++;
 				}else {
@@ -336,6 +346,7 @@ public class GameComponent extends JComponent{
 	
 	//sets constant velocity in a direction
 	public void setDirection(int code) {
+		this.checkCollision();
 		if(code == KeyEvent.VK_UP) {
 			hero.setGoUp(true);
 		}
@@ -348,6 +359,7 @@ public class GameComponent extends JComponent{
 	}
 	//stops constant velocity in a direction
 	public void stopDirection(int code) {
+		this.checkCollision();
 		if(code == KeyEvent.VK_UP) {
 			hero.setGoUp(false);
 		}
@@ -477,19 +489,19 @@ public class GameComponent extends JComponent{
 			
 		}
 	
-////	draws hitboxes
-//		g2.setColor(Color.WHITE);
-//		for (int j = 0; j < objects.size(); j++) {
-//			Line2D.Double top2 = objects.get(j).getTopLine();
-//			Line2D.Double butt2 = objects.get(j).getButtLine();
-//			Line2D.Double right2 = objects.get(j).getRightLine();
-//			Line2D.Double left2 = objects.get(j).getLeftLine();
-//			
-//			g2.draw(top2);
-//			g2.draw(butt2);
-//			g2.draw(right2);
-//			g2.draw(left2);
-//		}
+//	draws hitboxes
+		g2.setColor(Color.WHITE);
+		for (int j = 0; j < objects.size(); j++) {
+			Line2D.Double top2 = objects.get(j).getTopLine();
+			Line2D.Double butt2 = objects.get(j).getButtLine();
+			Line2D.Double right2 = objects.get(j).getRightLine();
+			Line2D.Double left2 = objects.get(j).getLeftLine();
+			
+			g2.draw(top2);
+			g2.draw(butt2);
+			g2.draw(right2);
+			g2.draw(left2);
+		}
 	}	
 
 	public void setFileName(String fileName) {
@@ -512,6 +524,7 @@ public class GameComponent extends JComponent{
 		delayPowerUp = 0;
 		delayStamina = 0;
 		delayHit = 0;
+		playerGotHit = false;
 		hero = null;
 		won = false;
 		lost = false;
