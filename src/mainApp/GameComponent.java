@@ -33,6 +33,7 @@ public class GameComponent extends JComponent{
 	private Player hero;
 	private int num = 0;
 	private int numTwo = 0;
+	private int delayStamina = 0;
 	private boolean playerGotHit = false;
 	private int delayHit = 0;
 	
@@ -278,6 +279,11 @@ public class GameComponent extends JComponent{
 				playerGotHit = false;
 				delayHit = 0;
 			}
+		}
+		delayStamina++;
+		if(delayStamina >= 10) {
+			hero.updateStamina();
+			delayStamina = 0;
 		}
 	}
 	
