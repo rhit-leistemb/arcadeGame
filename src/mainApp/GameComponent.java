@@ -235,8 +235,6 @@ public class GameComponent extends JComponent{
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
 				animateObjects.get(i).moveRight();
-			}else if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
-				animateObjects.get(i).moveRight();
 			}
 		}
 	}
@@ -245,8 +243,6 @@ public class GameComponent extends JComponent{
 		checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
 			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")) {
-				animateObjects.get(i).moveLeft();
-			}else if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
 				animateObjects.get(i).moveLeft();
 			}
 		}
@@ -288,25 +284,38 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void moveEnemy() {
-		if(num < 50) {
-			this.moveEnemyRight();
-			num++;
-		}else if(num < 100) {
-			this.moveEnemyLeft();
-			num++;
-		}else {
-			if(numTwo < 50) {
-				this.enemyFlyDown();
-				numTwo++;
-			}else if(numTwo < 100) {
-				this.enemyFlyUp();
-				numTwo++;
-			}else {
-				numTwo=0;
-				num = 0;
+		for(int i = 0; i< animateObjects.size(); i++) {
+			animateObjects.get(i).setPlayerX(hero.getX());
+			animateObjects.get(i).setPlayerY(hero.getY());
+			if(animateObjects.get(i).getClass().getSimpleName().equals("WalkingEnemy")){
+				if(num < 50) {
+					this.moveEnemyRight();
+					num++;
+				}else if(num < 100) {
+					this.moveEnemyLeft();
+					num++;
+				}else {
+					num = 0;
+				}
+			}else if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")){
+				if(numTwo < 10) {
+					this.enemyFly();
+					numTwo++;
+				}else {
+					numTwo= 0;
+				}
 			}
 		}
 	}
+	
+	public void enemyFly() {
+		for(int i = 0; i< animateObjects.size(); i++) {
+			if(animateObjects.get(i).getClass().getSimpleName().equals("FlyingEnemy")) {
+				animateObjects.get(i).move();
+			}
+		}
+	}
+	
 	//sets constant velocity in a direction
 	public void setDirection(int code) {
 		if(code == KeyEvent.VK_UP) {

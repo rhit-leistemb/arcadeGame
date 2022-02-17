@@ -8,6 +8,8 @@ public class AnimateObject extends GameObject{
 	private boolean goLeft = false;
 	private boolean goRight = false;
 	private boolean goDown = false;
+	private int playerX;
+	private int playerY;
 	
 	public AnimateObject(int x, int y) {
 		super(x, y);
@@ -88,6 +90,13 @@ public class AnimateObject extends GameObject{
 
 	public void setGoDown(boolean goDown) {
 		this.goDown = goDown;
+	}
+	
+	public void setPlayerX(int playerX) {
+		this.playerX = playerX;
+	}
+	public void setPlayerY(int playerY) {
+		this.playerY = playerY;
 	}
 
 }

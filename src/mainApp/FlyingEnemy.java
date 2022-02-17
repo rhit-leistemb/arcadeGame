@@ -19,6 +19,8 @@ public class FlyingEnemy extends Enemy{
 	
 	private File enemyImageFile = new File(enemyStanding);
 	private Image enemyImage;
+	private int playerX;
+	private int playerY;
 
 	public FlyingEnemy(int x, int y) {
 		super(x, y);
@@ -40,6 +42,27 @@ public class FlyingEnemy extends Enemy{
 			enemyImage = bufferedImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			System.out.println("Cannot find flying enemy image file.");
+		}
+	}
+	
+	public void move() {
+		int diffX = this.getX()-playerX;
+		System.out.println("DiffX: "+diffX);
+		int diffY = this.getY()-playerY;
+		System.out.println("DiffY: "+diffY);
+		if(Math.abs(diffX)>Math.abs(diffY)) {
+			if(diffX<0) {
+				this.moveRight();
+			}else if(diffX>0) {
+				this.moveLeft();
+			}
+		}else{
+			System.out.println("Otheru");
+			if(diffY<0) {
+				this.flyDown();
+			}else if(diffY>0){
+				this.flyUp();
+			}
 		}
 	}
 	
@@ -72,5 +95,12 @@ public class FlyingEnemy extends Enemy{
 	
 	public void gravity() {
 		return;
+	}
+	
+	public void setPlayerX(int playerX) {
+		this.playerX = playerX;
+	}
+	public void setPlayerY(int playerY) {
+		this.playerY = playerY;
 	}
 }
