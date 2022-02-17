@@ -76,8 +76,6 @@ public class GameComponent extends JComponent{
 			Image bufferedBackgroundImg = ImageIO.read(backgroundImageFile);
 			backgroundImage = bufferedBackgroundImg.getScaledInstance(450, 450, Image.SCALE_DEFAULT);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			//e1.printStackTrace();
 			System.out.println("Cannot find background image file");
 		}
 		createGameObjectList();
@@ -103,7 +101,6 @@ public class GameComponent extends JComponent{
 		try {
 			BufferedImage bufferedImg = ImageIO.read(congratsImgFile);
 			this.congratsImg = bufferedImg.getScaledInstance(2000, 30, Image.SCALE_DEFAULT);
-//			this.congratsImg = ImageIO.read(congratsImgFile);
 		} catch (IOException e) {
 			System.out.println("Cannot find trophy image file.");
 		}
@@ -289,9 +286,7 @@ public class GameComponent extends JComponent{
 		hero.setPoweredUp(isPoweredUp);
 		if(hero.getPoweredUp()) {
 			this.delayPowerUp++;
-			//System.out.println(delayPowerUp);
 			if(delayPowerUp >= 200) {
-				System.out.println("Reset powered up");
 				this.isPoweredUp = false; 
 				hero.setPoweredUp(isPoweredUp);
 				delayPowerUp = 0;
@@ -343,8 +338,6 @@ public class GameComponent extends JComponent{
 		if(code == KeyEvent.VK_RIGHT ) {
 			hero.goRight(true);
 		}
-		
-		//checkFreedom();
 	}
 	//stops constant velocity in a direction
 	public void stopDirection(int code) {
@@ -357,7 +350,6 @@ public class GameComponent extends JComponent{
 		if(code == KeyEvent.VK_RIGHT ) {
 			hero.goRight(false);
 		}
-		//checkFreedom();
 	}
 	
 	@Override
@@ -420,15 +412,11 @@ public class GameComponent extends JComponent{
 			
 				g2.drawString("Bombs:" + bombs, 160, 135);
 				g2.drawString("Lives: " + lives, 160, 155);
-//				g2.drawString("Time", 138, 175);
-//				g2.drawString("Stamina", 138, 195);
 		
 				int points1 = bombs * 10;
 				g2.drawString(" " + points1, 250, 135);
 				int points2 = lives * 20;
 				g2.drawString(" " + points2, 250, 155);
-//				g2.drawString("", 200, 175);
-//				g2.drawString("", 200, 195);
 				
 				g2.setFont(new Font("MS Gothic", Font.BOLD, 15));
 				g2.drawString("Items", 163, 105);
