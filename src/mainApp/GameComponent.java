@@ -148,19 +148,19 @@ public class GameComponent extends JComponent{
 						
 				if (butt1.intersectsLine(top2)) {
 					animateObjects.get(i).setButtHit(true);
-					react(animateObjects.get(i), objects.get(j), j);					
+					react(animateObjects.get(i), objects.get(j), i, j, true);					
 				}
 				if (top1.intersectsLine(butt2)) {
 					animateObjects.get(i).setTopHit(true); 
-					react(animateObjects.get(i), objects.get(j), j);				
+					react(animateObjects.get(i), objects.get(j), i, j, false);				
 				}
 				if (right1.intersectsLine(left2)) {
 					animateObjects.get(i).setRSideHit(true); 
-					react(animateObjects.get(i), objects.get(j), j);				
+					react(animateObjects.get(i), objects.get(j), i, j, false);				
 				}
 				if (left1.intersectsLine(right2)) {
 					animateObjects.get(i).setLSideHit(true); 
-					react(animateObjects.get(i), objects.get(j), j);				
+					react(animateObjects.get(i), objects.get(j), i, j, false);				
 				}
 			}
 		}
@@ -195,13 +195,13 @@ public class GameComponent extends JComponent{
 			}
 		}
 	}
-	public void react(AnimateObject movingObj, GameObject generalObj, int index) {
-		if(movingObj.getClass().getSimpleName().equals("Player")) {
+	public void react(AnimateObject movingObj, GameObject generalObj, int aniIndex, int objIndex, boolean attack) {
+		if(movingObj.getClass().getSimpleName().equals("Player")  && attack == false) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
-				objects.remove(index);
+				objects.remove(objIndex);
 				bombs++;
 				checkWin();
-			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")||generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+			} else if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
 				if(playerGotHit == false) {
 					playerGotHit = true;
 					lives--;
@@ -209,6 +209,11 @@ public class GameComponent extends JComponent{
 						lose();
 					}
 				}
+			}
+		}
+		if(movingObj.getClass().getSimpleName().equals("Player")  && attack == true) {
+			if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
+				objects.remove(objIndex);	
 			}
 		}
 	}
