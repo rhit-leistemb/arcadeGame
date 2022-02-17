@@ -30,7 +30,7 @@ public class Player extends AnimateObject {
 	private final String playerWalkingRight4 = "PlayerSprites/PlayerWalkingRight4NoBG.png";
 	
 	private int speed = 2;
-	private int lives = 200;
+	private int lives = 1;
 	private File playerImageFile = new File(playerStanding);
 	private Image playerImage;
 	

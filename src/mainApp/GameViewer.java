@@ -70,10 +70,10 @@ public class GameViewer {
 		informationPanel = new JPanel();
 		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
 		score = new JLabel("Score: " + scoreNum, JLabel.LEFT);
-		score.setFont(new Font("Verdana", Font.PLAIN, 18));
+		score.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
 		lives = new JLabel("Lives: " + livesNum, JLabel.RIGHT);
-		lives.setFont(new Font("Verdana", Font.PLAIN, 18));
+		lives.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
 		informationPanel.add(score);
 		informationPanel.add(lives);

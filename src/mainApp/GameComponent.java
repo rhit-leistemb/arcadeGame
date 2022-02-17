@@ -374,7 +374,7 @@ public class GameComponent extends JComponent{
 			g2.fillRect(0, 0, 450, 450);
 			
 			g2.setPaint(Color.YELLOW);
-			g2.drawString("Better lpuck next time...", 275, 13);
+			g2.drawString("Press 'R' to restart", 275, 13);
 			
 			int xPos2 = (450/2) - this.loseImg.getWidth(null)/2 - 5;
 			int yPos2 = (450/2) - this.loseImg.getHeight(null)/2 - 70;
