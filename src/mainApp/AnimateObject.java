@@ -27,8 +27,8 @@ public class AnimateObject extends GameObject{
 		rightLine.setLine(this.getX() + this.getWidth() , this.getY() + 1, this.getX() + this.getWidth(), this.getY() + this.getHeight() - 1);
 		leftLine.setLine(this.getX(), this.getY() + 1, this.getX(), this.getY() + this.getHeight() - 1);
 	
-		r2.setLine(this.getX() + 1 , this.getY() + this.getHeight() / 2, this.getX() + 4, this.getY() + this.getHeight() / 2);
-		l2.setLine(this.getX() + this.getWidth() - 4, this.getY() + this.getHeight() / 2, this.getX() + this.getWidth() - 1, this.getY() + this.getHeight() / 2);
+		l2.setLine(this.getX() - 1 , this.getY() + this.getHeight() / 2, this.getX() + 4, this.getY() + this.getHeight() / 2);
+		r2.setLine(this.getX() + this.getWidth() - 4, this.getY() + this.getHeight() / 2, this.getX() + this.getWidth() + 1, this.getY() + this.getHeight() / 2);
 	}
 	
 
