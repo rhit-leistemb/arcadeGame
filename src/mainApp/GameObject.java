@@ -5,6 +5,16 @@ import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Class: GameObject
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Universal object that houses universal behaviors and attributes
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    GameObject exGameObject = new GameObject(5, 5);
+ * </pre>
+ */
 public class GameObject {
 	
 	public int x;

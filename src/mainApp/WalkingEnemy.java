@@ -9,6 +9,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class: WalkingEnemy
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Draws and houses attributes as well as behaviors of the walking enemy type
+ * <br>Restrictions: Doesn't apply to other enemy types
+ * <br>For example: 
+ * <pre>
+ *    WalkingEnemy exWalkingEnemy = new WalkingEnemy(5, 5);
+ * </pre>
+ */
 public class WalkingEnemy extends Enemy{
 	
 	private final String enemyFalling = "WalkingEnemySprites/WalkingEnemyFallingNoBG.png";

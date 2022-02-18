@@ -27,7 +27,14 @@ import javax.swing.Timer;
 import javax.swing.border.Border;
 
 /**
- * 
+ * Class: GameViewer
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Monitors user input and creates as well as tells the game to change in response to that input
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    GameViewer exGameViewer = new GameViewer();
+ * </pre>
  */
 public class GameViewer {
 	private ArrayList<String> fileNames = new ArrayList<String>();

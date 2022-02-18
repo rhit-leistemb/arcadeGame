@@ -11,6 +11,16 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class: Player
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Houses attributes and behaviors of the interactive hero 
+ * <br>Restrictions: Limited to one Player type AnimateObject
+ * <br>For example: 
+ * <pre>
+ *    Player exPlayer = new Player();
+ * </pre>
+ */
 public class Player extends AnimateObject {
 
 	private final String playerFallingDown = "PlayerSprites/PlayerFallingDownNoBG.png";

@@ -8,6 +8,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class: PowerUpCollectible
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Draws and houses attributes of the power up
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    PowerUpCollectible exPowerUpCollectible = new PowerUpCollectible(5, 5);
+ * </pre>
+ */
 public class PowerUpCollectible extends GameObject{
 	
 	private File powerUpImageFile = new File("Sprites/PowerUpCollectibleNoBG.png");

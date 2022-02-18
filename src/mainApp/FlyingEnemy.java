@@ -10,6 +10,16 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class: FlyingEnemy
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Draws and allows for movement of the flying type of enemy
+ * <br>Restrictions: Doesn't apply to other enemy types
+ * <br>For example: 
+ * <pre>
+ *    FlyingEnemy exFlyingEnemy = new FlyingEnemy(5, 5);
+ * </pre>
+ */
 public class FlyingEnemy extends Enemy{
 	
 	private final String enemyStanding = "FlyingEnemySprites/FlyingEnemyStandingNoBG.png";
@@ -46,6 +56,9 @@ public class FlyingEnemy extends Enemy{
 		}
 	}
 	
+	/**
+	 * ensures: FlyingEnemy tracking of the player based on it's coordinates
+	 */
 	public void move() {
 		int diffX = this.getX()-playerX;
 		//System.out.println("DiffX: "+diffX);

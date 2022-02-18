@@ -9,6 +9,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class: BoundaryObject
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Creates and draws the walls and platforms of the game
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    BoundaryObject wall = new BoundaryObject(5, 5, 5);
+ * </pre>
+ */
 public class BoundaryObject extends GameObject{
 	
 	private File platformImageFile = new File("Sprites/PlatformImage.png");

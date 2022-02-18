@@ -5,6 +5,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class: LevelReader
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Reads and converts file levels into usable game objects
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    LevelReader exLevelReader = new LevelReader();
+ * </pre>
+ */
 public class LevelReader {
 	
 	String fileName;

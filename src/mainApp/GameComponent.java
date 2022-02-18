@@ -22,7 +22,15 @@ import javax.swing.Timer;
 
 
 /**
- * 
+ * Class: GameComponent
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Creates objects, facilitates collisions, monitors winning/losing, and is 
+ * <br> responsible for triggering universal behavior. 
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    GameComponent exGameComponent = new GameComponent(newFile, true);
+ * </pre>
  */
 public class GameComponent extends JComponent{
 	
@@ -68,7 +76,13 @@ public class GameComponent extends JComponent{
 	private Image backgroundImage;
 	
 	
-	
+	/**
+	 * ensures: initializes the GameComponenet, calls for the creation of lists, and sets all images
+	 * @param fileName used to initialize the file name to be read from
+	 * <br>requires: fileName &ne; ""
+	 * @param ready used to initialize the game's ready status
+	 * <br>requires: ready Boolean
+	 */
 	public GameComponent(String fileName, Boolean ready) {
 		this.fileName = fileName;
 		this.ready = ready;
@@ -132,7 +146,9 @@ public class GameComponent extends JComponent{
 		currentLevel = reader.getLevel();
 	}
 
-	//checks if animatedObject is colliding with something
+	/**
+	 * ensures: checks if animatedObject is colliding with something on its four sides
+	 */
 	public void checkCollision() {
 		for (int i = 0; i < animateObjects.size(); i++) {
 			Line2D.Double butt1 = animateObjects.get(i).getButtLine();
@@ -169,7 +185,9 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
-	//checks is animatedObject is no long colliding against something
+	/**
+	 * ensures: checks that all sides of the animatedObject aren't being touched
+	 */
 	public void checkFreedom() { 
 		for (int i = 0; i < animateObjects.size(); i++) {
 			checkCollision();
@@ -200,7 +218,9 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
-	//item reacts to collision accordingly
+	/**
+	 * ensures: item reacts to collision accordingly
+	 */
 	public void react(AnimateObject movingObj, GameObject generalObj, int aniIndex, int objIndex) {
 		if(movingObj.getClass().getSimpleName().equals("Player")) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
@@ -249,7 +269,6 @@ public class GameComponent extends JComponent{
 		this.lost = true;
 	}
 	
-	//tells player to start moving
 	public void traverse() {
 		checkCollision();
 		hero.move();
@@ -275,6 +294,10 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
+	/**
+	 * ensures: call animateObjects to update their hitbox and various other fields responsible 
+	 * <br> for stamina, powered up status, and temporary hitbox disabiling 
+	 */
 	public void update() {
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
@@ -349,7 +372,6 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
-	//sets constant velocity in a direction
 	public void setDirection(int code) {
 		this.checkCollision();
 		if(code == KeyEvent.VK_UP) {
@@ -365,7 +387,7 @@ public class GameComponent extends JComponent{
 			hero.goRight(true);
 		}
 	}
-	//stops constant velocity in a direction
+
 	public void stopDirection(int code) {
 		this.checkCollision();
 		if(code == KeyEvent.VK_UP) {

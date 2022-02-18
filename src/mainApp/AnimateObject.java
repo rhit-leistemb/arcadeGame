@@ -1,5 +1,15 @@
 package mainApp;
 
+/**
+ * Class: AnimateObject
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Contains behavior and attributes specific to moving objects in the game
+ * <br>Restrictions: Cannot be used for stationary objects
+ * <br>For example: 
+ * <pre>
+ *    AnimateObject exAnim = new AnimateObject(5, 5);
+ * </pre>
+ */
 public class AnimateObject extends GameObject{
 	
 	boolean isMoving = false;

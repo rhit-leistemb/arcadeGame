@@ -9,15 +9,23 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class: BombCollectible
+ * @author Bhargav Nagalamadaka and Mathew Leister
+ * <br>Purpose: Draws and creates a bomb
+ * <br>Restrictions: None
+ * <br>For example: 
+ * <pre>
+ *    BombCollectible exBomb = new BombCollectible(5, 5);
+ * </pre>
+ */
 public class BombCollectible extends GameObject{
 	
-	//private Color bombColor = Color.RED;
 	private File bombImageFile = new File("Sprites/BombCollectibleNoBG.png");
 	private Image bombImage;
 
 	public BombCollectible(int x, int y) {
 		super(x, y);
-		//this.setColor(bombColor);
 		try {
 			BufferedImage bufferedImg = ImageIO.read(bombImageFile);
 			bombImage = bufferedImg.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT);
