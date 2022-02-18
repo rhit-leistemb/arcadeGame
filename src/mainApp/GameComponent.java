@@ -427,7 +427,7 @@ public class GameComponent extends JComponent{
 		if(won) {
 			g2.setPaint(Color.BLACK);
 			g2.fillRect(0, 0, 450, 450);
-			if(currentLevel.equals("Levels/Level-2")) {
+			if(currentLevel.equals("Levels/Level-3")) {
 				int xPos = (450/2) - this.winImg.getWidth(null)/2 - 5;
 				int yPos = (450/2) - this.winImg.getHeight(null)/2 - 70;
 				g2.drawImage(this.winImg, xPos, yPos, this.winImg.getWidth(null), this.winImg.getHeight(null), null);

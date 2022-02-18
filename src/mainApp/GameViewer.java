@@ -188,16 +188,13 @@ public class GameViewer {
 				char key = e.getKeyChar();
 				int code = e.getKeyCode();
 				if(key == 'u' && lost == false) {
-					if(levelIndex == fileNames.size()-1) {
-						levelIndex = 0;
-					}else {
+					if(levelIndex != fileNames.size()-1) {
 						levelIndex++;
 					}
+					
 					changeLevel(component, "Arcade Game-Level "+(levelIndex+1), levelIndex);
 				} else if(key == 'd' && lost == false) {
-					if(levelIndex == 0) {
-						levelIndex = fileNames.size()-1;
-					}else {
+					if(levelIndex != 0) {
 						levelIndex--;
 					}
 					changeLevel(component, "Arcade Game-Level "+(levelIndex+1), levelIndex);
