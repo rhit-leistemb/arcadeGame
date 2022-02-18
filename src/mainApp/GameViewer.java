@@ -67,6 +67,9 @@ public class GameViewer {
 	public GameViewer() {
 	}
 	
+	/**
+	 * ensures: creates the start menu with slow motion version of game as animated background
+	 */
 	public boolean createStart() {
 		frame1 = new JFrame();
 		frame1.setTitle("Welcome!");
@@ -119,6 +122,9 @@ public class GameViewer {
 		return ready;
 	}
 	
+	/**
+	 * ensures: checks if game is ready to move on from start menu and functions accordingly to the ready status
+	 */
 	public boolean checkReady() {
 		if(ready) {
 			System.out.println("closed");
@@ -131,6 +137,9 @@ public class GameViewer {
 		return ready;
 	}
 	
+	/**
+	 * ensures: creates the actual game itself and gets it ready to be played
+	 */
 	public void createGame() {
 		fileNames.add("Levels/Level-1");
 		fileNames.add("Levels/Level-2");
@@ -259,6 +268,11 @@ public class GameViewer {
 		frame.setVisible(true);	
 	}
 	
+	/**
+	 * ensures: sets the bottom panel's information items to the correct figures
+	 * @param component used to set attributes of the right component
+	 * * <br>requires: component GameComponent
+	 */
 	public void updateCount(GameComponent component) {
 		this.livesNum = component.getLives();
 		this.bombNum = component.getScore();

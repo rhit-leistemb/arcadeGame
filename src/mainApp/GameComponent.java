@@ -296,7 +296,7 @@ public class GameComponent extends JComponent{
 	
 	/**
 	 * ensures: call animateObjects to update their hitbox and various other fields responsible 
-	 * <br> for stamina, powered up status, and temporary hitbox disabiling 
+	 * <br> for controling stamina, powered up status, and temporary hitbox disabling
 	 */
 	public void update() {
 		for(int i = 0; i< animateObjects.size(); i++) {
@@ -327,6 +327,9 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
+	/**
+	 * ensures: overall movement control for enemies that is responsible for their movement path
+	 */
 	public void moveEnemy() {
 		this.checkCollision();
 		for(int i = 0; i< animateObjects.size(); i++) {
@@ -404,6 +407,11 @@ public class GameComponent extends JComponent{
 		}
 	}
 	
+	/**
+	 * ensures: draws all objects on top of the various screens/texts unique to each menu
+	 * @param g is used to implement draw functionality 
+	 * <br>requires: g Graphics
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
@@ -424,6 +432,7 @@ public class GameComponent extends JComponent{
 			g2.setPaint(Color.RED);
 			g2.drawString("Press 'Enter' to Start", 120, 395);
 		}
+		
 		if(won) {
 			g2.setPaint(Color.BLACK);
 			g2.fillRect(0, 0, 450, 450);
@@ -478,7 +487,7 @@ public class GameComponent extends JComponent{
 				g2.drawString("Total Score: " + pointsTot, 157, 220);
 			}
 		}
-		//draws appropriate screens for loss
+
 		if(lost) {
 			g2.setPaint(new Color(0, 0, 0, 150));
 			g2.fillRect(0, 0, 450, 450);
@@ -547,7 +556,6 @@ public class GameComponent extends JComponent{
 		createGameObjectList();	
 	}
 	
-//getters and setters	
 	public boolean getWon() {
 		if(won == true) {
 			return true;

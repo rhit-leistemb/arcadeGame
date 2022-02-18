@@ -23,8 +23,8 @@ public class GameObject {
 	public int height = 20;
 	public Color color = Color.black;
 	
-	Line2D.Double l2;
-	Line2D.Double r2;
+	Line2D.Double backupLeft;
+	Line2D.Double backupRight;
 	
 	Line2D.Double buttLine;
 	Line2D.Double topLine;
@@ -36,7 +36,13 @@ public class GameObject {
 	private boolean lSideHit = false;
 	private boolean topHit = false;
 	
-	
+	/**
+	 * ensures: sets all hitbox lines for the object
+	 * @param x is x positional coordinate
+	 * <br>requires: x Integer
+	 * @param y is y positional coordinate  
+	 * <br>requires: y Integer
+	 */
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -45,8 +51,8 @@ public class GameObject {
 		rightLine = new Line2D.Double(this.getX() + this.getWidth(), this.getY()+1, this.getX() + this.getWidth(), this.getY() + this.getHeight()-1);
 		leftLine = new Line2D.Double(this.getX(), this.getY()+1, this.getX(), this.getY() + this.getHeight()-1);
 	
-		r2 = new Line2D.Double(this.getX() - 1 , this.getY() + this.getHeight() / 2, this.getX() + 4, this.getY() + this.getHeight() / 2);
-		l2 = new Line2D.Double(this.getX() + this.getWidth() - 4, this.getY() + this.getHeight() / 2, this.getX() + this.getWidth() + 1, this.getY() + this.getHeight() / 2);
+		backupRight = new Line2D.Double(this.getX() - 1 , this.getY() + this.getHeight() / 2, this.getX() + 4, this.getY() + this.getHeight() / 2);
+		backupLeft = new Line2D.Double(this.getX() + this.getWidth() - 4, this.getY() + this.getHeight() / 2, this.getX() + this.getWidth() + 1, this.getY() + this.getHeight() / 2);
 	}
 	
 	public void drawOn(Graphics2D g) {
@@ -124,10 +130,10 @@ public class GameObject {
 	}
 	
 	public Line2D.Double getR2(){
-		return this.r2;
+		return this.backupRight;
 	}
 	public Line2D.Double getL2(){
-		return this.l2;
+		return this.backupLeft;
 	}
 	
 	

@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  *    WalkingEnemy exWalkingEnemy = new WalkingEnemy(5, 5);
  * </pre>
  */
-public class WalkingEnemy extends Enemy{
+public class WalkingEnemy extends AnimateObject{
 	
 	private final String enemyFalling = "WalkingEnemySprites/WalkingEnemyFallingNoBG.png";
 	private final String enemyStanding = "WalkingEnemySprites/WalkingEnemyStandingNoBG.png";

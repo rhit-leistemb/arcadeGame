@@ -54,7 +54,9 @@ public class Player extends AnimateObject {
 		this.updateEffectImage();
 	}
 
-	//checks if velocity in a direction is active and moves player accordingly
+	/**
+	 * ensures: checks if velocity in a direction is active and moves player accordingly
+	 */
 	public void move() {
 		if(this.isGoUp() == true && this.getTopHit() == false&&stamina>0) {
 			this.setPlayerImageFile(playerFlyingUp);
@@ -107,6 +109,9 @@ public class Player extends AnimateObject {
 		}
 	}
 	
+	/**
+	 * ensures: changes stamina to infinite when player has power up
+	 */
 	public void updateStamina() {
 		if(this.isGoUp()&&isPoweredUp==false) {
 			stamina-=10;

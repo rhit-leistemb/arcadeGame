@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
  *    FlyingEnemy exFlyingEnemy = new FlyingEnemy(5, 5);
  * </pre>
  */
-public class FlyingEnemy extends Enemy{
+public class FlyingEnemy extends AnimateObject{
 	
 	private final String enemyStanding = "FlyingEnemySprites/FlyingEnemyStandingNoBG.png";
 	private final String enemyDown = "FlyingEnemySprites/FlyingEnemyDownNoBG.png";
@@ -61,9 +61,7 @@ public class FlyingEnemy extends Enemy{
 	 */
 	public void move() {
 		int diffX = this.getX()-playerX;
-		//System.out.println("DiffX: "+diffX);
 		int diffY = this.getY()-playerY;
-		//System.out.println("DiffY: "+diffY);
 		if(Math.abs(diffX)>Math.abs(diffY)) {
 			if(diffX<0) {
 				this.moveRight();
@@ -71,7 +69,6 @@ public class FlyingEnemy extends Enemy{
 				this.moveLeft();
 			}
 		}else{
-			//System.out.println("Other");
 			if(diffY<0) {
 				this.flyDown();
 			}else if(diffY>0){
@@ -94,12 +91,6 @@ public class FlyingEnemy extends Enemy{
 			this.setEnemyImageFile(enemyStanding);
 			this.setY(this.getY()-speed);
 		}
-			/*else if(this.getLSideHit()==false){
-		}
-			this.moveLeft();
-		}else {
-			this.moveRight();
-		}*/
 	}
 	public void flyDown() {
 		if(this.getButtHit() == false) {
@@ -116,12 +107,6 @@ public class FlyingEnemy extends Enemy{
 			this.setY(this.getY()-speed);
 		}
 		
-		/*else if(this.getLSideHit()==false){
-		}
-			this.moveLeft();
-		}else {
-			this.moveRight();
-		}*/
 	}
 	
 	public void moveRight() {
@@ -137,11 +122,7 @@ public class FlyingEnemy extends Enemy{
 		}else if(this.getLSideHit()==false){
 			this.setEnemyImageFile(enemyLeft);
 			this.setX(this.getX()-speed);
-		}/*else if(this.getTopHit()==false){
-			this.flyUp();
-		}else {
-			this.flyDown();
-		}*/
+		}
 	}
 	
 	public void moveLeft() {
@@ -157,13 +138,12 @@ public class FlyingEnemy extends Enemy{
 		}else if(this.getRSideHit()==false) {
 			this.setEnemyImageFile(enemyRight);
 			this.setX(this.getX()+speed);
-		}/*else if(this.getTopHit()==false){
-			this.flyUp();
-		}else {
-			this.flyDown();
-		}*/
+		}
 	}
 	
+	/**
+	 * ensures: modifies gravity to be work for the enemy's flying capability 
+	 */
 	public void gravity() {
 		return;
 	}
