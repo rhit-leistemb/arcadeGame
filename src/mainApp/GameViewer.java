@@ -205,10 +205,12 @@ public class GameViewer {
 				}
 				if(key == 'r') {
 					if(lost == true || won == true) {
+						levelIndex = 0;
 						changeLevel(component, "Arcade Game-Level 1", 0);
 						lost = false;
 						won = false;
 					} else {
+						levelIndex = 0;
 						//change logic so changeLevel iterates, then pick right level
 						changeLevel(component, "Arcade Game-Level 1", 0);
 						lost = false;
