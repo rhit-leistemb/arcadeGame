@@ -188,7 +188,7 @@ public class GameViewer {
 				char key = e.getKeyChar();
 				int code = e.getKeyCode();
 				if(key == 'u' && lost == false) {
-					if(levelIndex != fileNames.size()-1) {
+					if(levelIndex < fileNames.size()-1) {
 						levelIndex++;
 					}
 					
@@ -305,6 +305,7 @@ public class GameViewer {
 		frame.setTitle(title);
 		informationPanel.setVisible(true);
 		this.won = false;
+		this.lost = false;
 		this.paused = false;
 	}
 	
