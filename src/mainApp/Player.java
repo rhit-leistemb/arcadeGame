@@ -108,11 +108,14 @@ public class Player extends AnimateObject {
 	}
 	
 	public void updateStamina() {
-		if(this.isGoUp()) {
+		if(this.isGoUp()&&isPoweredUp==false) {
 			stamina-=10;
 			this.setStamina(stamina);
-		}else {
+		}else if(isPoweredUp==false){
 			stamina+=2;
+			this.setStamina(stamina);
+		}else {
+			stamina = 100;
 			this.setStamina(stamina);
 		}
 	}
