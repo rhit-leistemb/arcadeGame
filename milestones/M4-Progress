@@ -1,10 +1,17 @@
 Record your M4 progress (Date, Who, What has been done):
 
 
-1)
-2)
-3)
-...
+2/16/22
+2) Enhanced collisions, pause and restart button: Mat
+3) Better enemies and animations: Bhargav
+
+2/17/22
+4) Start, next, win, lose, help menus completed: Mat
+5) Stamina bar and power up implemented: Bhargav
+
+2/18/22
+6) Javadocs, uml, tidying up code: Mat
+7) Dillinger.IO added, fixing bugs, level changes: Bhargav
 
 
 
