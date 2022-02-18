@@ -52,6 +52,7 @@ public class GameViewer {
 	private int bombNum = 0;
 	private int livesNum = 3;
 	private int staminaNum = 100;
+	private int levelIndex = 0;
 	JLabel bombs;
 	JLabel lives;
 	JLabel stamina;
@@ -133,6 +134,7 @@ public class GameViewer {
 	public void createGame() {
 		fileNames.add("Levels/Level-1");
 		fileNames.add("Levels/Level-2");
+		fileNames.add("Levels/Level-3");
 		
 		frame = new JFrame();
 		frame.setTitle("Arcade Game-Level 1");
@@ -186,9 +188,19 @@ public class GameViewer {
 				char key = e.getKeyChar();
 				int code = e.getKeyCode();
 				if(key == 'u' && lost == false) {
-					changeLevel(component, "Arcade Game-Level 2", 1);
+					if(levelIndex == fileNames.size()-1) {
+						levelIndex = 0;
+					}else {
+						levelIndex++;
+					}
+					changeLevel(component, "Arcade Game-Level "+(levelIndex+1), levelIndex);
 				} else if(key == 'd' && lost == false) {
-					changeLevel(component, "Arcade Game-Level 1", 0);
+					if(levelIndex == 0) {
+						levelIndex = fileNames.size()-1;
+					}else {
+						levelIndex--;
+					}
+					changeLevel(component, "Arcade Game-Level "+(levelIndex+1), levelIndex);
 				} 
 				if(key == 'p' && won == false && lost == false) {
 					paused = !paused;

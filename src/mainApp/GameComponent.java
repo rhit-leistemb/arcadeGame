@@ -516,20 +516,6 @@ public class GameComponent extends JComponent{
 			g2.drawString("Previous Level", 200, 175);
 			g2.drawString("Restarts Game", 200, 195);	
 		}
-	
-//	draws hitboxes
-		g2.setColor(Color.WHITE);
-		for (int j = 0; j < objects.size(); j++) {
-			Line2D.Double top2 = objects.get(j).getTopLine();
-			Line2D.Double butt2 = objects.get(j).getButtLine();
-			Line2D.Double right2 = objects.get(j).getRightLine();
-			Line2D.Double left2 = objects.get(j).getLeftLine();
-			
-			g2.draw(top2);
-			g2.draw(butt2);
-			g2.draw(right2);
-			g2.draw(left2);
-		}
 	}	
 
 	public void setFileName(String fileName) {
