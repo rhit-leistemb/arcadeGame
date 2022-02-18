@@ -21,6 +21,7 @@ public class FlyingEnemy extends Enemy{
 	private Image enemyImage;
 	private int playerX;
 	private int playerY;
+	private int speed = 2;
 
 	public FlyingEnemy(int x, int y) {
 		super(x, y);
@@ -69,16 +70,16 @@ public class FlyingEnemy extends Enemy{
 	public void flyUp() {
 		if(this.getTopHit() == false) {
 			this.setEnemyImageFile(enemyStanding);
-			this.setY(this.getY()-2);
+			this.setY(this.getY()-speed);
 		}else if(this.getLSideHit()==false){
 			this.setEnemyImageFile(enemyLeft);
-			this.setX(this.getX()-2);
+			this.setX(this.getX()-speed);
 		}else if(this.getRSideHit()==false) {
 			this.setEnemyImageFile(enemyRight);
-			this.setX(this.getX()+2);
+			this.setX(this.getX()+speed);
 		}else if(this.getTopHit()==false){
 			this.setEnemyImageFile(enemyStanding);
-			this.setY(this.getY()-2);
+			this.setY(this.getY()-speed);
 		}
 			/*else if(this.getLSideHit()==false){
 		}
@@ -90,16 +91,16 @@ public class FlyingEnemy extends Enemy{
 	public void flyDown() {
 		if(this.getButtHit() == false) {
 			this.setEnemyImageFile(enemyDown);
-			this.setY(this.getY()+2);
+			this.setY(this.getY()+speed);
 		}else if(this.getLSideHit()==false){
 			this.setEnemyImageFile(enemyLeft);
-			this.setX(this.getX()-2);
+			this.setX(this.getX()-speed);
 		}else if(this.getRSideHit()==false) {
 			this.setEnemyImageFile(enemyRight);
-			this.setX(this.getX()+2);
+			this.setX(this.getX()+speed);
 		}else if(this.getTopHit()==false){
 			this.setEnemyImageFile(enemyStanding);
-			this.setY(this.getY()-2);
+			this.setY(this.getY()-speed);
 		}
 		
 		/*else if(this.getLSideHit()==false){
@@ -113,16 +114,16 @@ public class FlyingEnemy extends Enemy{
 	public void moveRight() {
 		if(this.getRSideHit() == false) {
 			this.setEnemyImageFile(enemyRight);
-			this.setX(this.getX()+2);
+			this.setX(this.getX()+speed);
 		}else if(this.getTopHit()==false){
 			this.setEnemyImageFile(enemyStanding);
-			this.setY(this.getY()-2);
+			this.setY(this.getY()-speed);
 		}else if(this.getButtHit()==false) {
 			this.setEnemyImageFile(enemyDown);
-			this.setY(this.getY()+2);
+			this.setY(this.getY()+speed);
 		}else if(this.getLSideHit()==false){
 			this.setEnemyImageFile(enemyLeft);
-			this.setX(this.getX()-2);
+			this.setX(this.getX()-speed);
 		}/*else if(this.getTopHit()==false){
 			this.flyUp();
 		}else {
@@ -133,16 +134,16 @@ public class FlyingEnemy extends Enemy{
 	public void moveLeft() {
 		if(this.getLSideHit() == false) {
 			this.setEnemyImageFile(enemyLeft);
-			this.setX(this.getX()-2);
+			this.setX(this.getX()-speed);
 		}else if(this.getTopHit()==false){
 			this.setEnemyImageFile(enemyStanding);
-			this.setY(this.getY()-2);
+			this.setY(this.getY()-speed);
 		}else if(this.getButtHit()==false) {
 			this.setEnemyImageFile(enemyDown);
-			this.setY(this.getY()+2);
+			this.setY(this.getY()+speed);
 		}else if(this.getRSideHit()==false) {
 			this.setEnemyImageFile(enemyRight);
-			this.setX(this.getX()+2);
+			this.setX(this.getX()+speed);
 		}/*else if(this.getTopHit()==false){
 			this.flyUp();
 		}else {

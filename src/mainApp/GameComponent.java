@@ -148,9 +148,6 @@ public class GameComponent extends JComponent{
 				Line2D.Double butt2 = objects.get(j).getButtLine();
 				Line2D.Double right2 = objects.get(j).getRightLine();
 				Line2D.Double left2 = objects.get(j).getLeftLine();
-				
-				Line2D.Double r22 = objects.get(i).getR2();
-				Line2D.Double l22 = objects.get(i).getL2();
 						
 				if (butt1.intersectsLine(top2)) {
 					animateObjects.get(i).setButtHit(true);
@@ -202,6 +199,8 @@ public class GameComponent extends JComponent{
 			}
 		}
 	}
+	
+	//item reacts to collision accordingly
 	public void react(AnimateObject movingObj, GameObject generalObj, int aniIndex, int objIndex) {
 		if(movingObj.getClass().getSimpleName().equals("Player")) {
 			if(generalObj.getClass().getSimpleName().equals("BombCollectible")) {
@@ -228,9 +227,6 @@ public class GameComponent extends JComponent{
 				}
 			}
 		}
-
-
-		
 	}
 	
 	public void checkWin() {
@@ -280,7 +276,6 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void update() {
-
 		for(int i = 0; i< animateObjects.size(); i++) {
 			animateObjects.get(i).updateHitLines();
 			this.checkCollision();
@@ -490,19 +485,14 @@ public class GameComponent extends JComponent{
 			g2.drawString("U", 135, 155);
 			g2.drawString("D", 135, 175);
 			g2.drawString("R", 135, 195);
-
-
-			
+	
 			g2.setFont(new Font("MS Gothic", Font.BOLD, 15));
 			g2.drawString("Action", 200, 100);
 			g2.setFont(new Font("MS Gothic", Font.PLAIN, 15));
 			g2.drawString("Pauses the game", 200, 135);
 			g2.drawString("Next Level", 200, 155);
 			g2.drawString("Previous Level", 200, 175);
-			g2.drawString("Restarts Game", 200, 195);
-
-
-			
+			g2.drawString("Restarts Game", 200, 195);	
 		}
 	
 //	draws hitboxes

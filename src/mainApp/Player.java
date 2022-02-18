@@ -44,6 +44,7 @@ public class Player extends AnimateObject {
 		this.updateEffectImage();
 	}
 
+	//checks if velocity in a direction is active and moves player accordingly
 	public void move() {
 		if(this.isGoUp() == true && this.getTopHit() == false&&stamina>0) {
 			this.setPlayerImageFile(playerFlyingUp);

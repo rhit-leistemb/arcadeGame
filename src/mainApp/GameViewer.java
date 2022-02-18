@@ -36,10 +36,8 @@ public class GameViewer {
 	public static final Color LIGHT_GRAY = new Color(200,200,200);
 	
 	protected static Graphics g;
-//	private File winImgFile = new File("Sprites/EndScreen.PNG");
-//	private Image winImg;
 	
-	private boolean ready = true;
+	private boolean ready = false;
 	private boolean paused = false;
 	private boolean won = false;
 	private boolean lost = false;
@@ -59,11 +57,6 @@ public class GameViewer {
 	Timer timer;
 	
 	public GameViewer() {
-//		try {
-//			this.winImg = ImageIO.read(winImgFile);
-//		} catch (IOException e) {
-//			System.out.println("Cannot find win screen image file.");
-//		}
 	}
 	
 	public boolean createStart() {
@@ -78,7 +71,6 @@ public class GameViewer {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -93,7 +85,6 @@ public class GameViewer {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
 				
 			}		
 			
@@ -124,8 +115,6 @@ public class GameViewer {
 		if(ready) {
 			System.out.println("closed");
 			timer.stop();
-//			timer.removeActionListener(null);
-//			timer = null;
 			frame1.removeAll();
 			frame1.setVisible(false);
 			frame1.dispose();
@@ -160,7 +149,6 @@ public class GameViewer {
 		staminaBar.setBackground(Color.green);
 		
 		staminaPanel.add(staminaBar);
-		//informationPanel.setLayout(new BoxLayout(informationPanel, BoxLayout.X_AXIS));
 		bombs = new JLabel("Bombs: " + bombNum, JLabel.LEFT);
 		bombs.setFont(new Font("MS Gothic", Font.PLAIN, 20));
 		
@@ -172,30 +160,13 @@ public class GameViewer {
 		
 		informationPanel.add(bombs);
 		informationPanel.add(lives);
-		//informationPanel.add(stamina);
 
 		informationPanel.add(staminaPanel);
-		//informationPanel.add(stamina);
 		Color informationPanelColor = new Color(204, 204, 0);
 		informationPanel.setBackground(informationPanelColor);
 		
-
-		
 		GameComponent component = new GameComponent(fileNames.get(0), ready);
 		
-//		JPanel startPanel = new JPanel();
-//		JButton pauseButt = new JButton("P");
-//		informationPanel.add(pauseButt);
-//		pauseButt.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				System.out.println("Rn game is paused: " + paused);
-//			}
-//			
-//			
-//		});
 		
 		frame.addKeyListener(new KeyListener() {			
 			@Override
@@ -287,7 +258,6 @@ public class GameViewer {
 		}
 		staminaBar.setSize(new Dimension(staminaNum, 10));
 		staminaBar.setLocation(5, staminaPanel.getHeight()/2-5);
-		//this.stamina.setText("Stamina:"+ staminaNum);
 	}
 	
 	
@@ -297,13 +267,7 @@ public class GameViewer {
 			this.paused = true;
 			this.won = true;
 			this.lost = false;
-//			informationPanel.removeAll();
 			informationPanel.setVisible(false);
-//			JLabel msg = new JLabel("Congratulations! Press the U key for the next level");
-//			msg.setFont(new Font("Verdana", Font.ITALIC, 13));
-			//informationPanel.add(msg);
-			//informationPanel.setVisible(true);
-//			frame.add(informationPanel);
 		} else {
 			return;
 		}
@@ -314,13 +278,6 @@ public class GameViewer {
 			this.lost = true;
 			this.won = false;
 			frame.setTitle(":(");
-//			informationPanel.setVisible(false);
-			//informationPanel.removeAll();
-//			JLabel msg = new JLabel("Better luck next time...");
-//			msg.setFont(new Font("Verdana", Font.ITALIC, 18));
-//			informationPanel.add(msg);
-			//informationPanel.revalidate();
-			//informationPanel.repaint();
 		} else {
 			return;
 		}
