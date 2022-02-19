@@ -203,7 +203,7 @@ public class GameViewer {
 					
 					changeLevel(component, "Arcade Game-Level "+(levelIndex+1), levelIndex);
 				} else if(key == 'd' && lost == false) {
-					if(levelIndex != 0) {
+					if(levelIndex > 0) {
 						levelIndex--;
 					}
 					changeLevel(component, "Arcade Game-Level "+(levelIndex+1), levelIndex);
