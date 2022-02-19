@@ -20,7 +20,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
-
 /**
  * Class: GameComponent
  * @author Bhargav Nagalamadaka and Mathew Leister
