@@ -50,8 +50,10 @@ public class GameComponent extends JComponent{
 	private boolean isPoweredUp = false;
 	private int delayHit = 0;
 	
+	private boolean added = false;
 	private int lives;
 	private int bombs = 0;
+	private int kills = 0;
 	private int winScore = 0;
 	private boolean won = false;
 	private boolean lost = false;
@@ -233,7 +235,8 @@ public class GameComponent extends JComponent{
 			}
 			if(hero.getPoweredUp()) {
 				if(generalObj.getClass().getSimpleName().equals("WalkingEnemy")) {
-					objects.remove(objIndex);	
+					objects.remove(objIndex);
+					kills++;
 				}
 			}else {
 				if(generalObj.getClass().getSimpleName().equals("WalkingEnemy") || generalObj.getClass().getSimpleName().equals("FlyingEnemy")) {
@@ -256,16 +259,6 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void lose() {
-		for(int i = 0; i< animateObjects.size(); i++) {
-			if(animateObjects.get(i).getClass().getSimpleName().equals("Player")) {
-				animateObjects.remove(i);
-			}
-		}
-		for(int j = 0; j< objects.size(); j++) {
-			if(objects.get(j).getClass().getSimpleName().equals("Player")) {
-				objects.remove(j);
-			}
-		}
 		this.lost = true;
 	}
 	
@@ -421,7 +414,6 @@ public class GameComponent extends JComponent{
 		for (GameObject o: this.objects) {
 			o.drawOn(g2);
 		}
-		//draws appropriate screens for win
 		g2.setFont(new Font("MS Gothic", Font.PLAIN, 11));
 		if(!ready) {
 			int xPos = (450/2) - this.titleImg.getWidth(null)/2;
@@ -455,10 +447,14 @@ public class GameComponent extends JComponent{
 				g2.setFont(new Font("MS Gothic", Font.BOLD, 30));
 				int points1 = bombs * 10;
 				int points2 = lives * 20;
-				int pointsTot = points1 + points2;
+				int points3 = kills * 5;
+				int pointsTot = points1 + points2 + points3;
 				
-				for(int i = 0; i < scoreList.size(); i++) {
-					pointsTot+=scoreList.get(i);
+				if(!added) {
+					for(int i = 0; i < scoreList.size(); i++) {
+						pointsTot = pointsTot + scoreList.get(i);
+					}
+					added = true;
 				}
 				g2.drawString("Total Score: " + pointsTot, 100, 380);
 			} else {
@@ -473,17 +469,23 @@ public class GameComponent extends JComponent{
 			
 				g2.drawString("Bombs:" + bombs, 160, 135);
 				g2.drawString("Lives: " + lives, 160, 155);
+				g2.drawString("Kills: " + kills, 160, 175);
 		
 				int points1 = bombs * 10;
 				g2.drawString(" " + points1, 250, 135);
 				int points2 = lives * 20;
 				g2.drawString(" " + points2, 250, 155);
+				int points3 = kills * 5;
+				g2.drawString(" " + points3, 250, 175);
 				
 				g2.setFont(new Font("MS Gothic", Font.BOLD, 15));
 				g2.drawString("Items", 163, 105);
 				g2.drawString("Points", 240, 105);
-				int pointsTot = points1 + points2;
-				scoreList.add(pointsTot);
+				int pointsTot = points1 + points2 + points3;
+				if(!added) {
+					scoreList.add(pointsTot);
+					added = true;
+				}
 				g2.drawString("Total Score: " + pointsTot, 157, 220);
 			}
 		}
@@ -539,9 +541,11 @@ public class GameComponent extends JComponent{
 	}
 	
 	public void recreate() {
+		if(fileName.equals("Levels/Level-1")) {
+			scoreList.clear();
+		}
 		objects.clear();
 		animateObjects.clear();
-		scoreList.clear();
 		isPoweredUp =false;
 		hero.setPoweredUp(isPoweredUp);
 		delayPowerUp = 0;
@@ -551,8 +555,11 @@ public class GameComponent extends JComponent{
 		hero = null;
 		won = false;
 		lost = false;
+		added = false;
 		bombs = 0;
 		lives = 3;
+		kills = 0;
+		currentLevel = null;
 		createGameObjectList();	
 	}
 	
